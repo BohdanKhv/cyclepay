@@ -1,7 +1,15 @@
 import { Image, TouchableOpacity, TouchableNativeFeedback, View } from 'react-native';
 import { COLORS } from '../../constants/theme';
 
-const IconButton = ({ containerStyle, onPress, iconStyle, icon, width, height, padding }) => {
+const IconButton = ({
+    containerStyle,
+    onPress,
+    iconStyle,
+    icon,
+    width,
+    height,
+    padding
+}) => {
     return (
         <View
             style={{

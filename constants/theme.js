@@ -3,21 +3,32 @@ const { width, height } = Dimensions.get("window");
 
 export const COLORS = {
     main: "#fff",
-    secondary: "#f6f7f8",
-    tertiary: "#f0f0f0",
-    primary: "#f7a800",
+    secondary: "#F5F8FA",
+    tertiary: "#E1E8ED",
+    primary: "#FC642D",
 
     textLight: "#fff",
     textSecondary: "#f6f7f8",
-    textDark: "#353535",
+    textDark: "#14171A",
     success: "#55f16c",
     danger: "#ff5e59",
-    
-    border: "#f0f0f0",
 
-    gradientMain1: "#464646",
-    gradientMain2: "#393939",
-    gradientMain3: "#212121",
+    gray10: "#E5E5E5",
+    gray20: "#CCCCCC",
+    gray30: "#A1A1A1",
+    gray40: "#999999",
+    gray50: "#7F7F7F",
+    gray60: "#666666",
+    gray70: "#4C4C4C",
+    gray80: "#333333",
+    gray85: "#242526",
+    gray90: "#191919",
+
+    border: "#657786",
+
+    gradientMain1: "#2D3239",
+    gradientMain2: "#1B1E22",
+    gradientMain3: "#14171A",
 
     gradientPrimary1: "#ff5e23",
     gradientPrimary2: "#ff5e59",
@@ -27,10 +38,12 @@ export const COLORS = {
 export const SIZES = {
     animationDuration: 150,
     animationDurationLong: 300,
+    
     // Global sizes
     radius: 12,
     radiusSm: 6,
     padding: 16,
+    top: 48,
 
     s2: 2,
     s4: 4,

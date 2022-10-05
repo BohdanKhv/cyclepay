@@ -26,7 +26,7 @@ const Header = () => {
         container: {
             backgroundColor: 'transparent',
             paddingHorizontal: SIZES.padding,
-            paddingTop: SIZES.padding * 2,
+            paddingTop: SIZES.top,
             paddingBottom: SIZES.padding,
             position: 'relative',
             zIndex: 1,

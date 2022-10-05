@@ -16,13 +16,13 @@ const style = {
 }
 
 const Home = ({navigation}) => {
-  const [editItem, setEditItem] = useState(null);
-  const [isEditModelOpen, setIsEditModelOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [modelOpen, setModelOpen] = useState(false);
 
   return (
     <>
       <View
-        style={style.body}
+          style={style.body}
         >
         <Header/>
         <Info/>
@@ -36,14 +36,14 @@ const Home = ({navigation}) => {
           renderItem={({item}) => (
             <SubItem
               item={item}
-              setEditItem={setEditItem}
-              setIsEditModelOpen={setIsEditModelOpen}
+              setSelectedItem={setSelectedItem}
+              setModelOpen={setModelOpen}
             />
           )}
         />
       </View>
       <Add navigation={navigation}/>
-      <SubModel item={editItem} isOpen={isEditModelOpen} setIsOpen={setIsEditModelOpen} />
+      <SubModel item={selectedItem} isOpen={modelOpen} setIsOpen={setModelOpen} />
     </>
   )
 }

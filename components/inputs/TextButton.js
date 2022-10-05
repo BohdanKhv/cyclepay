@@ -1,16 +1,26 @@
 import { Text, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 import { COLORS, SIZES } from '../../constants/theme';
 
-const TextButton = ({ containerStyle, label, labelStyle, onPress, disabled, color, borderColor }) => {
+const TextButton = ({
+    containerStyle,
+    label,
+    labelStyle,
+    onPress,
+    disabled,
+    color,
+    borderColor
+}) => {
 
     return (
-        <View
+        <LinearGradient
+            colors={color ? [color, color, color] : [COLORS.gradientMain1, COLORS.gradientMain2, COLORS.gradientMain3]}
+            start={{ x: 0.3, y: 0 }}
             style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: SIZES.radius,
-                backgroundColor: color || COLORS.textDark,
                 color: COLORS.textLight,
                 overflow: 'hidden',
                 ...containerStyle,
@@ -46,7 +56,7 @@ const TextButton = ({ containerStyle, label, labelStyle, onPress, disabled, colo
                     </Text>
                 </View>
             </TouchableNativeFeedback>
-        </View>
+        </LinearGradient>
     )
 }
 

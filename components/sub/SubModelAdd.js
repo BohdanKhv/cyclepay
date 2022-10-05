@@ -1,18 +1,18 @@
-import { useRef, useEffect, useState } from 'react';
-import { View, Text, Animated, Pressable, StyleSheet } from 'react-native';
+import { useRef, useEffect, useState, useLayoutEffect } from 'react';
+import { View, Text, Animated, Pressable, StyleSheet, KeyboardAwareScrollView } from 'react-native';
 
 import { TextButton, ModelItem } from '../';
 import { COLORS, SIZES } from '../../constants/theme';
 
 
-const SubModel = ({ item, isOpen, setIsOpen }) => {
+const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
     const animation = useRef(new Animated.Value(0)).current;
 
-    const [description, setDescription] = useState(item?.description || "");
-    const [amount, setAmount] = useState(item?.amount + "" || "");
-    const [cycle, setCycle] = useState(item?.cycle + "" || "");
-    const [firstBill, setFirstBill] = useState(item?.firstBill || "");
-    const [reminder, setReminder] = useState(item?.cycle || false);
+    const [description, setDescription] = useState("");
+    const [amount, setAmount] = useState("");
+    const [cycle, setCycle] = useState("");
+    const [firstBill, setFirstBill] = useState("");
+    const [reminder, setReminder] = useState(false);
 
     useEffect(() => {
         if(isOpen){
@@ -28,30 +28,15 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 useNativeDriver: true
             }).start();
         }
+
+        return () => {
+            setDescription("");
+            setAmount("");
+            setCycle("");
+            setFirstBill("");
+            setReminder(false);
+        }
     }, [isOpen]);
-
-    const countAmountOfCycles = (cycle, firstBill) => {
-        if(cycle && firstBill){
-            const today = new Date();
-            const startDate = new Date(firstBill);
-            const diff = today.getTime() - startDate.getTime();
-            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-            const cycles = Math.floor(months / cycle);
-            return cycles || 0;
-        }
-    }
-
-    const countTotalPaid = (cycle, firstBill) => {
-        if(cycle && firstBill){
-            const today = new Date();
-            const startDate = new Date(firstBill);
-            const diff = +today - +startDate;
-            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-            const cycles = Math.floor(months / cycle);
-            const totalPaid = cycles * item.amount;
-            return totalPaid;
-        }
-    }
 
     const style = StyleSheet.create({
         justifyBetween: {
@@ -101,12 +86,16 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     {
                         translateY: animation.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [SIZES.height, SIZES.height - 455]
+                            outputRange: [
+                                SIZES.height,
+                                SIZES.height - 360
+                            ]
                         })
                     }
                 ]
             }}
         >
+            <View>
             {/* Header */}
             <View
                 style={{
@@ -114,8 +103,8 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     justifyContent: 'space-between',
                     alignContent: 'center',
                     paddingHorizontal: SIZES.padding,
-                    paddingVertical: SIZES.padding,
                     borderBottomWidth: 1,
+                    paddingVertical: SIZES.padding,
                     borderBottomColor: COLORS.secondary,
                 }}
             >
@@ -131,13 +120,13 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     </Text>
                 </View>
                 <TextButton
-                    label='Delete'
+                    label='Close'
                     containerStyle={{
                         backgroundColor: 'transparent',
                     }}
                     labelStyle={{
-                        color: COLORS.danger,
-                        ...SIZES.h3
+                        color: COLORS.textDark,
+                        fontSize: SIZES.h3,
                     }}
                     color={'transparent'}
                     onPress={() => {
@@ -147,9 +136,11 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
             </View>
 
             {/* Body */}
-            <View style={{
-                paddingVertical: SIZES.padding,
-            }}>
+            <View
+                style={{
+                    paddingVertical: SIZES.padding,
+                }}
+            >
                 <ModelItem
                     label='Description'
                     value={description || "Enter a description"}
@@ -158,9 +149,10 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='First Bill'
-                    value={firstBill ?
-                        new Date(firstBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})
-                        : "Enter a date"}
+                    value={
+                        firstBill ? new Date(firstBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric' || "yyyy-mm-dd"})
+                            : "Enter a date"
+                        }
                     state={firstBill}
                     onChange={setFirstBill}
                     date
@@ -186,58 +178,31 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     onChange={setReminder}
                     reminder
                 />
-                <ModelItem
-                    label='Next Bill'
-                    disabled
-                    value={new Date(item?.nextBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}
-                />
-                <ModelItem
-                    label='Total Paid'
-                    disabled
-                    value={`$ ${countTotalPaid(item?.cycle, item?.firstBill)}`}
-                />
-                <ModelItem
-                    label='Cycles'
-                    disabled
-                    value={`${countAmountOfCycles(item?.cycle, item?.firstBill)}`}
-                />
             </View>
-
             {/* Actions */}
-            <View style={[
-                {
+            <View 
+                style={{
                     paddingTop: 12,
                     paddingHorizontal: SIZES.padding,
-                }, style.justifyBetween]}>
-                <TextButton
-                    labelStyle={{
-                        color: COLORS.textDark,
-                    }}
-                    containerStyle={{
-                        flex: 1,
-                        marginRight: 4,
-                    }}
-                    color="transparent"
-                    label='Close'
-                    onPress={() => {
-                        setIsOpen(false);
-                    }}
-                />
+                }}>
                 <TextButton
                     labelStyle={{
                         color: COLORS.textLight,
                     }}
                     containerStyle={{
-                        backgroundColor: COLORS.textDark,
-                        flex: 1,
+                        borderColor: COLORS.primary,
+                        borderWidth: 1,
                         marginLeft: 4,
                     }}
-                    label='Save'
+                    color={COLORS.primary}
+                    borderColor="transparent"
+                    label='Add subscription'
                 />
+            </View>
             </View>
         </Animated.View>
         </>
     )
 }
 
-export default SubModel;
+export default SubModelAdd;

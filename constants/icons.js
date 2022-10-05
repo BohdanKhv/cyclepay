@@ -5,6 +5,8 @@ const more = require("../assets/icons/more.png");
 const plus = require("../assets/icons/plus.png");
 const about = require("../assets/icons/about.png");
 const settings = require("../assets/icons/settings.png");
+const search = require("../assets/icons/search.png");
+const back = require("../assets/icons/back.png");
 
 export default {
     close,
@@ -14,4 +16,6 @@ export default {
     plus,
     about,
     settings,
+    search,
+    back,
 }

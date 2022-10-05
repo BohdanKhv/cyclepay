@@ -38,7 +38,8 @@ const Info = () => {
     return (
         <View style={style.container}>
             <LinearGradient
-                colors={[COLORS.gradientMain2, COLORS.gradientMain2, COLORS.gradientMain3]}
+                colors={[COLORS.gradientMain1, COLORS.gradientMain2, COLORS.gradientMain3]}
+                start={{ x: 0.3, y: 0 }}
                 style={style.infoWrapper}
             >
                 <Text style={{

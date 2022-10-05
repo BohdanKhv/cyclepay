@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
 import { COLORS, SIZES } from "../../constants/theme"
+import icons from '../../constants/icons';
 
 
-const SubItem = ({item, setSelectedItem, setModelOpen}) => {
+const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
     const [rippleOverflow, setRippleOverflow] = useState(false);
 
     const style = StyleSheet.create({
@@ -40,6 +41,7 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
         columnEmd: {
             flexDirection: 'column',
             alignItems: 'flex-end',
+            paddingRight: 10,
         },
         thumbnail: {
             width: 36,
@@ -68,43 +70,40 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                     background={TouchableNativeFeedback.Ripple(COLORS.tertiary, rippleOverflow)}
                 >
                     <View style={style.itemWrapper}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Image
-                            source={{
-                                uri: item.thumbnail
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                                alignItems: 'center',
                             }}
-                            style={style.thumbnail}
-                        />
-                        <View>
-                            <Text style={style.textMain}>
-                                {item.name}
-                            </Text>
-                            <Text style={style.textSecondary}>
-                                {item.description}
-                            </Text>
-                            <Text style={style.textSecondary}>
-                                Next Bill:
-                            </Text>
+                        >
+                            <Image
+                                source={{
+                                    uri: item.thumbnail,
+                                    cache: 'only-if-cached',
+                                }}
+                                style={style.thumbnail}
+                            />
+                            <View>
+                                <Text style={style.textMain}>
+                                    {item.name}
+                                </Text>
+                                <Text style={style.textSecondary}>
+                                    {item.description}
+                                </Text>
+                            </View>
                         </View>
-                    </View>
-                    <View
-                        style={style.columnEmd}
-                    >
-                        <Text style={style.textMain}>
-                            $ {item.amount}
-                        </Text>
-                        <Text style={style.textSecondary}>
-                            {item.cycle} Month{item.cycle > 1 ? 's' : ''}
-                        </Text>
-                        <Text style={style.textSecondary}>
-                            {new Date(item.nextBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
-                        </Text>
-                    </View>
+                        <View
+                            style={style.columnEmd}
+                        >
+                            <Image
+                                source={icons.plus}
+                                style={{
+                                    width: 24,
+                                    height: 24,
+                                    tintColor: COLORS.textDark,
+                                }}
+                            />
+                        </View>
                     </View>
                 </TouchableNativeFeedback>
             </View>
@@ -113,4 +112,4 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
     )
 }
 
-export default SubItem
+export default SubItemAdd
