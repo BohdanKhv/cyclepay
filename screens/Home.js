@@ -29,6 +29,26 @@ const Home = ({navigation}) => {
       <View
           style={style.body}
         >
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            backgroundColor: COLORS.primary,
+            width: 180,
+            height: 180,
+            borderBottomLeftRadius: 180,
+            // Shadow
+            shadowColor: COLORS.primary,
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+          }}
+        />
         <Header
           navigation={navigation}
         />

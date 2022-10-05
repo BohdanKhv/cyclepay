@@ -43,32 +43,37 @@ const TextButton = ({
                     borderColor: borderColor || 'transparent',
                     color: COLORS.textLight,
                     width: '100%',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
                 }}>
-                    {icon &&
-                        <Image
-                            source={icon}
-                            style={{
-                                width: 20,
-                                height: 20,
-                                marginRight: 8,
-                                tintColor: labelStyle && labelStyle.color ? labelStyle.color : COLORS.textDark,
-                            }}
-                        />
-                    }
-                    <Text
+                    <View
                         style={{
-                            color: COLORS.textLight,
-                            fontSize: SIZES.h3,
-                            fontWeight: 'bold',
-                            textAlign: 'center',
-                            ...labelStyle
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                         }}
                     >
-                        {label}
-                    </Text>
+                        {icon &&
+                            <Image
+                                source={icon}
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                    marginRight: 8,
+                                    tintColor: labelStyle && labelStyle.color ? labelStyle.color : COLORS.textDark,
+                                }}
+                            />
+                        }
+                        <Text
+                            style={{
+                                color: COLORS.textLight,
+                                fontSize: SIZES.h3,
+                                fontWeight: 'bold',
+                                textAlign: 'center',
+                                ...labelStyle
+                            }}
+                        >
+                            {label}
+                        </Text>
+                    </View>
                 </View>
             </TouchableNativeFeedback>
         </LinearGradient>

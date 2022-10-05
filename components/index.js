@@ -1,5 +1,6 @@
 import Header from "./common/Header";
 import LineDivider from "./common/LineDivider";
+import SettingsItem from "./common/SettingsItem";
 
 import IconButton from "./inputs/IconButton";
 import TextButton from "./inputs/TextButton";
@@ -20,6 +21,7 @@ import GoBack from "./nav/GoBack";
 export {
     Header,
     LineDivider,
+    SettingsItem,
 
     IconButton,
     TextButton,

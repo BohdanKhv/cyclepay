@@ -28,6 +28,7 @@ const Header = ({ navigation }) => {
             paddingHorizontal: SIZES.padding,
             paddingTop: SIZES.top,
             paddingBottom: SIZES.padding,
+            backgroundColor: 'transparent',
             position: 'relative',
             zIndex: 1,
         },

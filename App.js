@@ -25,6 +25,11 @@ const App = () => {
             initialRouteName={"Home"}
             screenOptions={{
               headerShown: false,
+              gestureEnabled: true,
+              gestureDirection: 'vertical',
+              animation: 'fade_from_bottom',
+              presentation: 'card',
+              orientation: 'portrait',
             }}
           >
             <Stack.Screen
