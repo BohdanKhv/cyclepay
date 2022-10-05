@@ -8,15 +8,15 @@ const Add = ({navigation}) => {
     return (
         <View style={{
             position: "absolute",
-            bottom: 16,
-            right: 16,
+            bottom: '10%',
+            right: '10%',
         }}>
             <IconButton
                 onPress={() => navigation.navigate('Search')}
                 icon={icons.plus}
-                width={25}
-                height={25}
-                padding={8}
+                width={35}
+                height={35}
+                padding={10}
                 containerStyle={{
                     backgroundColor: 'white',
                     borderRadius: 24,

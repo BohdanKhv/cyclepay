@@ -117,7 +117,7 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
                     zIndex: 30,
                     right: -100,
                     width: '150%',
-                    height: 1400,
+                    height: 2400,
                     backgroundColor: 'black',
                 }}
                 opacity={animation.interpolate({

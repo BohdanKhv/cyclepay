@@ -8,23 +8,33 @@ import { COLORS, SIZES } from '../../constants/theme';
 const SubModel = ({ item, isOpen, setIsOpen }) => {
     const animation = useRef(new Animated.Value(0)).current;
 
-    const [description, setDescription] = useState(item?.description || "");
-    const [amount, setAmount] = useState(item?.amount + "" || "");
-    const [cycle, setCycle] = useState(item?.cycle + "" || "");
-    const [firstBill, setFirstBill] = useState(item?.firstBill || "");
-    const [reminder, setReminder] = useState(item?.cycle || false);
+    const [description, setDescription] = useState("");
+    const [amount, setAmount] = useState("");
+    const [cycle, setCycle] = useState("");
+    const [firstBill, setFirstBill] = useState("");
+    const [reminder, setReminder] = useState(false);
+
+    useEffect(() => {
+        if(item) {
+            item.description && setDescription(item.description);
+            item.amount && setAmount(item.amount.toString());
+            item.cycle && setCycle(item.cycle.toString());
+            item.firstBill && setFirstBill(item.firstBill);
+            item.reminder && setReminder(item.reminder);
+        }
+    }, [item])
 
     useEffect(() => {
         if(isOpen){
             Animated.timing(animation, {
                 toValue: 1,
-                duration: 300,
+                duration: SIZES.animationDuration,
                 useNativeDriver: true
             }).start();
         } else {
             Animated.timing(animation, {
                 toValue: 0,
-                duration: 300,
+                duration: SIZES.animationDuration,
                 useNativeDriver: true
             }).start();
         }
@@ -101,7 +111,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     {
                         translateY: animation.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [SIZES.height, SIZES.height - 455]
+                            outputRange: [SIZES.height + 150, SIZES.height - 455]
                         })
                     }
                 ]

@@ -44,7 +44,7 @@ const Home = ({navigation}) => {
       </View>
       <Add navigation={navigation}/>
       <SubModel item={selectedItem} isOpen={modelOpen} setIsOpen={setModelOpen} />
-    </>
+      </>
   )
 }
 

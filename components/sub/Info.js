@@ -22,6 +22,9 @@ const Info = () => {
         infoWrapper: {
             padding: SIZES.padding,
             borderRadius: SIZES.radius,
+            // Shadow
+            elevation: 5,
+            shadowColor: '#000'
         },
         textSecondary: {
             color: COLORS.textLight,

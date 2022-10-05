@@ -15,16 +15,24 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
     const [reminder, setReminder] = useState(false);
 
     useEffect(() => {
+        if(item) {
+            item.description && setDescription(item.description);
+            item.amount && setAmount(item.amount.toString());
+            item.cycle && setCycle(item.cycle.toString());
+        }
+    }, [item])
+
+    useEffect(() => {
         if(isOpen){
             Animated.timing(animation, {
                 toValue: 1,
-                duration: 300,
+                duration: SIZES.animationDuration,
                 useNativeDriver: true
             }).start();
         } else {
             Animated.timing(animation, {
                 toValue: 0,
-                duration: 300,
+                duration: SIZES.animationDuration,
                 useNativeDriver: true
             }).start();
         }
@@ -87,7 +95,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                         translateY: animation.interpolate({
                             inputRange: [0, 1],
                             outputRange: [
-                                SIZES.height,
+                                SIZES.height + 150,
                                 SIZES.height - 360
                             ]
                         })

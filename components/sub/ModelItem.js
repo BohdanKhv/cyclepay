@@ -152,6 +152,9 @@ const ModelItem = ({
                     animationType="fade"
                     transparent={true}
                     visible={displayInput}
+                    onShow={() => {
+                        setTimeout(() => inputRef.current.focus(), 1)
+                    }}
                     onRequestClose={() => {
                         setDisplayInput(false);
                     }}
@@ -193,7 +196,6 @@ const ModelItem = ({
                                     keyboardType={keyboardType || 'default'}
                                     value={state}
                                     placeholder={value}
-                                    autoFocus={true}
                                     placeholderTextColor={COLORS.gray50}
                                     onChangeText={onChange}
                                     style={style.input}
