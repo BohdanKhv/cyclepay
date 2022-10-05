@@ -30,6 +30,7 @@ const Search = ({navigation}) => {
                     icon={icons.search}
                     placeholder="Search by name or service"
                     value={search}
+                    autoFocus={true}
                     onChangeText={setSearch}
                 />
             </View>

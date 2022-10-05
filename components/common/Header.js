@@ -4,7 +4,7 @@ import { COLORS, SIZES } from '../../constants/theme';
 import icons from '../../constants/icons';
 import { IconButton, Menu } from '../';
 
-const Header = () => {
+const Header = ({ navigation }) => {
     const [currentTimeOfDay, setCurrentTimeOfDay] = useState('morning');
     const [showMenu, setShowMenu] = useState(false);
 
@@ -53,13 +53,13 @@ const Header = () => {
             id: 1,
             name: 'Settings',
             icon: icons.settings,
-            onClick: () => console.log('Settings'),
+            onClick: () => navigation.navigate('Settings'),
         },
         {
             id: 2,
             name: 'About',
             icon: icons.about,
-            onClick: () => console.log('About'),
+            onClick: () => navigation.navigate('About'),
         },
     ]
 

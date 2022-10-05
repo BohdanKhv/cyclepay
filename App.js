@@ -7,7 +7,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import { COLORS } from './constants/theme';
 
-import { Home, Search } from './screens';
+import { Home, Search, Settings, About } from './screens';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,28 +23,25 @@ const App = () => {
           />
           <Stack.Navigator
             initialRouteName={"Home"}
+            screenOptions={{
+              headerShown: false,
+            }}
           >
             <Stack.Screen
               name="Home"
               component={Home}
-              options={{
-                headerShown: false,
-              }}
             />
             <Stack.Screen
               name="Search"
               component={Search}
-              options={{
-                headerShown: false,
-                // headerShown: true,
-                // headerStyle: {
-                //   backgroundColor: COLORS.textMain,
-                // },
-                // headerTintColor: COLORS.white,
-                // headerTitleStyle: {
-                //   fontWeight: '400',
-                // }
-              }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={Settings}
+            />
+            <Stack.Screen
+              name="About"
+              component={About}
             />
           </Stack.Navigator>
         </NavigationContainer>

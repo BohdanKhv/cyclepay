@@ -96,7 +96,7 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                         style={style.columnEmd}
                     >
                         <Text style={style.textMain}>
-                            $ {item.amount}
+                            $ {item.price}
                         </Text>
                         <Text style={style.textSecondary}>
                             {item.cycle} Month{item.cycle > 1 ? 's' : ''}

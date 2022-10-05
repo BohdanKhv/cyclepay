@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableNativeFeedback, Animated, Pressable } from "react-native"
+import { View, Text, StyleSheet, FlatList, TouchableNativeFeedback, Animated, Pressable, Image } from "react-native"
 import { COLORS, SIZES } from "../../constants/theme";
 
 const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
@@ -38,17 +38,18 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
             position: 'absolute',
             overflow: 'hidden',
             top: 0,
-            width: 100,
+            width: 150,
             right: 0,
             backgroundColor: COLORS.main,
             elevation: 5,
             borderRadius: 10,
         },
-        menuItems: {
-            flex: 1,
+        icon: {
             position: 'relative',
-            backgroundColor: 'blue',
-        },
+            width: 16,
+            height: 16,
+            marginRight: SIZES.padding,
+        }
     });
 
     return (
@@ -87,8 +88,16 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
                                         background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
                                     >
                                         <View style={{
-                                            padding: 10,
+                                            padding: 12,
+                                            flexDirection: 'row',
+                                            alignItems: 'center',
                                         }}>
+                                            {item.icon &&
+                                                <Image
+                                                    source={item.icon}
+                                                    style={style.icon}
+                                                />
+                                            }
                                             <Text
                                                 style={{
                                                     color: COLORS.textDark,
@@ -114,7 +123,6 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
             <Animated.View
                 style={{
                     position: 'absolute',
-                    zIndex: 30,
                     right: -100,
                     width: '150%',
                     height: 2400,
@@ -127,7 +135,7 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
             >
                 <Pressable style={{
                     flex: 1,
-                }}
+                }}  
                 onPress={() => setShowMenu(false)}
                 />
             </Animated.View>

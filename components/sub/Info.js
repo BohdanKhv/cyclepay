@@ -10,7 +10,7 @@ const Info = () => {
 
     useEffect(() => {
         const tpm = data.reduce((acc, item) => {
-            return (+acc + item.amount / item.cycle).toFixed(2)
+            return (+acc + item.price / item.cycle).toFixed(2)
         }, 0)
         setTotalPerMonth(tpm)
     }, [])
@@ -65,7 +65,7 @@ const Info = () => {
                         $ {totalPerMonth}
                     </Text>
                     <Text style={style.textSecondary}>
-                        monthly
+                        / month
                     </Text>
                 </View>
             </LinearGradient>

@@ -1,55 +1,54 @@
 import { useState } from "react";
 import { View, Text, StyleSheet } from 'react-native'
 import { COLORS, SIZES } from '../../constants/theme'
-import { IconButton, Menu } from '../'
+import { IconButton} from '../'
 import icons from '../../constants/icons'
 
 const Sort = ({items, setItems}) => {
-    const [showMenu, setShowMenu] = useState(false);
-
-    const menuItems = [
-        {
-            id: 1,
-            name: 'Price',
-            onClick: () => console.log('Price'),
-        },
-        {
-            id: 2,
-            name: 'Bill Date',
-            onClick: () => console.log('Bill Date'),
-        },
-    ]
+    const [sortBy, setSortBy] = useState('name')
 
     const style = StyleSheet.create({
         container: {
             paddingHorizontal: SIZES.padding,
             flexDirection: 'row',
             alignItems: 'center',
-            paddingVertical: SIZES.padding,
+            paddingTop: SIZES.padding,
             justifyContent: 'space-between',
+        },
+        wrapper: {
+            flexDirection: 'row',
+            alignItems: 'center',
         },
         text: {
             color: COLORS.textDark,
-            fontSize: 16,
+            fontSize: 14,
+            marginRight: 8,
+            fontWeight: 'bold',
         }
     });
 
     return (
         <View style={style.container}>
             <Text style={style.text}>
-                Sort by:
+                Sort by {sortBy}
             </Text>
-            <Menu
-                menuItems={menuItems}
-                showMenu={showMenu}
-                setShowMenu={setShowMenu}
-            >
-            <IconButton
-                icon={icons.sort}
-                onPress={() => {
-                    setShowMenu(!showMenu)
-                }}/>
-            </Menu>
+            <View style={style.wrapper}>
+                <IconButton
+                    icon={icons.sort}
+                    onPress={() => {
+                        if(sortBy === 'name') {
+                            setSortBy('bill date')
+                            items && items.length > 1 && setItems([...items].sort((a, b) => new Date(b.nextBill) - new Date(a.nextBill)))
+                        } else if (sortBy === 'bill date') {
+                            setSortBy('price')
+                            items && items.length > 1 && setItems([...items].sort((a, b) => b.price - a.price))
+                        } else if (sortBy === 'price') {
+                            setSortBy('name')
+                            items && items.length > 1 && setItems([...items].sort((a, b) => a.name.localeCompare(b.name)))
+                        }
+                    }}
+                />
+            </View>
         </View>
     )
 }

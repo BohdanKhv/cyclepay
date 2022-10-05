@@ -98,8 +98,8 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
                             <Image
                                 source={icons.plus}
                                 style={{
-                                    width: 24,
-                                    height: 24,
+                                    width: 18,
+                                    height: 18,
                                     tintColor: COLORS.textDark,
                                 }}
                             />

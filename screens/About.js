@@ -4,7 +4,7 @@ import { Input, SubItemAdd, SubModelAdd, GoBack } from "../components"
 import icons from "../constants/icons"
 import { SIZES } from "../constants/theme"
 
-const Settings = ({ navigation }) => {
+const About = ({ navigation }) => {
     const style = StyleSheet.create({
         container: {
             flex: 1,
@@ -28,4 +28,4 @@ const Settings = ({ navigation }) => {
     )
 }
 
-export default Settings
+export default About

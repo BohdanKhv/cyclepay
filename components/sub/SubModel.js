@@ -9,7 +9,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
     const animation = useRef(new Animated.Value(0)).current;
 
     const [description, setDescription] = useState("");
-    const [amount, setAmount] = useState("");
+    const [price, setPrice] = useState("");
     const [cycle, setCycle] = useState("");
     const [firstBill, setFirstBill] = useState("");
     const [reminder, setReminder] = useState(false);
@@ -17,7 +17,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
     useEffect(() => {
         if(item) {
             item.description && setDescription(item.description);
-            item.amount && setAmount(item.amount.toString());
+            item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
             item.firstBill && setFirstBill(item.firstBill);
             item.reminder && setReminder(item.reminder);
@@ -58,7 +58,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
             const diff = +today - +startDate;
             const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
             const cycles = Math.floor(months / cycle);
-            const totalPaid = cycles * item.amount;
+            const totalPaid = cycles * item.price;
             return totalPaid;
         }
     }
@@ -177,10 +177,10 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='Price'
-                    value={amount || "$ 0.00"}
-                    state={amount}
+                    value={price || "$ 0.00"}
+                    state={price}
                     keyboardType='numeric'
-                    onChange={setAmount}
+                    onChange={setPrice}
                 />
                 <ModelItem
                     label='Cycle'

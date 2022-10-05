@@ -9,7 +9,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
     const animation = useRef(new Animated.Value(0)).current;
 
     const [description, setDescription] = useState("");
-    const [amount, setAmount] = useState("");
+    const [price, setPrice] = useState("");
     const [cycle, setCycle] = useState("");
     const [firstBill, setFirstBill] = useState("");
     const [reminder, setReminder] = useState(false);
@@ -17,7 +17,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
     useEffect(() => {
         if(item) {
             item.description && setDescription(item.description);
-            item.amount && setAmount(item.amount.toString());
+            item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
         }
     }, [item])
@@ -39,7 +39,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
 
         return () => {
             setDescription("");
-            setAmount("");
+            setPrice("");
             setCycle("");
             setFirstBill("");
             setReminder(false);
@@ -167,10 +167,10 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='Price'
-                    value={amount || "$ 0.00"}
-                    state={amount}
+                    value={price || "$ 0.00"}
+                    state={price}
                     keyboardType='numeric'
-                    onChange={setAmount}
+                    onChange={setPrice}
                 />
                 <ModelItem
                     label='Cycle'

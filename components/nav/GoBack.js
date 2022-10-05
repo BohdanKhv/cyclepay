@@ -13,7 +13,7 @@ const GoBack = ({navigation}) => {
                 backgroundColor: COLORS.main,
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                // justifyContent: 'space-between',
             }}
         >
             <IconButton
@@ -25,11 +25,12 @@ const GoBack = ({navigation}) => {
             <Text
                 style={{
                     color: COLORS.textDark,
-                    fontSize: SIZES.h3,
+                    fontSize: SIZES.h2,
+                    marginLeft: SIZES.padding,
                     fontWeight: '400',
                 }}
             >
-                Search
+                {navigation.getState().routes[navigation.getState().index].name}
             </Text>
         </View>
         ) : (

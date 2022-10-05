@@ -1,4 +1,4 @@
-import { Text, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableNativeFeedback, Image, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { COLORS, SIZES } from '../../constants/theme';
@@ -10,6 +10,7 @@ const TextButton = ({
     onPress,
     disabled,
     color,
+    icon,
     borderColor
 }) => {
 
@@ -42,7 +43,21 @@ const TextButton = ({
                     borderColor: borderColor || 'transparent',
                     color: COLORS.textLight,
                     width: '100%',
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
                 }}>
+                    {icon &&
+                        <Image
+                            source={icon}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                marginRight: 8,
+                                tintColor: labelStyle && labelStyle.color ? labelStyle.color : COLORS.textDark,
+                            }}
+                        />
+                    }
                     <Text
                         style={{
                             color: COLORS.textLight,
