@@ -7,6 +7,7 @@ const about = require("../assets/icons/about.png");
 const settings = require("../assets/icons/settings.png");
 const search = require("../assets/icons/search.png");
 const back = require("../assets/icons/back.png");
+const check = require("../assets/icons/check.png");
 
 export default {
     close,
@@ -18,4 +19,5 @@ export default {
     settings,
     search,
     back,
+    check,
 }

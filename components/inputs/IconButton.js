@@ -5,6 +5,7 @@ const IconButton = ({
     containerStyle,
     onPress,
     iconStyle,
+    color,
     icon,
     width,
     height,
@@ -37,7 +38,7 @@ const IconButton = ({
                     style={{
                         width: width || 25,
                         height: height || 25,
-                        tintColor: 'black',
+                        tintColor: color || COLORS.textDark,
                         overlayColor: COLORS.textDark,
                         ...iconStyle,
                         padding: 8

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
-import { COLORS, SIZES } from "../../constants/theme"
+import { COLORS, FONTS, SIZES } from "../../constants/theme"
 
 
 const SubItem = ({item, setSelectedItem, setModelOpen}) => {
@@ -29,13 +29,17 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
         },
         textMain: {
             color: COLORS.textDark,
-            fontSize: SIZES.h3,
-            fontWeight: 'bold',
+            ...FONTS.h3,
         },
         textSecondary: {
             color: COLORS.textDark,
-            fontSize: SIZES.h5,
             opacity: 0.5,
+            ...FONTS.body5,
+        },
+        textTertiary: {
+            color: COLORS.textDark,
+            opacity: 0.5,
+            ...FONTS.body5,
         },
         columnEmd: {
             flexDirection: 'column',
@@ -87,7 +91,7 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                             <Text style={style.textSecondary}>
                                 {item.description}
                             </Text>
-                            <Text style={style.textSecondary}>
+                            <Text style={style.textTertiary}>
                                 Next Bill:
                             </Text>
                         </View>
@@ -101,8 +105,8 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                         <Text style={style.textSecondary}>
                             {item.cycle} Month{item.cycle > 1 ? 's' : ''}
                         </Text>
-                        <Text style={style.textSecondary}>
-                            {new Date(item.nextBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
+                        <Text style={style.textTertiary}>
+                            {new Date(item.nextBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: '2-digit'})}
                         </Text>
                     </View>
                     </View>

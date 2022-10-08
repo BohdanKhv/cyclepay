@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react';
 import { View, Text, Animated, Pressable, StyleSheet } from 'react-native';
 
 import { TextButton, ModelItem } from '../';
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
 
 
 const SubModel = ({ item, isOpen, setIsOpen }) => {
@@ -46,7 +46,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
             const startDate = new Date(firstBill);
             const diff = today.getTime() - startDate.getTime();
             const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-            const cycles = Math.floor(months / cycle);
+            const cycles = Math.floor((months / cycle) + 1); // +1 because we want to include the current cycle
             return cycles || 0;
         }
     }
@@ -58,7 +58,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
             const diff = +today - +startDate;
             const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
             const cycles = Math.floor(months / cycle);
-            const totalPaid = cycles * item.price;
+            const totalPaid = (cycles + 1) * item.price; // +1 because we want to include the current cycle
             return totalPaid;
         }
     }
@@ -111,7 +111,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     {
                         translateY: animation.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [SIZES.height + 150, SIZES.height - 455]
+                            outputRange: [SIZES.height + 150, SIZES.height - 470]
                         })
                     }
                 ]
@@ -133,8 +133,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     <Text
                         style={{
                             color: COLORS.textDark,
-                            fontSize: SIZES.h2,
-                            fontWeight: 'bold',
+                            ...FONTS.h2,
                         }}
                     >
                         {item?.name}
@@ -163,6 +162,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 <ModelItem
                     label='Description'
                     value={description || "Enter a description"}
+                    maxLength={20}
                     state={description}
                     onChange={setDescription}
                 />
@@ -178,6 +178,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 <ModelItem
                     label='Price'
                     value={price || "$ 0.00"}
+                    maxLength={6}
                     state={price}
                     keyboardType='numeric'
                     onChange={setPrice}
@@ -185,6 +186,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 <ModelItem
                     label='Cycle'
                     value={cycle || "1 month"}
+                    maxLength={2}
                     state={cycle}
                     keyboardType='numeric'
                     onChange={setCycle}

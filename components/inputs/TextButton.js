@@ -1,7 +1,7 @@
 import { Text, TouchableNativeFeedback, Image, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
 
 const TextButton = ({
     containerStyle,
@@ -65,8 +65,7 @@ const TextButton = ({
                         <Text
                             style={{
                                 color: COLORS.textLight,
-                                fontSize: SIZES.h3,
-                                fontWeight: 'bold',
+                                ...FONTS.h3,
                                 textAlign: 'center',
                                 ...labelStyle
                             }}

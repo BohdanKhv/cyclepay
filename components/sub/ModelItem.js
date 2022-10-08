@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Switch } from "react-native"
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
 import { IconButton } from '../'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import icons from "../../constants/icons";
@@ -13,10 +13,12 @@ const ModelItem = ({
     disabled,
     keyboardType,
     date,
+    maxLength,
     reminder,
 }) => {
     const [displayInput, setDisplayInput] = useState(false);
     const inputRef = useRef(null);
+    const [isInputFocused, setIsInputFocused] = useState(false);
 
     const style = StyleSheet.create({
         container: {
@@ -25,13 +27,13 @@ const ModelItem = ({
         },
         textSecondary: {
             color: COLORS.textDark,
-            fontSize: SIZES.h6,
             opacity: 0.5,
+            ...FONTS.body5,
         },
         textMain: {
             color: COLORS.textDark,
-            fontSize: SIZES.h4,
             fontWeight: 'bold',
+            ...FONTS.h4,
         },
         alignCenter: {
             flexDirection: 'row',
@@ -53,11 +55,14 @@ const ModelItem = ({
             color: COLORS.textDark,
             backgroundColor: 'transparent',
             margin: 0,
-            padding: 4,
+            paddingHorizontal: 4,
+            paddingVertical: 0,
             fontSize: SIZES.h4,
             fontWeight: '400',
             width: '100%',
             outline: 'none',
+            borderBottomColor: isInputFocused ? COLORS.primary : COLORS.border,
+            borderBottomWidth: 1,
         },
         inputContainer: {
             justifyContent: 'flex-end',
@@ -65,19 +70,18 @@ const ModelItem = ({
         },
         centeredView: {
             flex: 1,
-            backgroundColor: 'rgba(0,0,0,0.15)',
+            backgroundColor: 'rgba(0,0,0,0.35)',
             width: '100%',
             height: '100%',
-            justifyContent: "center",
             alignItems: "center",
-            paddingHorizontal: 20,
         },
         modalContainer: {
             width: '100%',
         },
         modalView: {
             backgroundColor: COLORS.main,
-            borderRadius: SIZES.radius,
+            borderBottomLeftRadius: SIZES.radius,
+            borderBottomRightRadius: SIZES.radius,
             padding: SIZES.padding,
             width: '100%',
             shadowColor: "#000",
@@ -94,6 +98,12 @@ const ModelItem = ({
             color: COLORS.textDark,
             fontWeight: 'bold',
         },
+        modalHeader: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: SIZES.padding,
+        }
     })
 
     return (
@@ -172,19 +182,19 @@ const ModelItem = ({
                             <View
                                 style={style.modalView}
                             >
-                                <View style={[
-                                    {marginBottom: SIZES.padding},
-                                    style.justifyBetween
-                                ]}>
+                                <View 
+                                    style={style.modalHeader}
+                                >
                                     <Text
                                         style={style.modalText}
                                     >
                                         {label}
                                     </Text>
                                     <IconButton
-                                        icon={icons.close}
-                                        width={SIZES.h3}
-                                        height={SIZES.h3}
+                                        icon={icons.check}
+                                        width={SIZES.h2}
+                                        height={SIZES.h2}
+                                        color={COLORS.primary}
                                         onPress={() => {
                                             setDisplayInput(false);
                                         }}
@@ -196,13 +206,21 @@ const ModelItem = ({
                                     keyboardType={keyboardType || 'default'}
                                     value={state}
                                     placeholder={value}
+                                    maxLength={maxLength || 100}
                                     placeholderTextColor={COLORS.gray50}
                                     onChangeText={onChange}
                                     style={style.input}
                                     onSubmitEditing={() => {
                                         setDisplayInput(false);
                                     }}
-                                    onBlur={() => setDisplayInput(false)}
+                                    onFocus={(e) => {
+                                        setIsInputFocused(true);
+                                        e.target.setSelection(0, state ? state.length : 0);
+                                    }}
+                                    onBlur={() => {
+                                        setIsInputFocused(false);
+                                        setDisplayInput(false);
+                                    }}
                                 />
                                 )}
                             </View>

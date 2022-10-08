@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
-import { COLORS, SIZES } from "../../constants/theme"
+import { COLORS, FONTS, SIZES } from "../../constants/theme"
 import icons from '../../constants/icons';
 
 
@@ -30,12 +30,11 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
         },
         textMain: {
             color: COLORS.textDark,
-            fontSize: SIZES.h3,
-            fontWeight: 'bold',
+            ...FONTS.h3,
         },
         textSecondary: {
             color: COLORS.textDark,
-            fontSize: SIZES.h5,
+            ...FONTS.body5,
             opacity: 0.5,
         },
         columnEmd: {

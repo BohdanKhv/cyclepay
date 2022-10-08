@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { View, Text, StyleSheet } from 'react-native'
-import { COLORS, SIZES } from '../../constants/theme'
+import { COLORS, FONTS, SIZES } from '../../constants/theme'
 import { IconButton} from '../'
 import icons from '../../constants/icons'
 
@@ -12,7 +12,6 @@ const Sort = ({items, setItems}) => {
             paddingHorizontal: SIZES.padding,
             flexDirection: 'row',
             alignItems: 'center',
-            paddingTop: SIZES.padding,
             justifyContent: 'space-between',
         },
         wrapper: {
@@ -21,18 +20,24 @@ const Sort = ({items, setItems}) => {
         },
         text: {
             color: COLORS.textDark,
-            fontSize: 14,
-            marginRight: 8,
-            fontWeight: 'bold',
+            ...FONTS.h3,
+        },
+        info: {
+            color: COLORS.textDark,
+            marginRight: 4,
+            ...FONTS.body4,
         }
     });
 
     return (
         <View style={style.container}>
             <Text style={style.text}>
-                Sort by {sortBy}
+                Sort by:
             </Text>
             <View style={style.wrapper}>
+                <Text style={style.info}>
+                    {sortBy}
+                </Text>
                 <IconButton
                     icon={icons.sort}
                     onPress={() => {

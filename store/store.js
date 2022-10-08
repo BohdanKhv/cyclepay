@@ -1,28 +1,22 @@
-// src/redux/store.js
 import { configureStore } from "@reduxjs/toolkit";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
 import localReducer from './features/local/localSlice';
-import storage from 'redux-persist/lib/storage';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist'
+import subReducer from './features/sub/subSlice';
 
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
+  whitelist: ['local', 'sub'],
 }
 
-const persistedReducer = persistReducer(persistConfig, localReducer)
+const local = persistReducer(persistConfig, localReducer);
+const sub = persistReducer(persistConfig, subReducer);
 
 export const store = configureStore({
   reducer: {
-    local: persistedReducer
+    local: local,
+    sub: sub,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

@@ -1,6 +1,7 @@
 import Header from "./common/Header";
 import LineDivider from "./common/LineDivider";
 import SettingsItem from "./common/SettingsItem";
+import LoadScreen from "./common/LoadScreen";
 
 import IconButton from "./inputs/IconButton";
 import TextButton from "./inputs/TextButton";
@@ -22,6 +23,7 @@ export {
     Header,
     LineDivider,
     SettingsItem,
+    LoadScreen,
 
     IconButton,
     TextButton,

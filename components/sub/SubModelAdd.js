@@ -2,7 +2,7 @@ import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text, Animated, Pressable, StyleSheet, KeyboardAwareScrollView } from 'react-native';
 
 import { TextButton, ModelItem } from '../';
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
 
 
 const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
@@ -33,7 +33,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
             Animated.timing(animation, {
                 toValue: 0,
                 duration: SIZES.animationDuration,
-                useNativeDriver: true
+                useNativeDriver: true,
             }).start();
         }
 
@@ -120,8 +120,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                     <Text
                         style={{
                             color: COLORS.textDark,
-                            fontSize: SIZES.h2,
-                            fontWeight: 'bold',
+                            ...FONTS.h2,
                         }}
                     >
                         {item?.name}
@@ -134,7 +133,6 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                     }}
                     labelStyle={{
                         color: COLORS.textDark,
-                        fontSize: SIZES.h3,
                     }}
                     color={'transparent'}
                     onPress={() => {
@@ -153,6 +151,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                     label='Description'
                     value={description || "Enter a description"}
                     state={description}
+                    maxLength={50}
                     onChange={setDescription}
                 />
                 <ModelItem
@@ -169,12 +168,14 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                     label='Price'
                     value={price || "$ 0.00"}
                     state={price}
+                    maxLength={6}
                     keyboardType='numeric'
                     onChange={setPrice}
                 />
                 <ModelItem
                     label='Cycle'
                     value={cycle || "1 month"}
+                    maxLength={2}
                     state={cycle}
                     keyboardType='numeric'
                     onChange={setCycle}

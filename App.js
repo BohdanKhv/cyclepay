@@ -1,20 +1,27 @@
+import { useEffect } from 'react';
 import { StatusBar, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+import SplashScreen from 'react-native-splash-screen';
 
 import { COLORS } from './constants/theme';
 
 import { Home, Search, Settings, About } from './screens';
+import { LoadScreen } from './components';
 
 const Stack = createNativeStackNavigator();
 
 const App = () => {
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [])
+
   return (
     <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator/>} persistor={persistor}>
+      <PersistGate loading={<LoadScreen/>} persistor={persistor}>
         <NavigationContainer>
           <StatusBar
             backgroundColor="rgba(0,0,0,0.25)"

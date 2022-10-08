@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import { TouchableOpacity, Image, TextInput, StyleSheet } from "react-native"
-import { COLORS, SIZES } from "../../constants/theme"
+import { COLORS, FONTS, SIZES } from "../../constants/theme"
 
 
 const Input = ({
@@ -28,7 +28,7 @@ const Input = ({
             flexShrink: 1,
             width: '100%',
             color: COLORS.textDark,
-            fontSize: SIZES.h3,
+            ...FONTS.body3
         },
         icon: {
             width: 15,

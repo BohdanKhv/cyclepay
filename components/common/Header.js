@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { COLORS, SIZES } from '../../constants/theme';
+import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import { useSelector } from 'react-redux';
 import icons from '../../constants/icons';
 import { IconButton, Menu } from '../';
 
 const Header = ({ navigation }) => {
     const [currentTimeOfDay, setCurrentTimeOfDay] = useState('morning');
     const [showMenu, setShowMenu] = useState(false);
+    const { theme } = useSelector(state => state.local);
 
 
     useEffect(() => {
@@ -27,7 +29,6 @@ const Header = ({ navigation }) => {
             backgroundColor: 'transparent',
             paddingHorizontal: SIZES.padding,
             paddingTop: SIZES.top,
-            paddingBottom: SIZES.padding,
             backgroundColor: 'transparent',
             position: 'relative',
             zIndex: 1,
@@ -39,13 +40,12 @@ const Header = ({ navigation }) => {
         },
         textSecondary: {
             color: COLORS.textDark,
-            fontSize: 16,
             opacity: 0.5,
+            ...FONTS.body3,
         },
         textMain: {
             color: COLORS.textDark,
-            fontSize: 20,
-            fontWeight: 'bold',
+            ...FONTS.titleSm
         },
     });
 

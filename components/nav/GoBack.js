@@ -1,7 +1,7 @@
 import { IconButton } from '../'
 import { View, Text } from 'react-native'
 import icons from "../../constants/icons"
-import { COLORS, SIZES } from '../../constants/theme'
+import { COLORS, FONTS, SIZES } from '../../constants/theme'
 
 const GoBack = ({navigation}) => {
     return (
@@ -25,9 +25,8 @@ const GoBack = ({navigation}) => {
             <Text
                 style={{
                     color: COLORS.textDark,
-                    fontSize: SIZES.h2,
                     marginLeft: SIZES.padding,
-                    fontWeight: '400',
+                    ...FONTS.body2
                 }}
             >
                 {navigation.getState().routes[navigation.getState().index].name}

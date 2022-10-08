@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableNativeFeedback, Animated, Pressable, Image } from "react-native"
-import { COLORS, SIZES } from "../../constants/theme";
+import { COLORS, FONTS, SIZES } from "../../constants/theme";
 
 const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
     const animation = useRef(new Animated.Value(0)).current;
@@ -101,8 +101,7 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
                                             <Text
                                                 style={{
                                                     color: COLORS.textDark,
-                                                    fontWeight: 'bold',
-                                                    fontSize: SIZES.h4,
+                                                    ...FONTS.body4
                                                 }}
                                             >{item.name}</Text>
                                         </View>

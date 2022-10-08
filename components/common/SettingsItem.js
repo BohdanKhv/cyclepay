@@ -1,5 +1,5 @@
 import { View, Text, Switch, StyleSheet, TouchableNativeFeedback } from "react-native"
-import { COLORS, SIZES } from "../../constants/theme"
+import { COLORS, FONTS, SIZES } from "../../constants/theme"
 
 export const SettingsItem = ({ value, onChange, label }) => {
 
@@ -10,7 +10,7 @@ export const SettingsItem = ({ value, onChange, label }) => {
         },
         label: {
             color: COLORS.textDark,
-            fontSize: SIZES.h4,
+            ...FONTS.body3
         },
         alignCenter: {
             flexDirection: 'row',
@@ -54,6 +54,9 @@ export const SettingsItem = ({ value, onChange, label }) => {
                         style={{margin: 0, padding: 0}}
                         trackColor={{ false: COLORS.secondary, true: COLORS.primary }}
                         thumbColor={ value ? COLORS.primary : COLORS.secondary }
+                        onValueChange={() => {
+                            onChange(!value)
+                        }}
                     />
                 </View>
             </TouchableNativeFeedback>

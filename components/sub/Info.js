@@ -1,75 +1,125 @@
 import { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native"
+import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
-import { COLORS, SIZES } from "../../constants/theme";
+import { COLORS, FONTS, SIZES } from "../../constants/theme";
 import data from "../../constants/dummyData";
 
 
 const Info = () => {
     const [ totalPerMonth, setTotalPerMonth ] = useState(0)
+    const [ totalType, setTotalType ] = useState('month')
 
     useEffect(() => {
+        if(totalType === 'month')
+            setTotalPerMonth(calcPerMonth(data));
+        else if (totalType === 'year')
+            setTotalPerMonth(calcPerYear(data));
+        else if (totalType === 'day')
+            setTotalPerMonth(calcPerDay(data));
+    }, [totalType])
+
+    const handleSwitch = () => {
+        if(totalType === 'month')
+            setTotalType('year');
+        else if (totalType === 'year')
+            setTotalType('day');
+        else if (totalType === 'day')
+            setTotalType('month');
+    }
+
+    const calcPerMonth = (data) => {
         const tpm = data.reduce((acc, item) => {
             return (+acc + item.price / item.cycle).toFixed(2)
         }, 0)
-        setTotalPerMonth(tpm)
-    }, [])
+        return tpm;
+    }
+
+    const calcPerYear = (data) => {
+        const tpy = calcPerMonth(data) * 12;
+        return tpy;
+    }
+
+    const calcPerDay = (data) => {
+        const tpy = calcPerMonth(data) / 30;
+        return tpy.toFixed(2);
+    }
 
     const style = StyleSheet.create({
-        container: {
-            paddingHorizontal: SIZES.padding,
+        wrapper: {
+            borderRadius: SIZES.radius,
+            overflow: 'hidden',
+            margin: SIZES.padding,
+            // Shadow
+            elevation: 12,
+            shadowColor: '#000'
         },
         infoWrapper: {
-            padding: SIZES.padding,
+            paddingHorizontal: SIZES.padding,
+            paddingVertical: SIZES.padding,
             borderRadius: SIZES.radius,
-            // Shadow
-            elevation: 5,
-            shadowColor: '#000'
+            flexDirection: 'column',
+            justifyContent: 'space-between',
         },
         textSecondary: {
             color: COLORS.textLight,
-            fontSize: SIZES.h4,
             opacity: 0.5,
+            ...FONTS.body3
         },
         bill: {
-            fontSize: SIZES.h1,
-            fontWeight: 'bold',
+            ...FONTS.title,
             color: COLORS.textLight,
-        }
+        },
+        justifyBetween: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+        },
     });
 
     return (
-        <View style={style.container}>
-            <LinearGradient
-                colors={[COLORS.gradientMain1, COLORS.gradientMain2, COLORS.gradientMain3]}
-                start={{ x: 0.3, y: 0 }}
-                style={style.infoWrapper}
+        <LinearGradient
+            colors={[COLORS.gradientMain1, COLORS.gradientMain2, COLORS.gradientMain3]}
+            start={{ x: 0.3, y: 0 }}
+            style={style.wrapper}
+        >
+            <TouchableNativeFeedback
+                onPress={handleSwitch}
+                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
             >
-                <Text style={{
-                    fontSize: SIZES.h5,
-                    color: COLORS.textLight,
-                    fontWeight: 'bold',
-                    opacity: 0.5,
-                }}>
-                    Total Subscriptions
-                </Text>
-                <View
-                    style={{
+                <View style={style.infoWrapper}>
+                    <View style={{
                         flexDirection: 'row',
-                        alignItems: 'center',
                         justifyContent: 'space-between',
-                        paddingVertical: 8,
-                    }}
-                >
-                    <Text style={style.bill}>
-                        $ {totalPerMonth}
-                    </Text>
-                    <Text style={style.textSecondary}>
-                        / month
-                    </Text>
+                    }}>
+                        <Text style={{
+                            ...FONTS.body4,
+                            color: COLORS.textLight,
+                            opacity: 0.5,
+                        }}>
+                            Total Subscriptions
+                        </Text>
+                        <Text style={{
+                            ...FONTS.h4,
+                            color: COLORS.textLight,
+                        }}>
+                            {data.length}
+                        </Text>
+                    </View>
+                    <View
+                        style={[{
+                            paddingTop: 24,
+                        }, style.justifyBetween]}
+                    >
+                        <Text style={style.bill}>
+                            $ {totalPerMonth}
+                        </Text>
+                        <Text style={style.textSecondary}>
+                            / {totalType}
+                        </Text>
+                    </View>
                 </View>
-            </LinearGradient>
-        </View>
+            </TouchableNativeFeedback>
+        </LinearGradient>
     )
 }
 
