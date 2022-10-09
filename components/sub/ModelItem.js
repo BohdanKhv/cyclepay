@@ -2,8 +2,9 @@ import { useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Switch } from "react-native"
 import { COLORS, FONTS, SIZES } from '../../constants/theme';
 import { IconButton } from '../'
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DatePicker from 'react-native-date-picker'
 import icons from "../../constants/icons";
+import utils from "../../constants/utils";
 
 const ModelItem = ({
     value,
@@ -136,34 +137,19 @@ const ModelItem = ({
                                     />
                             ) : (
                                 <Text style={style.textMain}>
-                                    {value || `Enter ${label}`}
+                                    {date ? utils.dateConverter(value) : value ? value : `Enter ${label}`}
                                 </Text>
                             )}
                         </View>
                     </View>
                 </TouchableNativeFeedback>
-                {date ? (
-                    <DateTimePickerModal
-                        isVisible={displayInput}
-                        style={{
-                            borderRadius: SIZES.radius,
-                        }}
-                        mode="date"
-                        onConfirm={(date) => {
-                            onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
-                            setDisplayInput(false);
-                        }}
-                        onCancel={() => {
-                            setDisplayInput(false);
-                        }}
-                    />
-                ) : !reminder && (
+                {!reminder && (
                 <Modal
                     animationType="fade"
                     transparent={true}
                     visible={displayInput}
                     onShow={() => {
-                        setTimeout(() => inputRef.current.focus(), 1)
+                        !date && setTimeout(() => inputRef.current.focus(), 1)
                     }}
                     onRequestClose={() => {
                         setDisplayInput(false);
@@ -200,28 +186,45 @@ const ModelItem = ({
                                         }}
                                     />
                                 </View>
-                                {displayInput && (
-                                <TextInput
-                                    ref={inputRef}
-                                    keyboardType={keyboardType || 'default'}
-                                    value={state}
-                                    placeholder={value}
-                                    maxLength={maxLength || 100}
-                                    placeholderTextColor={COLORS.gray50}
-                                    onChangeText={onChange}
-                                    style={style.input}
-                                    onSubmitEditing={() => {
-                                        setDisplayInput(false);
-                                    }}
-                                    onFocus={(e) => {
-                                        setIsInputFocused(true);
-                                        e.target.setSelection(0, state ? state.length : 0);
-                                    }}
-                                    onBlur={() => {
-                                        setIsInputFocused(false);
-                                        setDisplayInput(false);
-                                    }}
-                                />
+                                {date ? (
+                                    <DatePicker
+                                        open={displayInput}
+                                        date={new Date(value)}
+                                        style={{
+                                            borderRadius: SIZES.radius,
+                                        }}
+                                        mode="date"
+                                        androidVariant="iosClone"
+                                        onDateChange={(date) => {
+                                            onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
+                                        }}
+                                        onCancel={() => {
+                                            setDisplayInput(false);
+                                        }}
+                                    />
+                                ) : 
+                                displayInput && (
+                                    <TextInput
+                                        ref={inputRef}
+                                        keyboardType={keyboardType || 'default'}
+                                        value={state}
+                                        placeholder={value}
+                                        maxLength={maxLength || 100}
+                                        placeholderTextColor={COLORS.gray50}
+                                        onChangeText={onChange}
+                                        style={style.input}
+                                        onSubmitEditing={() => {
+                                            setDisplayInput(false);
+                                        }}
+                                        onFocus={(e) => {
+                                            setIsInputFocused(true);
+                                            e.target.setSelection(0, state ? state.length : 0);
+                                        }}
+                                        onBlur={() => {
+                                            setIsInputFocused(false);
+                                            setDisplayInput(false);
+                                        }}
+                                    />
                                 )}
                             </View>
                         </TouchableWithoutFeedback>

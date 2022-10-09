@@ -169,7 +169,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 <ModelItem
                     label='First Bill'
                     value={firstBill ?
-                        new Date(firstBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})
+                        firstBill
                         : "Enter a date"}
                     state={firstBill}
                     onChange={setFirstBill}
