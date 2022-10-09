@@ -186,21 +186,25 @@ const ModelItem = ({
                                 />
                             </View>
                             {date ? (
-                                <DatePicker
-                                    open={displayInput}
-                                    date={new Date(state)}
-                                    style={{
-                                        borderRadius: SIZES.radius,
-                                    }}
-                                    mode="date"
-                                    androidVariant="iosClone"
-                                    onDateChange={(date) => {
-                                        onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
-                                    }}
-                                    onCancel={() => {
-                                        setDisplayInput(false);
-                                    }}
-                                />
+                                <View style={{
+                                    width: '100%',
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                }}>
+                                    <DatePicker
+                                        open={displayInput}
+                                        date={new Date(state)}
+                                        mode="date"
+                                        textColor={COLORS.textDark}
+                                        androidVariant="iosClone"
+                                        onDateChange={(date) => {
+                                            onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
+                                        }}
+                                        onCancel={() => {
+                                            setDisplayInput(false);
+                                        }}
+                                    />
+                                </View>
                             ) : 
                             displayInput && (
                                 <TextInput
