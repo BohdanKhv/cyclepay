@@ -3,6 +3,7 @@ import { View, Text, Animated, Pressable, StyleSheet } from 'react-native';
 
 import { TextButton, ModelItem } from '../';
 import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import utils from '../../constants/utils';
 
 
 const SubModel = ({ item, isOpen, setIsOpen }) => {
@@ -161,23 +162,21 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
             }}>
                 <ModelItem
                     label='Description'
-                    value={description || "Enter a description"}
+                    stateLabel={description || 'No description'}
                     maxLength={20}
                     state={description}
                     onChange={setDescription}
                 />
                 <ModelItem
                     label='First Bill'
-                    value={firstBill ?
-                        firstBill
-                        : "Enter a date"}
+                    stateLabel={firstBill ? utils.dateConverter(firstBill) : "Enter a date"}
                     state={firstBill}
                     onChange={setFirstBill}
                     date
                 />
                 <ModelItem
                     label='Price'
-                    value={price || "$ 0.00"}
+                    stateLabel={price ? `$ ${price}` : "Enter a price"}
                     maxLength={6}
                     state={price}
                     keyboardType='numeric'
@@ -185,7 +184,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='Cycle'
-                    value={cycle || "1 month"}
+                    stateLabel={cycle ? `${cycle} months` : "Enter a cycle"}
                     maxLength={2}
                     state={cycle}
                     keyboardType='numeric'
@@ -193,25 +192,24 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='Reminder'
-                    value={reminder || "Off"}
                     state={reminder}
                     onChange={setReminder}
                     reminder
                 />
                 <ModelItem
                     label='Next Bill'
+                    stateLabel={item && item.nextBill ? utils.dateConverter(item.nextBill) : "No date"}
                     disabled
-                    value={new Date(item?.nextBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}
                 />
                 <ModelItem
                     label='Total Paid'
+                    stateLabel={`$${countTotalPaid(item?.cycle, item?.firstBill)}`}
                     disabled
-                    value={`$ ${countTotalPaid(item?.cycle, item?.firstBill)}`}
                 />
                 <ModelItem
                     label='Cycles'
+                    stateLabel={`${countAmountOfCycles(item?.cycle, item?.firstBill)} cycles`}
                     disabled
-                    value={`${countAmountOfCycles(item?.cycle, item?.firstBill)}`}
                 />
             </View>
 

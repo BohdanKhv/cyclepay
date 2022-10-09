@@ -94,6 +94,28 @@ export const FONTS = {
     body6: { fontFamily: "Roboto-Regular", fontSize: SIZES.body6, lineHeight: 16 },
 };
 
+export const darkTheme = {
+    name: "dark",
+    main: "#000",
+    secondary: "#0D1117",
+    tertiary: "#E1E8ED",
+    primary: "#FC642D",
+    textLight: "#000",
+    textDark: "#14171A",
+}
+
+export const lightTheme = {
+    name: "light",
+    main: "#fff",
+    secondary: "#F5F8FA",
+    tertiary: "#E1E8ED",
+    primary: "#FC642D",
+    textLight: "#fff",
+    textDark: "#14171A",
+}
+
+export const selectedTheme = lightTheme;
+
 const appTheme = { COLORS, SIZES, FONTS };
 
 export default appTheme;

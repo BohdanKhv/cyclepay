@@ -7,7 +7,7 @@ import icons from "../../constants/icons";
 import utils from "../../constants/utils";
 
 const ModelItem = ({
-    value,
+    stateLabel,
     state,
     onChange,
     label,
@@ -71,7 +71,7 @@ const ModelItem = ({
         },
         centeredView: {
             flex: 1,
-            backgroundColor: 'rgba(0,0,0,0.35)',
+            backgroundColor: 'white',
             width: '100%',
             height: '100%',
             alignItems: "center",
@@ -81,18 +81,18 @@ const ModelItem = ({
         },
         modalView: {
             backgroundColor: COLORS.main,
-            borderBottomLeftRadius: SIZES.radius,
-            borderBottomRightRadius: SIZES.radius,
             padding: SIZES.padding,
             width: '100%',
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 2
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5
+            // borderBottomLeftRadius: SIZES.radius,
+            // borderBottomRightRadius: SIZES.radius,
+            // shadowColor: "#000",
+            // shadowOffset: {
+            //     width: 0,
+            //     height: 2
+            // },
+            // shadowOpacity: 0.25,
+            // shadowRadius: 3.84,
+            // elevation: 5
         },
         modalText: {
             fontSize: SIZES.h3,
@@ -108,131 +108,129 @@ const ModelItem = ({
     })
 
     return (
-        value ? (
-            <View
-                style={style.container}
+        <View
+            style={style.container}
+        >
+            <TouchableNativeFeedback
+                disabled={disabled}
+                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                onPress={() => {
+                    !disabled && setDisplayInput(true);
+                    reminder && onChange(!state);
+                }}
             >
-                <TouchableNativeFeedback
-                    disabled={disabled}
-                    background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                <View style={[style.justifyBetween, style.borderBottom, {paddingHorizontal: SIZES.padding}]}>
+                    <View style={[style.alignCenter, style.py]}>
+                        <Text style={style.textSecondary}>
+                            {label}
+                        </Text>
+                    </View>
+                    <View style={[style.alignCenter, style.py, style.inputContainer]}>
+                        {reminder ? (
+                            <Switch
+                                value={state}
+                                style={{margin: 0, padding: 0}}
+                                onValueChange={onChange}
+                                trackColor={{ false: COLORS.secondary, true: COLORS.primary }}
+                                thumbColor={state ? COLORS.primary : COLORS.secondary}
+                                />
+                        ) : (
+                            <Text style={style.textMain}>
+                                {stateLabel || 'Empty'}
+                            </Text>
+                        )}
+                    </View>
+                </View>
+            </TouchableNativeFeedback>
+            {!reminder && (
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={displayInput}
+                onShow={() => {
+                    setTimeout(() => inputRef?.current?.focus(), 1)
+                }}
+                onRequestClose={() => {
+                    setDisplayInput(false);
+                }}
+            >
+                <TouchableOpacity
+                    style={style.centeredView}
+                    activeOpacity={1}
                     onPress={() => {
-                        !disabled && setDisplayInput(true);
-                        reminder && onChange(!state);
+                        // displayInput && setDisplayInput(false);
                     }}
                 >
-                    <View style={[style.justifyBetween, style.borderBottom, {paddingHorizontal: SIZES.padding}]}>
-                        <View style={[style.alignCenter, style.py]}>
-                            <Text style={style.textSecondary}>
-                                {label}
-                            </Text>
-                        </View>
-                        <View style={[style.alignCenter, style.py, style.inputContainer]}>
-                            {reminder ? (
-                                <Switch
-                                    value={state}
-                                    style={{margin: 0, padding: 0}}
-                                    onValueChange={onChange}
-                                    trackColor={{ false: COLORS.secondary, true: COLORS.primary }}
-                                    thumbColor={state ? COLORS.primary : COLORS.secondary}
-                                    />
-                            ) : (
-                                <Text style={style.textMain}>
-                                    {date ? utils.dateConverter(value) : value ? value : `Enter ${label}`}
+                    <TouchableWithoutFeedback
+                        style={style.modalContainer}
+                    >
+                        <View
+                            style={style.modalView}
+                        >
+                            <View 
+                                style={style.modalHeader}
+                            >
+                                <Text
+                                    style={style.modalText}
+                                >
+                                    {label}
                                 </Text>
+                                <IconButton
+                                    icon={icons.check}
+                                    width={SIZES.h2}
+                                    height={SIZES.h2}
+                                    color={COLORS.primary}
+                                    onPress={() => {
+                                        setDisplayInput(false);
+                                    }}
+                                />
+                            </View>
+                            {date ? (
+                                <DatePicker
+                                    open={displayInput}
+                                    date={new Date(state)}
+                                    style={{
+                                        borderRadius: SIZES.radius,
+                                    }}
+                                    mode="date"
+                                    androidVariant="iosClone"
+                                    onDateChange={(date) => {
+                                        onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
+                                    }}
+                                    onCancel={() => {
+                                        setDisplayInput(false);
+                                    }}
+                                />
+                            ) : 
+                            displayInput && (
+                                <TextInput
+                                    ref={inputRef}
+                                    keyboardType={keyboardType || 'default'}
+                                    value={state}
+                                    placeholder={stateLabel}
+                                    maxLength={maxLength || 100}
+                                    placeholderTextColor={COLORS.gray50}
+                                    onChangeText={onChange}
+                                    style={style.input}
+                                    onSubmitEditing={() => {
+                                        setDisplayInput(false);
+                                    }}
+                                    onFocus={(e) => {
+                                        setIsInputFocused(true);
+                                        e.target.setSelection(0, state ? state.length : 0);
+                                    }}
+                                    onBlur={() => {
+                                        setIsInputFocused(false);
+                                        setDisplayInput(false);
+                                    }}
+                                />
                             )}
                         </View>
-                    </View>
-                </TouchableNativeFeedback>
-                {!reminder && (
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={displayInput}
-                    onShow={() => {
-                        !date && setTimeout(() => inputRef.current.focus(), 1)
-                    }}
-                    onRequestClose={() => {
-                        setDisplayInput(false);
-                    }}
-                >
-                    <TouchableOpacity
-                        style={style.centeredView}
-                        activeOpacity={1}
-                        onPress={() => {
-                            displayInput && setDisplayInput(false);
-                        }}
-                    >
-                        <TouchableWithoutFeedback
-                            style={style.modalContainer}
-                        >
-                            <View
-                                style={style.modalView}
-                            >
-                                <View 
-                                    style={style.modalHeader}
-                                >
-                                    <Text
-                                        style={style.modalText}
-                                    >
-                                        {label}
-                                    </Text>
-                                    <IconButton
-                                        icon={icons.check}
-                                        width={SIZES.h2}
-                                        height={SIZES.h2}
-                                        color={COLORS.primary}
-                                        onPress={() => {
-                                            setDisplayInput(false);
-                                        }}
-                                    />
-                                </View>
-                                {date ? (
-                                    <DatePicker
-                                        open={displayInput}
-                                        date={new Date(value)}
-                                        style={{
-                                            borderRadius: SIZES.radius,
-                                        }}
-                                        mode="date"
-                                        androidVariant="iosClone"
-                                        onDateChange={(date) => {
-                                            onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
-                                        }}
-                                        onCancel={() => {
-                                            setDisplayInput(false);
-                                        }}
-                                    />
-                                ) : 
-                                displayInput && (
-                                    <TextInput
-                                        ref={inputRef}
-                                        keyboardType={keyboardType || 'default'}
-                                        value={state}
-                                        placeholder={value}
-                                        maxLength={maxLength || 100}
-                                        placeholderTextColor={COLORS.gray50}
-                                        onChangeText={onChange}
-                                        style={style.input}
-                                        onSubmitEditing={() => {
-                                            setDisplayInput(false);
-                                        }}
-                                        onFocus={(e) => {
-                                            setIsInputFocused(true);
-                                            e.target.setSelection(0, state ? state.length : 0);
-                                        }}
-                                        onBlur={() => {
-                                            setIsInputFocused(false);
-                                            setDisplayInput(false);
-                                        }}
-                                    />
-                                )}
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </TouchableOpacity>
-                </Modal>
-                )}
-            </View>
-        ) : null
+                    </TouchableWithoutFeedback>
+                </TouchableOpacity>
+            </Modal>
+            )}
+        </View>
     )
 }
 

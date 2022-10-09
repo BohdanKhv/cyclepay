@@ -3,6 +3,7 @@ import { View, Text, Animated, Pressable, StyleSheet, KeyboardAwareScrollView } 
 
 import { TextButton, ModelItem } from '../';
 import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import utils from '../../constants/utils';
 
 
 const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
@@ -11,7 +12,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [cycle, setCycle] = useState("");
-    const [firstBill, setFirstBill] = useState("");
+    const [firstBill, setFirstBill] = useState(new Date());
     const [reminder, setReminder] = useState(false);
 
     useEffect(() => {
@@ -149,24 +150,21 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
             >
                 <ModelItem
                     label='Description'
-                    value={description || "Enter a description"}
+                    stateLabel={description || 'Enter description'}
                     state={description}
                     maxLength={50}
                     onChange={setDescription}
                 />
                 <ModelItem
                     label='First Bill'
-                    value={
-                        firstBill ? new Date(firstBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric' || "yyyy-mm-dd"})
-                            : "Enter a date"
-                        }
-                    state={firstBill}
+                    stateLabel={firstBill ? utils.dateConverter(firstBill) : 'Enter first bill'}
+                    state={firstBill ? firstBill : new Date()}
                     onChange={setFirstBill}
                     date
                 />
                 <ModelItem
                     label='Price'
-                    value={price || "$ 0.00"}
+                    stateLabel={price ? `$ ${price}` : 'Enter price'}
                     state={price}
                     maxLength={6}
                     keyboardType='numeric'
@@ -174,7 +172,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='Cycle'
-                    value={cycle || "1 month"}
+                    stateLabel={cycle ? `${cycle} months` : 'Enter cycle'}
                     maxLength={2}
                     state={cycle}
                     keyboardType='numeric'
@@ -182,7 +180,6 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 />
                 <ModelItem
                     label='Reminder'
-                    value={reminder || "Off"}
                     state={reminder}
                     onChange={setReminder}
                     reminder
