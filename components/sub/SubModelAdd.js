@@ -8,7 +8,7 @@ import { addSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
 
 
-const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
+const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
@@ -20,13 +20,18 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
     const [firstBill, setFirstBill] = useState(utils.dateFormat(new Date()));
     const [reminder, setReminder] = useState(false);
 
+    const [nameError, setNameError] = useState(false);
+    const [priceError, setPriceError] = useState(false);
+    const [cycleError, setCycleError] = useState(false);
+    const [firstBillError, setFirstBillError] = useState(false);
+
     useEffect(() => {
         if(item) {
             item.name && setName(item.name);
             item.description && setDescription(item.description);
             item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
-            item.firstBill && setFirstBill(utils.dateFormat(new Date()));
+            setFirstBill(utils.dateFormat(new Date()));
         }
     }, [item])
 
@@ -43,6 +48,12 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                 duration: SIZES.animationDuration,
                 useNativeDriver: true,
             }).start();
+
+            setSelectedItem(null);
+            setNameError(false);
+            setPriceError(false);
+            setCycleError(false);
+            setFirstBillError(false);
         }
 
         return () => {
@@ -65,9 +76,22 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
             nextBill: utils.dateFormat(utils.calcNewBill(firstBill, parseInt(cycle))),
             reminder,
         }
-        dispatch(addSub(newItem));
-        setIsOpen(false);
-        setAlertMsg("Subscription added");
+
+        if(newItem.name) setNameError(false);
+        if(newItem.price) setPriceError(false);
+        if(newItem.cycle) setCycleError(false);
+        if(newItem.firstBill) setFirstBillError(false);
+
+        if(newItem.name && newItem.price && newItem.cycle && newItem.firstBill) {
+            dispatch(addSub(newItem));
+            setIsOpen(false);
+            setAlertMsg("Subscription added");
+        } else {
+            if(!newItem.name) setNameError(true);
+            if(!newItem.price) setPriceError(true);
+            if(!newItem.cycle) setCycleError(true);
+            if(!newItem.firstBill) setFirstBillError(true);
+        }
     }
 
     const style = StyleSheet.create({
@@ -173,6 +197,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                         state={name}
                         maxLength={20}
                         onChange={setName}
+                        isError={nameError}
                     />
                     <ModelItem
                         label='Description'
@@ -186,6 +211,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                         stateLabel={firstBill ? utils.dateConverter(firstBill) : 'Enter first bill'}
                         state={firstBill ? firstBill : new Date()}
                         onChange={setFirstBill}
+                        isError={firstBillError}
                         date
                     />
                     <ModelItem
@@ -195,14 +221,16 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                         maxLength={6}
                         keyboardType='numeric'
                         onChange={setPrice}
+                        isError={priceError}
                     />
                     <ModelItem
                         label='Cycle'
-                        stateLabel={cycle ? `${cycle} months` : 'Enter cycle'}
+                        stateLabel={cycle ? `${cycle} month${cycle == 1 ? '' : 's'}` : 'Enter cycle'}
                         maxLength={2}
                         state={cycle}
                         keyboardType='numeric'
                         onChange={setCycle}
+                        isError={cycleError}
                     />
                     <ModelItem
                         label='Reminder'

@@ -3,7 +3,7 @@ import { View, Text, TextInput, StyleSheet, FlatList } from "react-native"
 import { useSelector } from "react-redux"
 import { Input, SubItemAdd, SubModelAdd, GoBack, SubCustomAdd, Alert } from "../components"
 import { SIZES } from "../constants/theme"
-import data from "../constants/dummyData"
+import data from "../constants/data"
 import icons from "../constants/icons"
 
 const Search = ({navigation}) => {
@@ -40,6 +40,7 @@ const Search = ({navigation}) => {
             <View
                 style={{
                     paddingTop: SIZES.padding,
+                    marginBottom: 120,
                 }}
             >
                 <SubCustomAdd
@@ -50,7 +51,7 @@ const Search = ({navigation}) => {
                     data={
                         data
                         .filter(i => search.length > 0 ? i.name.toLowerCase().includes(search.toLowerCase()) : true)
-                        .slice(0, 5)
+                        .slice(0, 10)
                     }
                     keyExtractor={(item) => `item-${item.id}`}
                     renderItem={({item}) => (
@@ -68,6 +69,7 @@ const Search = ({navigation}) => {
             isOpen={modelOpen}
             setIsOpen={setModelOpen}
             setAlertMsg={setAlertMsg}
+            setSelectedItem={setSelectedItem}
         />
         <Alert
             message={alertMsg}

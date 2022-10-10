@@ -17,6 +17,7 @@ const ModelItem = ({
     date,
     maxLength,
     reminder,
+    isError
 }) => {
     const { theme } = useSelector(state => state.local);
     const [displayInput, setDisplayInput] = useState(false);
@@ -27,6 +28,7 @@ const ModelItem = ({
         container: {
             position: 'relative',
             overflow: 'hidden',
+            backgroundColor: isError ? '#ff5e5910' : 'transparent',
         },
         textSecondary: {
             color: theme.textDark,
@@ -52,7 +54,7 @@ const ModelItem = ({
         },
         borderBottom: {
             borderBottomWidth: 1,
-            borderBottomColor: theme.secondary,
+            borderBottomColor: isError ? theme.danger : theme.secondary,
         },
         input: {
             color: theme.textDark,

@@ -45,13 +45,22 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
             alignItems: 'flex-end',
             paddingRight: 10,
         },
-        thumbnail: {
+        thumbnailWrapper: {
             width: 36,
             height: 36,
-            borderRadius: 18,
-            marginRight: 10,
+            padding: 4,
+            borderRadius: 50,
+            overflow: 'hidden',
             backgroundColor: "white",
-            resizeMode: 'contain',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginRight: 10,
+        },
+        thumbnail: {
+            width: 25,
+            height: 25,
+            backgroundColor: "white",
             // tintColor: theme.textDark,
         },
     })
@@ -79,13 +88,12 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
                                 alignItems: 'center',
                             }}
                         >
-                            <Image
-                                source={{
-                                    uri: item.thumbnail,
-                                    cache: 'only-if-cached',
-                                }}
-                                style={style.thumbnail}
-                            />
+                            <View style={style.thumbnailWrapper}>
+                                <Image
+                                    source={item.thumbnail}
+                                    style={style.thumbnail}
+                                />
+                            </View>
                             <View>
                                 <Text style={style.textMain}>
                                     {item.name}

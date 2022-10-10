@@ -3,7 +3,7 @@ import { View, FlatList, ScrollView, StyleSheet } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 import { COLORS, SIZES } from "../constants/theme"
 import { useSelector } from "react-redux"
-import data from "../constants/dummyData"
+import data from "../constants/data"
 import { Sort, SubItem, Header, Add, Info, SubModel, Alert } from "../components"
 
 const Home = ({navigation}) => {
@@ -92,6 +92,7 @@ const Home = ({navigation}) => {
         item={selectedItem}
         isOpen={modelOpen}
         setIsOpen={setModelOpen}
+        setSelectedItem={setSelectedItem}
         setAlertMsg={setAlertMsg}
       />
       <Alert

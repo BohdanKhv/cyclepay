@@ -23,7 +23,7 @@ const Alert = ({message, color}) => {
                     duration: 250,
                     useNativeDriver: true,
                 }).start();
-            }, 1500);
+            }, 2000);
         }
         return () => {
             clearTimeout(timeout);
@@ -41,14 +41,14 @@ const Alert = ({message, color}) => {
             padding: SIZES.padding,
         },
         alert: {
-            backgroundColor: color || theme.main,
+            backgroundColor: color || theme.primary,
             borderColor: theme.border,
             borderWidth: 1,
             borderRadius: SIZES.radius,
             padding: SIZES.padding,
         },
         message: {
-            color: theme.textDark,
+            color: theme.textLight,
             textAlign: 'center',
             ...FONTS.body4,
         },

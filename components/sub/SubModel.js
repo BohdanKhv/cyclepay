@@ -9,7 +9,7 @@ import utils from '../../constants/utils';
 import icons from '../../constants/icons';
 
 
-const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
+const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
@@ -19,6 +19,11 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
     const [cycle, setCycle] = useState("");
     const [firstBill, setFirstBill] = useState("");
     const [reminder, setReminder] = useState(false);
+
+    const [priceError, setPriceError] = useState(false);
+    const [cycleError, setCycleError] = useState(false);
+    const [firstBillError, setFirstBillError] = useState(false);
+
 
     useEffect(() => {
         if(item) {
@@ -43,6 +48,10 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                 duration: SIZES.animationDuration,
                 useNativeDriver: true
             }).start();
+            setSelectedItem(null);
+            setPriceError(false);
+            setCycleError(false);
+            setFirstBillError(false);
         }
     }, [isOpen]);
 
@@ -56,9 +65,20 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
             nextBill: utils.dateFormat(utils.calcNewBill(firstBill, parseInt(cycle))),
             reminder,
         }
-        dispatch(updateSub(newItem));
-        setIsOpen(false);
-        setAlertMsg("Subscription updated");
+
+        if(newItem.price) setPriceError(false);
+        if(newItem.cycle) setCycleError(false);
+        if(newItem.firstBill) setFirstBillError(false);
+
+        if(newItem.name && newItem.price && newItem.cycle && newItem.firstBill) {
+            dispatch(updateSub(newItem));
+            setIsOpen(false);
+            setAlertMsg("Subscription updated");
+        } else {
+            if(!newItem.price) setPriceError(true);
+            if(!newItem.cycle) setCycleError(true);
+            if(!newItem.firstBill) setFirstBillError(true);
+        }
     }
 
     const handleDelete = () => {
@@ -190,6 +210,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                     stateLabel={firstBill ? utils.dateConverter(firstBill) : "Enter a date"}
                     state={firstBill}
                     onChange={setFirstBill}
+                    isError={firstBillError}
                     date
                 />
                 <ModelItem
@@ -198,6 +219,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                     maxLength={6}
                     state={price}
                     keyboardType='numeric'
+                    isError={priceError}
                     onChange={setPrice}
                 />
                 <ModelItem
@@ -206,6 +228,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                     maxLength={2}
                     state={cycle}
                     keyboardType='numeric'
+                    isError={cycleError}
                     onChange={setCycle}
                 />
                 <ModelItem

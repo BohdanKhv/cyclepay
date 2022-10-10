@@ -12,6 +12,7 @@ export const COLORS = {
     textDark: "#14171A",
     success: "#55f16c",
     danger: "#ff5e59",
+    info: "#00b8d9",
 
     gray10: "#E5E5E5",
     gray20: "#CCCCCC",
@@ -107,6 +108,7 @@ export const darkTheme = {
 
     success: "#55f16c",
     danger: "#ff5e59",
+    info: "#00b8d9",
 
     border: "#4b4b4b",
 
@@ -132,6 +134,7 @@ export const lightTheme = {
 
     success: "#55f16c",
     danger: "#ff5e59",
+    info: "#00b8d9",
 
     border: "#cccccc",
 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
 import { FONTS, SIZES } from "../../constants/theme"
+import utils from '../../constants/utils';
 import { useSelector } from "react-redux"
 
 
@@ -47,13 +48,22 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
             flexDirection: 'column',
             alignItems: 'flex-end',
         },
-        thumbnail: {
+        thumbnailWrapper: {
             width: 36,
             height: 36,
-            borderRadius: 18,
+            padding: 4,
+            borderRadius: 50,
+            overflow: 'hidden',
+            backgroundColor: "white",
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
             marginRight: 10,
-            backgroundColor: 'white',
-            resizeMode: 'contain',
+        },
+        thumbnail: {
+            width: 25,
+            height: 25,
+            backgroundColor: "white",
             // tintColor: theme.textDark,
         },
     })
@@ -81,21 +91,21 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                             alignItems: 'center',
                         }}
                     >
-                        <Image
-                            source={{
-                                uri: item.thumbnail
-                            }}
-                            style={style.thumbnail}
-                        />
+                        <View style={style.thumbnailWrapper}>
+                            <Image
+                                source={item.thumbnail}
+                                style={style.thumbnail}
+                            />
+                        </View>
                         <View>
                             <Text style={style.textMain}>
                                 {item.name}
                             </Text>
-                            <Text style={style.textSecondary}>
-                                {item.description}
-                            </Text>
                             <Text style={style.textTertiary}>
                                 Next Bill:
+                            </Text>
+                            <Text style={style.textSecondary}>
+                                {item.description}
                             </Text>
                         </View>
                     </View>
@@ -105,11 +115,11 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                         <Text style={style.textMain}>
                             $ {item.price}
                         </Text>
+                        <Text style={style.textTertiary}>
+                            {utils.dateConverter(item.nextBill)}
+                        </Text>
                         <Text style={style.textSecondary}>
                             {item.cycle} Month{item.cycle > 1 ? 's' : ''}
-                        </Text>
-                        <Text style={style.textTertiary}>
-                            {new Date(item.nextBill).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: '2-digit'})}
                         </Text>
                     </View>
                     </View>
