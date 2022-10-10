@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { View, Text, StyleSheet } from 'react-native'
-import { COLORS, FONTS, SIZES } from '../../constants/theme'
+import { FONTS, SIZES } from '../../constants/theme'
 import { IconButton} from '../'
 import icons from '../../constants/icons'
+import { useSelector } from "react-redux"
 
 const Sort = ({items, setItems}) => {
+    const { theme } = useSelector(state => state.local);
     const [sortBy, setSortBy] = useState('name')
 
     const style = StyleSheet.create({
@@ -19,11 +21,11 @@ const Sort = ({items, setItems}) => {
             alignItems: 'center',
         },
         text: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.h3,
         },
         info: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             marginRight: 4,
             ...FONTS.body4,
         }

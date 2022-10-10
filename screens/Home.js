@@ -1,28 +1,29 @@
 import { useState, useEffect } from "react"
-import { View, FlatList, ScrollView } from "react-native"
+import { View, FlatList, ScrollView, StyleSheet } from "react-native"
 import { COLORS, SIZES } from "../constants/theme"
+import { useSelector } from "react-redux"
 import data from "../constants/dummyData"
 import { Sort, SubItem, Header, Add, Info, SubModel } from "../components"
-
-
-const style = {
-  body: {
-    flex: 1,
-    backgroundColor: COLORS.main,
-  },
-  container: {
-    paddingHorizontal: 8,
-  },
-}
 
 const Home = ({navigation}) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [modelOpen, setModelOpen] = useState(false);
   const [items, setItems] = useState([]);
+  const { theme } = useSelector(state => state.local);
 
   useEffect(() => {
     setItems(data);
   }, []);
+
+  const style = StyleSheet.create({
+    body: {
+      flex: 1,
+      backgroundColor: theme.main,
+    },
+    container: {
+      paddingHorizontal: 8,
+    },
+  });
 
   return (
     <>
@@ -34,12 +35,12 @@ const Home = ({navigation}) => {
             position: "absolute",
             top: 0,
             right: 0,
-            backgroundColor: COLORS.primary,
+            backgroundColor: theme.primary,
             width: 180,
             height: 180,
             borderBottomLeftRadius: 180,
             // Shadow
-            shadowColor: COLORS.primary,
+            shadowColor: theme.primary,
             shadowOffset: {
               width: 0,
               height: 2,

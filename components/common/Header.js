@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import { FONTS, SIZES } from '../../constants/theme';
 import { useSelector } from 'react-redux';
 import icons from '../../constants/icons';
 import { IconButton, Menu } from '../';
@@ -39,12 +39,12 @@ const Header = ({ navigation }) => {
             justifyContent: 'space-between',
         },
         textSecondary: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             opacity: 0.5,
             ...FONTS.body3,
         },
         textMain: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.titleSm
         },
     });

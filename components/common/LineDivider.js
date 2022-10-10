@@ -1,15 +1,16 @@
-import React from 'react';
 import { View } from 'react-native';
 
-import { COLORS } from '../../constants/theme';
+import { useSelector } from 'react-redux';
 
 const LiveDivider = ({ lineStyle }) => {
+    const { theme } = useSelector(state => state.local);
+
     return (
         <View
             style={{
                 height: 1,
                 width: '100%',
-                backgroundColor: COLORS.tertiary,
+                backgroundColor: theme.tertiary,
                 ...lineStyle
             }}
         >

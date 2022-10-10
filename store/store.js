@@ -4,19 +4,22 @@ import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, 
 import localReducer from './features/local/localSlice';
 import subReducer from './features/sub/subSlice';
 
-const persistConfig = {
-  key: 'root',
+const localPersistConfig = {
+  key: 'local',
   storage: AsyncStorage,
-  whitelist: ['local', 'sub'],
+  whitelist: ['theme'],
 }
 
-const local = persistReducer(persistConfig, localReducer);
-const sub = persistReducer(persistConfig, subReducer);
+const subPersistConfig = {
+  key: 'sub',
+  storage: AsyncStorage,
+  whitelist: ['items'],
+}
 
 export const store = configureStore({
   reducer: {
-    local: local,
-    sub: sub,
+    local: persistReducer(localPersistConfig, localReducer),
+    sub: persistReducer(subPersistConfig, subReducer),
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

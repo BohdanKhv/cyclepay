@@ -1,7 +1,9 @@
 import { View, Text, Switch, StyleSheet, TouchableNativeFeedback } from "react-native"
-import { COLORS, FONTS, SIZES } from "../../constants/theme"
+import { FONTS, SIZES } from "../../constants/theme"
+import { useSelector } from "react-redux"
 
 export const SettingsItem = ({ value, onChange, label }) => {
+    const { theme } = useSelector(state => state.local);
 
     const style = StyleSheet.create({
         container: {
@@ -9,7 +11,7 @@ export const SettingsItem = ({ value, onChange, label }) => {
             overflow: 'hidden',
         },
         label: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.body3
         },
         alignCenter: {
@@ -29,7 +31,7 @@ export const SettingsItem = ({ value, onChange, label }) => {
         },
         borderBottom: {
             borderBottomWidth: 1,
-            borderBottomColor: COLORS.secondary,
+            borderBottomColor: theme.secondary,
         },
     })
 
@@ -38,7 +40,7 @@ export const SettingsItem = ({ value, onChange, label }) => {
             style={style.container}
         >
             <TouchableNativeFeedback
-                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
                 onPress={() => {
                     onChange(!value)
                 }}
@@ -52,8 +54,8 @@ export const SettingsItem = ({ value, onChange, label }) => {
                     <Switch
                         value={value}
                         style={{margin: 0, padding: 0}}
-                        trackColor={{ false: COLORS.secondary, true: COLORS.primary }}
-                        thumbColor={ value ? COLORS.primary : COLORS.secondary }
+                        trackColor={{ false: theme.secondary, true: theme.primary }}
+                        thumbColor={ value ? theme.primary : theme.secondary }
                         onValueChange={() => {
                             onChange(!value)
                         }}

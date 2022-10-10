@@ -1,10 +1,11 @@
 import { useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Switch } from "react-native"
-import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import { FONTS, SIZES } from '../../constants/theme';
 import { IconButton } from '../'
 import DatePicker from 'react-native-date-picker'
 import icons from "../../constants/icons";
 import utils from "../../constants/utils";
+import { useSelector } from "react-redux"
 
 const ModelItem = ({
     stateLabel,
@@ -17,6 +18,7 @@ const ModelItem = ({
     maxLength,
     reminder,
 }) => {
+    const { theme } = useSelector(state => state.local);
     const [displayInput, setDisplayInput] = useState(false);
     const inputRef = useRef(null);
     const [isInputFocused, setIsInputFocused] = useState(false);
@@ -27,12 +29,12 @@ const ModelItem = ({
             overflow: 'hidden',
         },
         textSecondary: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             opacity: 0.5,
             ...FONTS.body5,
         },
         textMain: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             fontWeight: 'bold',
             ...FONTS.h4,
         },
@@ -50,10 +52,10 @@ const ModelItem = ({
         },
         borderBottom: {
             borderBottomWidth: 1,
-            borderBottomColor: COLORS.secondary,
+            borderBottomColor: theme.secondary,
         },
         input: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             backgroundColor: 'transparent',
             margin: 0,
             paddingHorizontal: 4,
@@ -62,7 +64,7 @@ const ModelItem = ({
             fontWeight: '400',
             width: '100%',
             outline: 'none',
-            borderBottomColor: isInputFocused ? COLORS.primary : COLORS.border,
+            borderBottomColor: isInputFocused ? theme.primary : theme.border,
             borderBottomWidth: 1,
         },
         inputContainer: {
@@ -80,9 +82,10 @@ const ModelItem = ({
             width: '100%',
         },
         modalView: {
-            backgroundColor: COLORS.main,
+            backgroundColor: theme.main,
             padding: SIZES.padding,
             width: '100%',
+            height: '100%',
             // borderBottomLeftRadius: SIZES.radius,
             // borderBottomRightRadius: SIZES.radius,
             // shadowColor: "#000",
@@ -96,7 +99,7 @@ const ModelItem = ({
         },
         modalText: {
             fontSize: SIZES.h3,
-            color: COLORS.textDark,
+            color: theme.textDark,
             fontWeight: 'bold',
         },
         modalHeader: {
@@ -113,7 +116,7 @@ const ModelItem = ({
         >
             <TouchableNativeFeedback
                 disabled={disabled}
-                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
                 onPress={() => {
                     !disabled && setDisplayInput(true);
                     reminder && onChange(!state);
@@ -131,8 +134,8 @@ const ModelItem = ({
                                 value={state}
                                 style={{margin: 0, padding: 0}}
                                 onValueChange={onChange}
-                                trackColor={{ false: COLORS.secondary, true: COLORS.primary }}
-                                thumbColor={state ? COLORS.primary : COLORS.secondary}
+                                trackColor={{ false: theme.secondary, true: theme.primary }}
+                                thumbColor={state ? theme.primary : theme.secondary}
                                 />
                         ) : (
                             <Text style={style.textMain}>
@@ -179,7 +182,7 @@ const ModelItem = ({
                                     icon={icons.check}
                                     width={SIZES.h2}
                                     height={SIZES.h2}
-                                    color={COLORS.primary}
+                                    color={theme.primary}
                                     onPress={() => {
                                         setDisplayInput(false);
                                     }}
@@ -195,8 +198,9 @@ const ModelItem = ({
                                         open={displayInput}
                                         date={new Date(state)}
                                         mode="date"
-                                        textColor={COLORS.textDark}
+                                        textColor={theme.textDark}
                                         androidVariant="iosClone"
+                                        fadeToColor={theme.main}
                                         onDateChange={(date) => {
                                             onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
                                         }}
@@ -213,7 +217,7 @@ const ModelItem = ({
                                     value={state}
                                     placeholder={stateLabel}
                                     maxLength={maxLength || 100}
-                                    placeholderTextColor={COLORS.gray50}
+                                    placeholderTextColor={theme.gray50}
                                     onChangeText={onChange}
                                     style={style.input}
                                     onSubmitEditing={() => {

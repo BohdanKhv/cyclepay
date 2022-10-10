@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
-import { COLORS, FONTS, SIZES } from "../../constants/theme"
+import { FONTS, SIZES } from "../../constants/theme"
+import { useSelector } from "react-redux"
 
 
 const SubItem = ({item, setSelectedItem, setModelOpen}) => {
+    const { theme } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
 
     const style = StyleSheet.create({
@@ -12,10 +14,10 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
             paddingBottom: 8,
         },
         itemBody: {
-            backgroundColor: COLORS.textLight,
-            color: COLORS.textDark,
+            backgroundColor: theme.main,
+            color: theme.textDark,
             borderRadius: SIZES.radius,
-            borderColor: COLORS.secondary,
+            borderColor: theme.border,
             overflow: 'hidden',
             borderWidth: 1,
         },
@@ -28,16 +30,16 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
             justifyContent: 'space-between',
         },
         textMain: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.h3,
         },
         textSecondary: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             opacity: 0.5,
             ...FONTS.body5,
         },
         textTertiary: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             opacity: 0.5,
             ...FONTS.body5,
         },
@@ -50,8 +52,9 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
             height: 36,
             borderRadius: 18,
             marginRight: 10,
+            backgroundColor: 'white',
             resizeMode: 'contain',
-            // tintColor: COLORS.textDark,
+            // tintColor: theme.textDark,
         },
     })
 
@@ -69,7 +72,7 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                         setModelOpen(true);
                         setRippleOverflow(!rippleOverflow);
                     }}
-                    background={TouchableNativeFeedback.Ripple(COLORS.tertiary, rippleOverflow)}
+                    background={TouchableNativeFeedback.Ripple(theme.tertiary, rippleOverflow)}
                 >
                     <View style={style.itemWrapper}>
                     <View

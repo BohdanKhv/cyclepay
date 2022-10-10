@@ -1,9 +1,11 @@
 import { View } from "react-native"
 import { TextButton } from '../'
 import icons from "../../constants/icons"
-import { COLORS, SIZES } from "../../constants/theme"
+import { SIZES } from "../../constants/theme"
+import { useSelector } from "react-redux"
 
 const Add = ({navigation}) => {
+    const { theme } = useSelector(state => state.local);
 
     return (
         <View style={{
@@ -14,7 +16,7 @@ const Add = ({navigation}) => {
                 onPress={() => navigation.navigate('Search')}
                 color={'transparent'}
                 labelStyle={{
-                    color: COLORS.primary,
+                    color: theme.primary,
                 }}
                 label={'Add Subscription'}
                 icon={icons.plus}

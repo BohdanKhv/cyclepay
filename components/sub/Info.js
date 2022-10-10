@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
-import { COLORS, FONTS, SIZES } from "../../constants/theme";
+import { FONTS, SIZES } from "../../constants/theme";
 import data from "../../constants/dummyData";
+import { useSelector } from "react-redux"
 
 
 const Info = () => {
+    const { theme } = useSelector(state => state.local);
     const [ totalPerMonth, setTotalPerMonth ] = useState(0)
     const [ totalType, setTotalType ] = useState('month')
 
@@ -50,8 +52,8 @@ const Info = () => {
             overflow: 'hidden',
             margin: SIZES.padding,
             // Shadow
-            elevation: 12,
-            shadowColor: '#000'
+            elevation: theme.name === 'dark' ? 2 : 10,
+            shadowColor: theme.textDark
         },
         infoWrapper: {
             paddingHorizontal: SIZES.padding,
@@ -61,13 +63,13 @@ const Info = () => {
             justifyContent: 'space-between',
         },
         textSecondary: {
-            color: COLORS.textLight,
+            color: '#fff',
             opacity: 0.5,
             ...FONTS.body3
         },
         bill: {
             ...FONTS.title,
-            color: COLORS.textLight,
+            color: '#fff',
         },
         justifyBetween: {
             flexDirection: 'row',
@@ -78,13 +80,13 @@ const Info = () => {
 
     return (
         <LinearGradient
-            colors={[COLORS.gradientMain1, COLORS.gradientMain2, COLORS.gradientMain3]}
-            start={{ x: 0.3, y: 0 }}
+            colors={[theme.gradientMain1, theme.gradientMain2, theme.gradientMain3]}
+            start={{ x: 0.6, y: 0 }}
             style={style.wrapper}
         >
             <TouchableNativeFeedback
                 onPress={handleSwitch}
-                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
             >
                 <View style={style.infoWrapper}>
                     <View style={{
@@ -93,14 +95,14 @@ const Info = () => {
                     }}>
                         <Text style={{
                             ...FONTS.body4,
-                            color: COLORS.textLight,
+                            color: '#fff',
                             opacity: 0.5,
                         }}>
                             Total Subscriptions
                         </Text>
                         <Text style={{
                             ...FONTS.h4,
-                            color: COLORS.textLight,
+                            color: '#fff',
                         }}>
                             {data.length}
                         </Text>

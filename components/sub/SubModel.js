@@ -2,11 +2,13 @@ import { useRef, useEffect, useState } from 'react';
 import { View, Text, Animated, Pressable, StyleSheet } from 'react-native';
 
 import { TextButton, ModelItem } from '../';
-import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import { FONTS, SIZES } from '../../constants/theme';
+import { useSelector } from "react-redux"
 import utils from '../../constants/utils';
 
 
 const SubModel = ({ item, isOpen, setIsOpen }) => {
+    const { theme } = useSelector(state => state.local);
     const animation = useRef(new Animated.Value(0)).current;
 
     const [description, setDescription] = useState("");
@@ -105,7 +107,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 height: '100%',
                 flex: 1,
                 width: SIZES.width,
-                backgroundColor: COLORS.main,
+                backgroundColor: theme.main,
                 borderTopLeftRadius: SIZES.radius,
                 borderTopRightRadius: SIZES.radius,
                 transform: [
@@ -127,13 +129,13 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     paddingHorizontal: SIZES.padding,
                     paddingVertical: SIZES.padding,
                     borderBottomWidth: 1,
-                    borderBottomColor: COLORS.secondary,
+                    borderBottomColor: theme.secondary,
                 }}
             >
                 <View style={style.alignCenter}>
                     <Text
                         style={{
-                            color: COLORS.textDark,
+                            color: theme.textDark,
                             ...FONTS.h2,
                         }}
                     >
@@ -146,7 +148,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                         backgroundColor: 'transparent',
                     }}
                     labelStyle={{
-                        color: COLORS.danger,
+                        color: theme.danger,
                         ...SIZES.h3
                     }}
                     color={'transparent'}
@@ -221,7 +223,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 }, style.justifyBetween]}>
                 <TextButton
                     labelStyle={{
-                        color: COLORS.textDark,
+                        color: theme.textDark,
                     }}
                     containerStyle={{
                         flex: 1,
@@ -235,10 +237,10 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                 />
                 <TextButton
                     labelStyle={{
-                        color: COLORS.textLight,
+                        color: theme.textLight,
                     }}
                     containerStyle={{
-                        backgroundColor: COLORS.textDark,
+                        backgroundColor: theme.textDark,
                         flex: 1,
                         marginLeft: 4,
                     }}

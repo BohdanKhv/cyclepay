@@ -1,17 +1,22 @@
 import { IconButton } from '../'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableWithoutFeedback } from 'react-native'
 import icons from "../../constants/icons"
-import { COLORS, FONTS, SIZES } from '../../constants/theme'
+import { FONTS, SIZES } from '../../constants/theme'
+import { useSelector } from "react-redux"
 
 const GoBack = ({navigation}) => {
+    const { theme } = useSelector(state => state.local);
+
     return (
         navigation.canGoBack() ? (
         <View
             style={{
                 paddingTop: SIZES.top,
+                paddingBottom: SIZES.padding,
                 paddingHorizontal: SIZES.padding,
-                backgroundColor: COLORS.main,
+                backgroundColor: theme.main,
                 flexDirection: 'row',
+                backgroundColor: theme.main,
                 alignItems: 'center',
                 // justifyContent: 'space-between',
             }}
@@ -22,21 +27,23 @@ const GoBack = ({navigation}) => {
                 width={25}
                 height={25}
             />
-            <Text
-                style={{
-                    color: COLORS.textDark,
-                    marginLeft: SIZES.padding,
-                    ...FONTS.body2
-                }}
-            >
-                {navigation.getState().routes[navigation.getState().index].name}
-            </Text>
+            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+                <Text
+                    style={{
+                        color: theme.textDark,
+                        paddingLeft: SIZES.padding,
+                        ...FONTS.body2
+                    }}
+                >
+                    {navigation.getState().routes[navigation.getState().index].name}
+                </Text>
+            </TouchableWithoutFeedback>
         </View>
         ) : (
             <View
                 style={{
                     paddingTop: SIZES.top,
-                    backgroundColor: COLORS.main,
+                    backgroundColor: theme.main,
                     flexDirection: 'row',
                     alignItems: 'center',
                 }}

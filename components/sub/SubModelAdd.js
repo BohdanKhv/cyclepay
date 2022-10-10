@@ -2,11 +2,13 @@ import { useRef, useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text, Animated, Pressable, StyleSheet, KeyboardAwareScrollView } from 'react-native';
 
 import { TextButton, ModelItem } from '../';
-import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import { FONTS, SIZES } from '../../constants/theme';
+import { useSelector } from "react-redux"
 import utils from '../../constants/utils';
 
 
 const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
+    const { theme } = useSelector(state => state.local);
     const animation = useRef(new Animated.Value(0)).current;
 
     const [description, setDescription] = useState("");
@@ -88,7 +90,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 height: '100%',
                 flex: 1,
                 width: SIZES.width,
-                backgroundColor: COLORS.main,
+                backgroundColor: theme.main,
                 borderTopLeftRadius: SIZES.radius,
                 borderTopRightRadius: SIZES.radius,
                 transform: [
@@ -114,13 +116,13 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                     paddingHorizontal: SIZES.padding,
                     borderBottomWidth: 1,
                     paddingVertical: SIZES.padding,
-                    borderBottomColor: COLORS.secondary,
+                    borderBottomColor: theme.secondary,
                 }}
             >
                 <View style={style.alignCenter}>
                     <Text
                         style={{
-                            color: COLORS.textDark,
+                            color: theme.textDark,
                             ...FONTS.h2,
                         }}
                     >
@@ -133,7 +135,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                         backgroundColor: 'transparent',
                     }}
                     labelStyle={{
-                        color: COLORS.textDark,
+                        color: theme.textDark,
                     }}
                     color={'transparent'}
                     onPress={() => {
@@ -193,14 +195,14 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 }}>
                 <TextButton
                     labelStyle={{
-                        color: COLORS.textLight,
+                        color: theme.textLight,
                     }}
                     containerStyle={{
-                        borderColor: COLORS.primary,
+                        borderColor: theme.primary,
                         borderWidth: 1,
                         marginLeft: 4,
                     }}
-                    color={COLORS.primary}
+                    color={theme.primary}
                     borderColor="transparent"
                     label='Add subscription'
                 />

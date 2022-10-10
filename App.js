@@ -6,8 +6,9 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import SplashScreen from 'react-native-splash-screen';
-
-import { COLORS } from './constants/theme';
+import { useDispatch, useSelector } from 'react-redux';
+import { darkTheme, lightTheme } from './constants/theme';
+import { setTheme } from './store/features/local/localSlice';
 
 import { Home, Search, Settings, About } from './screens';
 import { LoadScreen } from './components';

@@ -1,5 +1,5 @@
 import { Image, TouchableOpacity, TouchableNativeFeedback, View } from 'react-native';
-import { COLORS } from '../../constants/theme';
+import { useSelector } from "react-redux"
 
 const IconButton = ({
     containerStyle,
@@ -11,6 +11,8 @@ const IconButton = ({
     height,
     padding
 }) => {
+    const { theme } = useSelector(state => state.local);
+
     return (
         <View
             style={{
@@ -26,7 +28,7 @@ const IconButton = ({
                 style={{
                     padding: 8
                 }}
-                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
             >
                 <View
                     style={{
@@ -38,8 +40,8 @@ const IconButton = ({
                     style={{
                         width: width || 25,
                         height: height || 25,
-                        tintColor: color || COLORS.textDark,
-                        overlayColor: COLORS.textDark,
+                        tintColor: color || theme.textDark,
+                        overlayColor: theme.textDark,
                         ...iconStyle,
                         padding: 8
                     }}

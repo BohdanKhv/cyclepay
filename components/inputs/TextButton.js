@@ -1,7 +1,8 @@
 import { Text, TouchableNativeFeedback, Image, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useSelector } from "react-redux"
 
-import { COLORS, FONTS, SIZES } from '../../constants/theme';
+import { FONTS, SIZES } from '../../constants/theme';
 
 const TextButton = ({
     containerStyle,
@@ -13,16 +14,17 @@ const TextButton = ({
     icon,
     borderColor
 }) => {
+    const { theme } = useSelector(state => state.local);
 
     return (
         <LinearGradient
-            colors={color ? [color, color, color] : [COLORS.gradientMain1, COLORS.gradientMain2, COLORS.gradientMain3]}
+            colors={color ? [color, color, color] : [theme.gradientMain1, theme.gradientMain2, theme.gradientMain3]}
             start={{ x: 0.3, y: 0 }}
             style={{
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderRadius: SIZES.radius,
-                color: COLORS.textLight,
+                color: theme.textLight,
                 overflow: 'hidden',
                 ...containerStyle,
             }}
@@ -32,16 +34,16 @@ const TextButton = ({
                 onPress={() => {
                     onPress ? onPress() : null;
                 }}
-                background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
             >
                 <View style={{
                     paddingVertical: 6,
                     paddingHorizontal: 16,
                     borderRadius: SIZES.radius,
-                    backgroundColor: color || COLORS.textDark,
+                    backgroundColor: color || theme.textDark,
                     borderWidth: 1,
                     borderColor: borderColor || 'transparent',
-                    color: COLORS.textLight,
+                    color: theme.textLight,
                     width: '100%',
                 }}>
                     <View
@@ -58,13 +60,13 @@ const TextButton = ({
                                     width: 20,
                                     height: 20,
                                     marginRight: 8,
-                                    tintColor: labelStyle && labelStyle.color ? labelStyle.color : COLORS.textDark,
+                                    tintColor: labelStyle && labelStyle.color ? labelStyle.color : theme.textDark,
                                 }}
                             />
                         }
                         <Text
                             style={{
-                                color: COLORS.textLight,
+                                color: theme.textLight,
                                 ...FONTS.h3,
                                 textAlign: 'center',
                                 ...labelStyle

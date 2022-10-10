@@ -1,6 +1,7 @@
 import { useRef, useState } from "react"
 import { TouchableOpacity, Image, TextInput, StyleSheet } from "react-native"
-import { COLORS, FONTS, SIZES } from "../../constants/theme"
+import { FONTS, SIZES } from "../../constants/theme"
+import { useSelector } from "react-redux"
 
 
 const Input = ({
@@ -10,31 +11,32 @@ const Input = ({
     onChangeText,
     autoFocus,
 }) => {
+    const { theme } = useSelector(state => state.local);
     const inputRef = useRef(null)
     const [isFocused, setIsFocused] = useState(false)
 
     const style = StyleSheet.create({
         container: {
             borderWidth: 1,
-            borderColor: isFocused ? COLORS.gray70 : COLORS.gray20,
+            borderColor: isFocused ? theme.textDark : theme.tertiary,
             flexDirection: 'row',
             alignItems: 'center',
             width: "100%",
             paddingHorizontal: SIZES.padding,
             borderRadius: SIZES.radius,
-            backgroundColor: COLORS.main,
+            backgroundColor: theme.main,
         },
         input: {
             flexShrink: 1,
             width: '100%',
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.body3
         },
         icon: {
             width: 15,
             height: 15,
             marginRight: SIZES.padding,
-            tintColor: COLORS.gray50
+            tintColor: isFocused ? theme.textDark : theme.tertiary,
         }
     })
 
@@ -53,7 +55,7 @@ const Input = ({
         <TextInput 
             ref={inputRef}
             placeholder={placeholder}
-            placeholderTextColor={COLORS.gray50}
+            placeholderTextColor={theme.textSecondary}
             value={value}
             autoFocus={autoFocus}
             onFocus={() => setIsFocused(true)}

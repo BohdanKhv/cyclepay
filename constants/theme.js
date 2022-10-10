@@ -96,12 +96,27 @@ export const FONTS = {
 
 export const darkTheme = {
     name: "dark",
-    main: "#000",
-    secondary: "#0D1117",
-    tertiary: "#E1E8ED",
-    primary: "#FC642D",
+    main: "#202020",
+    secondary: "#363636",
+    tertiary: "#999999",
+    primary: "#ff9000",
+
     textLight: "#000",
-    textDark: "#14171A",
+    textDark: "#fff",
+    textSecondary: "#cccccc",
+
+    success: "#55f16c",
+    danger: "#ff5e59",
+
+    border: "#4b4b4b",
+
+    gradientMain1: "#2D3239",
+    gradientMain2: "#1B1E22",
+    gradientMain3: "#14171A",
+
+    gradientPrimary1: "#ff5e23",
+    gradientPrimary2: "#ff5e59",
+    gradientPrimary3: "#ff5e59",
 }
 
 export const lightTheme = {
@@ -110,12 +125,27 @@ export const lightTheme = {
     secondary: "#F5F8FA",
     tertiary: "#E1E8ED",
     primary: "#FC642D",
+
     textLight: "#fff",
+    textSecondary: "#999999",
     textDark: "#14171A",
+
+    success: "#55f16c",
+    danger: "#ff5e59",
+
+    border: "#cccccc",
+
+    gradientMain1: "#2D3239",
+    gradientMain2: "#1B1E22",
+    gradientMain3: "#14171A",
+
+    gradientPrimary1: "#ff5e23",
+    gradientPrimary2: "#ff5e59",
+    gradientPrimary3: "#ff5e59",
 }
 
 export const selectedTheme = lightTheme;
 
-const appTheme = { COLORS, SIZES, FONTS };
+const appTheme = { COLORS, SIZES, FONTS, darkTheme, lightTheme };
 
 export default appTheme;

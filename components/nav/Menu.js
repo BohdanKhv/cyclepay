@@ -1,8 +1,10 @@
 import { useRef, useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, TouchableNativeFeedback, Animated, Pressable, Image } from "react-native"
-import { COLORS, FONTS, SIZES } from "../../constants/theme";
+import { FONTS, SIZES } from "../../constants/theme";
+import { useSelector } from "react-redux"
 
 const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
+    const { theme } = useSelector(state => state.local);
     const animation = useRef(new Animated.Value(0)).current;
     const [display, setDisplay] = useState(false);
 
@@ -40,7 +42,7 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
             top: 0,
             width: 150,
             right: 0,
-            backgroundColor: COLORS.main,
+            backgroundColor: theme.main,
             elevation: 5,
             borderRadius: 10,
         },
@@ -49,6 +51,7 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
             width: 16,
             height: 16,
             marginRight: SIZES.padding,
+            tintColor: theme.textDark,
         }
     });
 
@@ -78,14 +81,14 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
                         renderItem={({item}) => {
                             return (
                                 <View style={{
-                                    backgroundColor: COLORS.main,
+                                    backgroundColor: theme.main,
                                 }}>
                                     <TouchableNativeFeedback
                                         onPress={() => {
                                             item.onClick();
                                             setShowMenu(false);
                                         }}
-                                        background={TouchableNativeFeedback.Ripple(COLORS.tertiary, false)}
+                                        background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
                                     >
                                         <View style={{
                                             padding: 12,
@@ -100,7 +103,7 @@ const Menu = ({children, menuItems, showMenu, setShowMenu}) => {
                                             }
                                             <Text
                                                 style={{
-                                                    color: COLORS.textDark,
+                                                    color: theme.textDark,
                                                     ...FONTS.body4
                                                 }}
                                             >{item.name}</Text>

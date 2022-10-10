@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
-import { COLORS, FONTS, SIZES } from "../../constants/theme"
+import { FONTS, SIZES } from "../../constants/theme"
+import { useSelector } from "react-redux"
 import icons from '../../constants/icons';
 
 
 const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
+    const { theme } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
 
     const style = StyleSheet.create({
@@ -13,10 +15,11 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
             paddingBottom: 8,
         },
         itemBody: {
-            backgroundColor: COLORS.textLight,
-            color: COLORS.textDark,
+            backgroundColor: theme.textLight,
+            color: theme.textDark,
             borderRadius: SIZES.radius,
-            borderColor: COLORS.secondary,
+            backgroundColor: theme.main,
+            borderColor: theme.secondary,
             overflow: 'hidden',
             borderWidth: 1,
         },
@@ -29,11 +32,11 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
             justifyContent: 'space-between',
         },
         textMain: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.h3,
         },
         textSecondary: {
-            color: COLORS.textDark,
+            color: theme.textDark,
             ...FONTS.body5,
             opacity: 0.5,
         },
@@ -47,8 +50,9 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
             height: 36,
             borderRadius: 18,
             marginRight: 10,
+            backgroundColor: "white",
             resizeMode: 'contain',
-            // tintColor: COLORS.textDark,
+            // tintColor: theme.textDark,
         },
     })
 
@@ -66,7 +70,7 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
                         setModelOpen(true);
                         setRippleOverflow(!rippleOverflow);
                     }}
-                    background={TouchableNativeFeedback.Ripple(COLORS.tertiary, rippleOverflow)}
+                    background={TouchableNativeFeedback.Ripple(theme.tertiary, rippleOverflow)}
                 >
                     <View style={style.itemWrapper}>
                         <View
@@ -99,7 +103,7 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
                                 style={{
                                     width: 18,
                                     height: 18,
-                                    tintColor: COLORS.textDark,
+                                    tintColor: theme.textDark,
                                 }}
                             />
                         </View>

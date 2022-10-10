@@ -1,7 +1,9 @@
 import { ActivityIndicator, View } from 'react-native'
-import { COLORS } from '../../constants/theme'
+import { useSelector } from 'react-redux';
 
 const LoadScreen = () => {
+    const { theme } = useSelector(state => state.local);
+
     return (
         <View style={{
             flex: 1,
@@ -9,7 +11,7 @@ const LoadScreen = () => {
             alignItems: 'center',
             width: '100%',
             height: '100%',
-            backgroundColor: COLORS.primary,
+            backgroundColor: theme.primary,
         }}>
             <ActivityIndicator size="large" color={'white'} />
         </View>

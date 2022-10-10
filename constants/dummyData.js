@@ -19,7 +19,7 @@ const data = [
         cycle: 1,
         price: 14.99,
         reminder: false,
-        thumbnail: 'https://upload.wikimedia.org/wikipedia/commons/5/50/Xbox_Logo_2012.png?20140606145608'
+        thumbnail: 'https://www.mcvuk.com/wp-content/uploads/xbox-logo-1159774.jpeg'
     },
     {
         id: 3,
