@@ -1,14 +1,17 @@
 import { useRef, useEffect, useState } from 'react';
 import { View, Text, Animated, Pressable, StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from "react-redux"
 
-import { TextButton, ModelItem } from '../';
+import { TextButton, ModelItem, TotalInfo } from '../';
 import { FONTS, SIZES } from '../../constants/theme';
-import { useSelector } from "react-redux"
+import { updateSub, deleteSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
+import icons from '../../constants/icons';
 
 
 const SubModel = ({ item, isOpen, setIsOpen }) => {
     const { theme } = useSelector(state => state.local);
+    const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
 
     const [description, setDescription] = useState("");
@@ -43,27 +46,23 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
         }
     }, [isOpen]);
 
-    const countAmountOfCycles = (cycle, firstBill) => {
-        if(cycle && firstBill){
-            const today = new Date();
-            const startDate = new Date(firstBill);
-            const diff = today.getTime() - startDate.getTime();
-            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-            const cycles = Math.floor((months / cycle) + 1); // +1 because we want to include the current cycle
-            return cycles || 0;
+    const handleUpdate = () => {
+        const newItem = {
+            ...item,
+            description,
+            price: parseFloat(price),
+            cycle: parseInt(cycle),
+            firstBill,
+            nextBill: utils.dateFormat(utils.calcNewBill(firstBill, parseInt(cycle))),
+            reminder,
         }
+        dispatch(updateSub(newItem));
+        setIsOpen(false);
     }
 
-    const countTotalPaid = (cycle, firstBill) => {
-        if(cycle && firstBill){
-            const today = new Date();
-            const startDate = new Date(firstBill);
-            const diff = +today - +startDate;
-            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
-            const cycles = Math.floor(months / cycle);
-            const totalPaid = (cycles + 1) * item.price; // +1 because we want to include the current cycle
-            return totalPaid;
-        }
+    const handleDelete = () => {
+        dispatch(deleteSub(item));
+        setIsOpen(false);
     }
 
     const style = StyleSheet.create({
@@ -72,6 +71,10 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
             alignItems: 'center',
             justifyContent: 'space-between',
         },
+        totalInfo: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+        }
     })
 
     return (
@@ -114,7 +117,7 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     {
                         translateY: animation.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [SIZES.height + 150, SIZES.height - 470]
+                            outputRange: [SIZES.height + 150, SIZES.height - 396]
                         })
                     }
                 ]
@@ -128,8 +131,6 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     alignContent: 'center',
                     paddingHorizontal: SIZES.padding,
                     paddingVertical: SIZES.padding,
-                    borderBottomWidth: 1,
-                    borderBottomColor: theme.secondary,
                 }}
             >
                 <View style={style.alignCenter}>
@@ -152,16 +153,29 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                         ...SIZES.h3
                     }}
                     color={'transparent'}
-                    onPress={() => {
-                        setIsOpen(false);
-                    }}
+                    onPress={handleDelete}
                 />
             </View>
 
             {/* Body */}
-            <View style={{
-                paddingVertical: SIZES.padding,
-            }}>
+            <View>
+                <View style={style.totalInfo}>
+                    <TotalInfo
+                        label={`$${item && utils.countTotalPaid(item.cycle, item.firstBill, item.price)}`}
+                        secondaryLabel='Paid'
+                        icon={icons.total}
+                    />
+                    <TotalInfo
+                        label={item && item.nextBill ? utils.dateConverter(item.nextBill) : "N/A"}
+                        secondaryLabel='Next Bill'
+                        icon={icons.date}
+                    />
+                    <TotalInfo
+                        label={`${item && utils.countAmountOfCycles(item.cycle, item.firstBill)}`}
+                        secondaryLabel='Cycles'
+                        icon={icons.cycle}
+                    />
+                    </View>
                 <ModelItem
                     label='Description'
                     stateLabel={description || 'No description'}
@@ -198,28 +212,12 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                     onChange={setReminder}
                     reminder
                 />
-                <ModelItem
-                    label='Next Bill'
-                    stateLabel={item && item.nextBill ? utils.dateConverter(item.nextBill) : "No date"}
-                    disabled
-                />
-                <ModelItem
-                    label='Total Paid'
-                    stateLabel={`$${countTotalPaid(item?.cycle, item?.firstBill)}`}
-                    disabled
-                />
-                <ModelItem
-                    label='Cycles'
-                    stateLabel={`${countAmountOfCycles(item?.cycle, item?.firstBill)} cycles`}
-                    disabled
-                />
             </View>
 
             {/* Actions */}
             <View style={[
                 {
-                    paddingTop: 12,
-                    paddingHorizontal: SIZES.padding,
+                    padding: SIZES.padding,
                 }, style.justifyBetween]}>
                 <TextButton
                     labelStyle={{
@@ -240,11 +238,12 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
                         color: theme.textLight,
                     }}
                     containerStyle={{
-                        backgroundColor: theme.textDark,
                         flex: 1,
                         marginLeft: 4,
                     }}
+                    color={theme.primary}
                     label='Save'
+                    onPress={handleUpdate}
                 />
             </View>
         </Animated.View>

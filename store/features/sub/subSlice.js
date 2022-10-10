@@ -15,7 +15,7 @@ export const subSlice = createSlice({
         addSub: (state, action) => {
             state.items.push(action.payload);
         },
-        removeSub: (state, action) => {
+        deleteSub: (state, action) => {
             state.items = state.items.filter(item => item.id !== action.payload.id);
         },
         updateSub: (state, action) => {
@@ -24,5 +24,5 @@ export const subSlice = createSlice({
     }
 });
 
-export const { addSub, editSub, deleteSub } = subSlice.actions;
+export const { clearSub, addSub, updateSub, deleteSub } = subSlice.actions;
 export default subSlice.reducer;

@@ -6,14 +6,15 @@ import data from "../constants/dummyData"
 import { Sort, SubItem, Header, Add, Info, SubModel } from "../components"
 
 const Home = ({navigation}) => {
+  const subItems = useSelector((state) => state.sub.items)
   const [selectedItem, setSelectedItem] = useState(null);
   const [modelOpen, setModelOpen] = useState(false);
   const [items, setItems] = useState([]);
   const { theme } = useSelector(state => state.local);
 
   useEffect(() => {
-    setItems(data);
-  }, []);
+    setItems(subItems);
+  }, [subItems]);
 
   const style = StyleSheet.create({
     body: {
@@ -47,7 +48,7 @@ const Home = ({navigation}) => {
             },
             shadowOpacity: 0.25,
             shadowRadius: 3.84,
-            elevation: 5,
+            elevation: 12,
           }}
         />
         <Header

@@ -8,7 +8,7 @@ import { addSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
 
 
-const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
+const SubCustomAdd = ({ item, isOpen, setIsOpen }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
@@ -116,7 +116,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                             inputRange: [0, 1],
                             outputRange: [
                                 SIZES.height + 150,
-                                SIZES.height - 326
+                                SIZES.height - 360
                             ]
                         })
                     }
@@ -162,7 +162,11 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 </View>
 
                 {/* Body */}
-                <View>
+                <View
+                    style={{
+                        paddingVertical: SIZES.padding,
+                    }}
+                >
                     <ModelItem
                         label='Description'
                         stateLabel={description || 'Enter description'}
@@ -203,7 +207,8 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
                 {/* Actions */}
                 <View 
                     style={{
-                        padding: SIZES.padding,
+                        paddingTop: 12,
+                        paddingHorizontal: SIZES.padding,
                     }}>
                     <TextButton
                         labelStyle={{
@@ -226,4 +231,4 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
     )
 }
 
-export default SubModelAdd;
+export default SubCustomAdd;

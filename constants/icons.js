@@ -8,6 +8,10 @@ const settings = require("../assets/icons/settings.png");
 const search = require("../assets/icons/search.png");
 const back = require("../assets/icons/back.png");
 const check = require("../assets/icons/check.png");
+const arrowRight = require("../assets/icons/arrowRight.png");
+const date = require("../assets/icons/date.png");
+const cycle = require("../assets/icons/cycle.png");
+const total = require("../assets/icons/total.png");
 
 export default {
     close,
@@ -20,4 +24,8 @@ export default {
     search,
     back,
     check,
+    arrowRight,
+    date,
+    cycle,
+    total,
 }

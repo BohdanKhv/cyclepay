@@ -32,7 +32,7 @@ const IconButton = ({
             >
                 <View
                     style={{
-                        padding: padding || 4,
+                        padding: padding || 8,
                     }}
                 >
                 <Image

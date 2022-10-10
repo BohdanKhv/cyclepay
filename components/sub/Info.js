@@ -7,26 +7,30 @@ import { useSelector } from "react-redux"
 
 
 const Info = () => {
-    const { theme } = useSelector(state => state.local);
+    const { theme, infoDisplay } = useSelector(state => state.local);
     const [ totalPerMonth, setTotalPerMonth ] = useState(0)
-    const [ totalType, setTotalType ] = useState('month')
+    const [ totalType, setTotalType ] = useState(infoDisplay || 'monthly')
 
     useEffect(() => {
-        if(totalType === 'month')
+        setTotalType(infoDisplay)
+    }, [infoDisplay])
+
+    useEffect(() => {
+        if(totalType === 'monthly')
             setTotalPerMonth(calcPerMonth(data));
-        else if (totalType === 'year')
+        else if (totalType === 'yearly')
             setTotalPerMonth(calcPerYear(data));
-        else if (totalType === 'day')
+        else if (totalType === 'daily')
             setTotalPerMonth(calcPerDay(data));
     }, [totalType])
 
     const handleSwitch = () => {
-        if(totalType === 'month')
-            setTotalType('year');
-        else if (totalType === 'year')
-            setTotalType('day');
-        else if (totalType === 'day')
-            setTotalType('month');
+        if(totalType === 'monthly')
+            setTotalType('yearly');
+        else if (totalType === 'yearly')
+            setTotalType('daily');
+        else if (totalType === 'daily')
+            setTotalType('monthly');
     }
 
     const calcPerMonth = (data) => {
@@ -52,8 +56,16 @@ const Info = () => {
             overflow: 'hidden',
             margin: SIZES.padding,
             // Shadow
-            elevation: theme.name === 'dark' ? 2 : 10,
-            shadowColor: theme.textDark
+            elevation: theme.name === 'dark' ? 5 : 10,
+            shadowColor: '#000',
+            shadowOffset: {
+                width: 0,
+                height: 10,
+            },
+            shadowOpacity: 0.51,
+            shadowRadius: 13.16,
+            borderColor: theme.border,
+            borderWidth: 0.5
         },
         infoWrapper: {
             paddingHorizontal: SIZES.padding,

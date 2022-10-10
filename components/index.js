@@ -1,6 +1,7 @@
 import Header from "./common/Header";
 import LineDivider from "./common/LineDivider";
 import SettingsItem from "./common/SettingsItem";
+import SettingsItemLabel from "./common/SettingsItemLabel";
 import LoadScreen from "./common/LoadScreen";
 
 import IconButton from "./inputs/IconButton";
@@ -15,6 +16,7 @@ import SubItem from "./sub/SubItem";
 import SubItemAdd from "./sub/SubItemAdd";
 import Info from "./sub/Info";
 import Sort from "./sub/Sort";
+import TotalInfo from "./sub/TotalInfo";
 
 import Menu from "./nav/Menu";
 import GoBack from "./nav/GoBack";
@@ -23,6 +25,7 @@ export {
     Header,
     LineDivider,
     SettingsItem,
+    SettingsItemLabel,
     LoadScreen,
 
     IconButton,
@@ -37,6 +40,7 @@ export {
     SubItemAdd,
     Info,
     Sort,
+    TotalInfo,
 
     Menu,
     GoBack,

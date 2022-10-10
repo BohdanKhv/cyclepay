@@ -151,7 +151,7 @@ const ModelItem = ({
                 transparent={true}
                 visible={displayInput}
                 onShow={() => {
-                    setTimeout(() => inputRef?.current?.focus(), 1)
+                    setTimeout(() => inputRef?.current?.focus(), 5)
                 }}
                 onRequestClose={() => {
                     setDisplayInput(false);
@@ -198,11 +198,12 @@ const ModelItem = ({
                                         open={displayInput}
                                         date={new Date(state)}
                                         mode="date"
+                                        maximumDate={new Date()}
                                         textColor={theme.textDark}
                                         androidVariant="iosClone"
                                         fadeToColor={theme.main}
                                         onDateChange={(date) => {
-                                            onChange(date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate() );
+                                            onChange(utils.dateFormat(date));
                                         }}
                                         onCancel={() => {
                                             setDisplayInput(false);
@@ -220,6 +221,7 @@ const ModelItem = ({
                                     placeholderTextColor={theme.gray50}
                                     onChangeText={onChange}
                                     style={style.input}
+                                    autoFocus={true}
                                     onSubmitEditing={() => {
                                         setDisplayInput(false);
                                     }}
