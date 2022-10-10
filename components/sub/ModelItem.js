@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { View, Text, StyleSheet, TouchableNativeFeedback, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Switch } from "react-native"
+import { View, Text, StyleSheet, TouchableNativeFeedback, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Switch, StatusBar } from "react-native"
 import { FONTS, SIZES } from '../../constants/theme';
 import { IconButton } from '../'
 import DatePicker from 'react-native-date-picker'
@@ -111,6 +111,14 @@ const ModelItem = ({
     })
 
     return (
+        <>
+        {displayInput && (
+            <StatusBar
+            backgroundColor={theme.main}
+            translucent={true}
+            barStyle="light-content"
+            />
+        )}
         <View
             style={style.container}
         >
@@ -151,7 +159,7 @@ const ModelItem = ({
                 transparent={true}
                 visible={displayInput}
                 onShow={() => {
-                    setTimeout(() => inputRef?.current?.focus(), 5)
+                    inputRef && inputRef?.current?.focus()
                 }}
                 onRequestClose={() => {
                     setDisplayInput(false);
@@ -211,7 +219,6 @@ const ModelItem = ({
                                     />
                                 </View>
                             ) : 
-                            displayInput && (
                                 <TextInput
                                     ref={inputRef}
                                     keyboardType={keyboardType || 'default'}
@@ -221,7 +228,6 @@ const ModelItem = ({
                                     placeholderTextColor={theme.gray50}
                                     onChangeText={onChange}
                                     style={style.input}
-                                    autoFocus={true}
                                     onSubmitEditing={() => {
                                         setDisplayInput(false);
                                     }}
@@ -234,13 +240,14 @@ const ModelItem = ({
                                         setDisplayInput(false);
                                     }}
                                 />
-                            )}
+                            }
                         </View>
                     </TouchableWithoutFeedback>
                 </TouchableOpacity>
             </Modal>
             )}
         </View>
+        </>
     )
 }
 

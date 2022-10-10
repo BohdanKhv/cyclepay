@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
 import { FONTS, SIZES } from "../../constants/theme";
-import data from "../../constants/dummyData";
 import { useSelector } from "react-redux"
 
 
 const Info = () => {
     const { theme, infoDisplay } = useSelector(state => state.local);
+    const subItem = useSelector(state => state.sub.items);
+    const [items, setItems] = useState([]);
     const [ totalPerMonth, setTotalPerMonth ] = useState(0)
     const [ totalType, setTotalType ] = useState(infoDisplay || 'monthly')
+
+    useEffect(() => {
+        setItems(subItem);
+    }, [subItem])
 
     useEffect(() => {
         setTotalType(infoDisplay)
@@ -17,12 +22,12 @@ const Info = () => {
 
     useEffect(() => {
         if(totalType === 'monthly')
-            setTotalPerMonth(calcPerMonth(data));
+            setTotalPerMonth(calcPerMonth(items));
         else if (totalType === 'yearly')
-            setTotalPerMonth(calcPerYear(data));
+            setTotalPerMonth(calcPerYear(items));
         else if (totalType === 'daily')
-            setTotalPerMonth(calcPerDay(data));
-    }, [totalType])
+            setTotalPerMonth(calcPerDay(items));
+    }, [totalType, items])
 
     const handleSwitch = () => {
         if(totalType === 'monthly')
@@ -33,20 +38,20 @@ const Info = () => {
             setTotalType('monthly');
     }
 
-    const calcPerMonth = (data) => {
-        const tpm = data.reduce((acc, item) => {
+    const calcPerMonth = (items) => {
+        const tpm = items.reduce((acc, item) => {
             return (+acc + item.price / item.cycle).toFixed(2)
         }, 0)
         return tpm;
     }
 
-    const calcPerYear = (data) => {
-        const tpy = calcPerMonth(data) * 12;
+    const calcPerYear = (items) => {
+        const tpy = (calcPerMonth(items) * 12).toFixed(2);
         return tpy;
     }
 
-    const calcPerDay = (data) => {
-        const tpy = calcPerMonth(data) / 30;
+    const calcPerDay = (items) => {
+        const tpy = calcPerMonth(items) / 30;
         return tpy.toFixed(2);
     }
 
@@ -116,7 +121,7 @@ const Info = () => {
                             ...FONTS.h4,
                             color: '#fff',
                         }}>
-                            {data.length}
+                            {items.length}
                         </Text>
                     </View>
                     <View

@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { View, Text, TextInput, StyleSheet, FlatList } from "react-native"
-import { Input, SubItemAdd, SubModelAdd, GoBack } from "../components"
-import { SIZES } from "../constants/theme"
 import { useSelector } from "react-redux"
+import { Input, SubItemAdd, SubModelAdd, GoBack, SubCustomAdd, Alert } from "../components"
+import { SIZES } from "../constants/theme"
 import data from "../constants/dummyData"
 import icons from "../constants/icons"
 
@@ -10,6 +10,7 @@ const Search = ({navigation}) => {
     const [search, setSearch] = useState("");
     const [selectedItem, setSelectedItem] = useState(null);
     const [modelOpen, setModelOpen] = useState(false);
+    const [alertMsg, setAlertMsg] = useState("");
     const { theme } = useSelector(state => state.local);
 
     const style = StyleSheet.create({
@@ -32,7 +33,7 @@ const Search = ({navigation}) => {
                     icon={icons.search}
                     placeholder="Search by name or service"
                     value={search}
-                    autoFocus={true}
+                    // autoFocus={true}
                     onChangeText={setSearch}
                 />
             </View>
@@ -41,6 +42,10 @@ const Search = ({navigation}) => {
                     paddingTop: SIZES.padding,
                 }}
             >
+                <SubCustomAdd
+                    setSelectedItem={setSelectedItem}
+                    setModelOpen={setModelOpen}
+                />
                 <FlatList
                     data={
                         data
@@ -58,7 +63,15 @@ const Search = ({navigation}) => {
                 />
             </View>
         </View>
-        <SubModelAdd item={selectedItem} isOpen={modelOpen} setIsOpen={setModelOpen} />
+        <SubModelAdd
+            item={selectedItem}
+            isOpen={modelOpen}
+            setIsOpen={setModelOpen}
+            setAlertMsg={setAlertMsg}
+        />
+        <Alert
+            message={alertMsg}
+        />
     </>
     )
 }

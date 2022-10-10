@@ -1,234 +1,129 @@
-import { useRef, useEffect, useState, useLayoutEffect } from 'react';
-import { View, Text, Animated, Pressable, StyleSheet, KeyboardAwareScrollView } from 'react-native';
-import { useSelector, useDispatch } from "react-redux"
-
-import { TextButton, ModelItem } from '../';
-import { FONTS, SIZES } from '../../constants/theme';
-import { addSub } from "../../store/features/sub/subSlice"
+import { useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
+import { FONTS, SIZES } from "../../constants/theme"
+import { useSelector } from "react-redux"
+import icons from '../../constants/icons';
 import utils from '../../constants/utils';
 
 
-const SubCustomAdd = ({ item, isOpen, setIsOpen }) => {
+const SubCustomAdd = ({setSelectedItem, setModelOpen}) => {
     const { theme } = useSelector(state => state.local);
-    const dispatch = useDispatch();
-    const animation = useRef(new Animated.Value(0)).current;
-
-    const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [cycle, setCycle] = useState("");
-    const [firstBill, setFirstBill] = useState(utils.dateFormat(new Date()));
-    const [reminder, setReminder] = useState(false);
-
-    useEffect(() => {
-        if(item) {
-            item.description && setDescription(item.description);
-            item.price && setPrice(item.price.toString());
-            item.cycle && setCycle(item.cycle.toString());
-            item.firstBill && setFirstBill(utils.dateFormat(new Date()));
-        }
-    }, [item])
-
-    useEffect(() => {
-        if(isOpen){
-            Animated.timing(animation, {
-                toValue: 1,
-                duration: SIZES.animationDuration,
-                useNativeDriver: true
-            }).start();
-        } else {
-            Animated.timing(animation, {
-                toValue: 0,
-                duration: SIZES.animationDuration,
-                useNativeDriver: true,
-            }).start();
-        }
-
-        return () => {
-            setDescription("");
-            setPrice("");
-            setCycle("");
-            setFirstBill("");
-            setReminder(false);
-        }
-    }, [isOpen]);
-
-    const handleAdd = () => {
-        const newItem = {
-            ...item,
-            description,
-            price: parseFloat(price),
-            cycle: parseInt(cycle),
-            firstBill,
-            nextBill: utils.dateFormat(utils.calcNewBill(firstBill, parseInt(cycle))),
-            reminder,
-        }
-        dispatch(addSub(newItem));
-        setIsOpen(false);
-    }
+    const [rippleOverflow, setRippleOverflow] = useState(false);
 
     const style = StyleSheet.create({
-        justifyBetween: {
+        container: {
+            paddingHorizontal: SIZES.padding,
+            paddingBottom: 8,
+        },
+        itemBody: {
+            backgroundColor: theme.textLight,
+            color: theme.textDark,
+            borderRadius: SIZES.radius,
+            backgroundColor: theme.main,
+            borderColor: theme.secondary,
+            overflow: 'hidden',
+            borderWidth: 1,
+        },
+        itemWrapper: {
+            paddingHorizontal: 10,
+            paddingVertical: 12,
+            borderRadius: SIZES.radius,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
         },
+        textMain: {
+            color: theme.textDark,
+            ...FONTS.h3,
+        },
+        textSecondary: {
+            color: theme.textDark,
+            ...FONTS.body5,
+            opacity: 0.5,
+        },
+        columnEmd: {
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            paddingRight: 10,
+        },
+        thumbnail: {
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            marginRight: 10,
+            backgroundColor: "white",
+            resizeMode: 'contain',
+        },
     })
 
-    return (
-    <>
-        {/* Darken background */}
-        {isOpen && (
-            <Animated.View 
-                style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    height: '100%',
-                    width: SIZES.width,
-                }}
-                opacity={animation}
-            >
-                {/* Background container */}
-                <Pressable
-                    style={{
-                        flex: 1,
-                        height: '100%',
-                        width: SIZES.width,
-                        backgroundColor: "rgba(0,0,0,0.5)",
-                    }}
-                    onPress={() => setIsOpen(false)}
-                />
-            </Animated.View>
-        )}
+    const selectItem = () => {
+        setSelectedItem({
+            id: 0,
+            name: "Custom",
+            description: "",
+            firstBill: utils.dateFormat(new Date()),
+            image: "",
+            price: '9.99',
+            cycle: 1,
+            reminder: false
+        });
+        setModelOpen(true);
+        setRippleOverflow(!rippleOverflow);
+    }
 
-        {/* Content Container */}
-        <Animated.View
-            style={{
-                position: 'absolute',
-                height: '100%',
-                flex: 1,
-                width: SIZES.width,
-                backgroundColor: theme.main,
-                borderTopLeftRadius: SIZES.radius,
-                borderTopRightRadius: SIZES.radius,
-                transform: [
-                    {
-                        translateY: animation.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [
-                                SIZES.height + 150,
-                                SIZES.height - 360
-                            ]
-                        })
-                    }
-                ]
-            }}
+    return (
+        <>
+        <View
+            style={style.container}
         >
-            <View>
-                {/* Header */}
-                <View
-                    style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignContent: 'center',
-                        paddingHorizontal: SIZES.padding,
-                        borderBottomWidth: 1,
-                        paddingVertical: SIZES.padding,
-                        borderBottomColor: theme.secondary,
-                    }}
+            <View
+                style={style.itemBody}
+            >
+                <TouchableNativeFeedback
+                    onPress={selectItem}
+                    background={TouchableNativeFeedback.Ripple(theme.tertiary, rippleOverflow)}
                 >
-                    <View style={style.alignCenter}>
-                        <Text
+                    <View style={style.itemWrapper}>
+                        <View
                             style={{
-                                color: theme.textDark,
-                                ...FONTS.h2,
+                                flexDirection: 'row',
+                                alignItems: 'center',
                             }}
                         >
-                            {item?.name}
-                        </Text>
+                            <Image
+                                source={{
+                                    uri: null,
+                                    cache: 'only-if-cached',
+                                }}
+                                style={style.thumbnail}
+                            />
+                            <View>
+                                <Text style={style.textMain}>
+                                    Custom Service
+                                </Text>
+                                <Text style={style.textSecondary}>
+                                    Add a custom service
+                                </Text>
+                            </View>
+                        </View>
+                        <View
+                            style={style.columnEmd}
+                        >
+                            <Image
+                                source={icons.plus}
+                                style={{
+                                    width: 18,
+                                    height: 18,
+                                    tintColor: theme.textDark,
+                                }}
+                            />
+                        </View>
                     </View>
-                    <TextButton
-                        label='Close'
-                        containerStyle={{
-                            backgroundColor: 'transparent',
-                        }}
-                        labelStyle={{
-                            color: theme.textDark,
-                        }}
-                        color={'transparent'}
-                        onPress={() => {
-                            setIsOpen(false);
-                        }}
-                    />
-                </View>
-
-                {/* Body */}
-                <View
-                    style={{
-                        paddingVertical: SIZES.padding,
-                    }}
-                >
-                    <ModelItem
-                        label='Description'
-                        stateLabel={description || 'Enter description'}
-                        state={description}
-                        maxLength={50}
-                        onChange={setDescription}
-                    />
-                    <ModelItem
-                        label='First Bill'
-                        stateLabel={firstBill ? utils.dateConverter(firstBill) : 'Enter first bill'}
-                        state={firstBill ? firstBill : new Date()}
-                        onChange={setFirstBill}
-                        date
-                    />
-                    <ModelItem
-                        label='Price'
-                        stateLabel={price ? `$ ${price}` : 'Enter price'}
-                        state={price}
-                        maxLength={6}
-                        keyboardType='numeric'
-                        onChange={setPrice}
-                    />
-                    <ModelItem
-                        label='Cycle'
-                        stateLabel={cycle ? `${cycle} months` : 'Enter cycle'}
-                        maxLength={2}
-                        state={cycle}
-                        keyboardType='numeric'
-                        onChange={setCycle}
-                    />
-                    <ModelItem
-                        label='Reminder'
-                        state={reminder}
-                        onChange={setReminder}
-                        reminder
-                    />
-                </View>
-                {/* Actions */}
-                <View 
-                    style={{
-                        paddingTop: 12,
-                        paddingHorizontal: SIZES.padding,
-                    }}>
-                    <TextButton
-                        labelStyle={{
-                            color: theme.textLight,
-                        }}
-                        containerStyle={{
-                            borderColor: theme.primary,
-                            borderWidth: 1,
-                            marginLeft: 4,
-                        }}
-                        onPress={handleAdd}
-                        color={theme.primary}
-                        borderColor="transparent"
-                        label='Add subscription'
-                    />
-                </View>
+                </TouchableNativeFeedback>
             </View>
-        </Animated.View>
+        </View>
         </>
     )
 }
 
-export default SubCustomAdd;
+export default SubCustomAdd

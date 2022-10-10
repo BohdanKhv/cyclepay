@@ -9,7 +9,7 @@ import utils from '../../constants/utils';
 import icons from '../../constants/icons';
 
 
-const SubModel = ({ item, isOpen, setIsOpen }) => {
+const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
@@ -58,11 +58,13 @@ const SubModel = ({ item, isOpen, setIsOpen }) => {
         }
         dispatch(updateSub(newItem));
         setIsOpen(false);
+        setAlertMsg("Subscription updated");
     }
 
     const handleDelete = () => {
         dispatch(deleteSub(item));
         setIsOpen(false);
+        setAlertMsg("Subscription deleted");
     }
 
     const style = StyleSheet.create({

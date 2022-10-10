@@ -8,7 +8,7 @@ import { addSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
 
 
-const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
+const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
@@ -64,6 +64,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen }) => {
         }
         dispatch(addSub(newItem));
         setIsOpen(false);
+        setAlertMsg("Subscription added");
     }
 
     const style = StyleSheet.create({

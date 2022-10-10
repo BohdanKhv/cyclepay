@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react"
 import { View, FlatList, ScrollView, StyleSheet } from "react-native"
+import LinearGradient from "react-native-linear-gradient"
 import { COLORS, SIZES } from "../constants/theme"
 import { useSelector } from "react-redux"
 import data from "../constants/dummyData"
-import { Sort, SubItem, Header, Add, Info, SubModel } from "../components"
+import { Sort, SubItem, Header, Add, Info, SubModel, Alert } from "../components"
 
 const Home = ({navigation}) => {
   const subItems = useSelector((state) => state.sub.items)
   const [selectedItem, setSelectedItem] = useState(null);
   const [modelOpen, setModelOpen] = useState(false);
   const [items, setItems] = useState([]);
+  const [alertMsg, setAlertMsg] = useState("");
   const { theme } = useSelector(state => state.local);
 
   useEffect(() => {
@@ -31,7 +33,9 @@ const Home = ({navigation}) => {
       <View
           style={style.body}
         >
-        <View
+        <LinearGradient
+          colors={[theme.gradientPrimary2, theme.primary]}
+          start={{ x: 0.9, y: 0 }}
           style={{
             position: "absolute",
             top: 0,
@@ -40,6 +44,9 @@ const Home = ({navigation}) => {
             width: 180,
             height: 180,
             borderBottomLeftRadius: 180,
+            borderBottomWidth: 1,
+            borderLeftWidth: 1,
+            borderColor: theme.primary,
             // Shadow
             shadowColor: theme.primary,
             shadowOffset: {
@@ -81,7 +88,15 @@ const Home = ({navigation}) => {
           </ScrollView>
         </View>
       </View>
-      <SubModel item={selectedItem} isOpen={modelOpen} setIsOpen={setModelOpen} />
+      <SubModel
+        item={selectedItem}
+        isOpen={modelOpen}
+        setIsOpen={setModelOpen}
+        setAlertMsg={setAlertMsg}
+      />
+      <Alert
+        message={alertMsg}
+      />
       </>
   )
 }
