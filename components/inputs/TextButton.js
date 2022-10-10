@@ -6,6 +6,7 @@ import { FONTS, SIZES } from '../../constants/theme';
 
 const TextButton = ({
     containerStyle,
+    height,
     label,
     labelStyle,
     onPress,
@@ -51,6 +52,7 @@ const TextButton = ({
                             flexDirection: 'row',
                             alignItems: 'center',
                             justifyContent: 'center',
+                            height: height || 'auto',
                         }}
                     >
                         {icon &&

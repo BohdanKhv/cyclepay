@@ -18,6 +18,7 @@ const Add = ({navigation}) => {
                 labelStyle={{
                     color: theme.primary,
                 }}
+                height={70}
                 label={'Add Subscription'}
                 icon={icons.plus}
             />

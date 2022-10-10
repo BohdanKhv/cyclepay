@@ -144,12 +144,13 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
                             inputRange: [0, 1],
                             outputRange: [
                                 SIZES.height + 150,
-                                SIZES.height - 366
+                                SIZES.height - 363
                             ]
                         })
                     }
                 ]
             }}
+            opacity={animation}
         >
             <View>
                 {/* Header */}

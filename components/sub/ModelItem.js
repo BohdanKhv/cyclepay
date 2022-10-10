@@ -22,6 +22,7 @@ const ModelItem = ({
     const { theme } = useSelector(state => state.local);
     const [displayInput, setDisplayInput] = useState(false);
     const inputRef = useRef(null);
+    const [currDate, setCurrDate] = useState(state ? new Date(state) : new Date());
     const [isInputFocused, setIsInputFocused] = useState(false);
 
     const style = StyleSheet.create({
@@ -53,7 +54,7 @@ const ModelItem = ({
             paddingVertical: 8,
         },
         borderBottom: {
-            borderBottomWidth: 1,
+            borderBottomWidth: 0.5,
             borderBottomColor: isError ? theme.danger : theme.secondary,
         },
         input: {
@@ -116,9 +117,9 @@ const ModelItem = ({
         <>
         {displayInput && (
             <StatusBar
-            backgroundColor={theme.main}
-            translucent={true}
-            barStyle="light-content"
+                backgroundColor={'#202020'}
+                translucent={true}
+                barStyle='light-content'
             />
         )}
         <View
@@ -128,7 +129,7 @@ const ModelItem = ({
                 disabled={disabled}
                 background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
                 onPress={() => {
-                    !disabled && setDisplayInput(true);
+                    !disabled && !reminder && setDisplayInput(true);
                     reminder && onChange(!state);
                 }}
             >
@@ -161,7 +162,8 @@ const ModelItem = ({
                 transparent={true}
                 visible={displayInput}
                 onShow={() => {
-                    !date && inputRef && setTimeout(() => inputRef.current.focus(), 100);
+                    date && setCurrDate(new Date(state));
+                    !date && inputRef && setTimeout(() => inputRef?.current?.focus(), 100);
                 }}
                 onRequestClose={() => {
                     setDisplayInput(false);
@@ -194,6 +196,8 @@ const ModelItem = ({
                                     color={theme.primary}
                                     onPress={() => {
                                         setDisplayInput(false);
+                                        date && onChange(utils.dateFormat(currDate));
+                                        console.log(currDate);
                                     }}
                                 />
                             </View>
@@ -211,14 +215,14 @@ const ModelItem = ({
                                     }}>
                                         <DatePicker
                                             open={displayInput}
-                                            date={new Date(state)}
+                                            date={currDate}
                                             mode="date"
                                             maximumDate={new Date()}
                                             textColor={theme.textDark}
                                             androidVariant="iosClone"
                                             fadeToColor={theme.main}
                                             onDateChange={(date) => {
-                                                onChange(utils.dateFormat(date));
+                                                setCurrDate(date);
                                             }}
                                             onCancel={() => {
                                                 setDisplayInput(false);

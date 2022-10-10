@@ -139,11 +139,12 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
                     {
                         translateY: animation.interpolate({
                             inputRange: [0, 1],
-                            outputRange: [SIZES.height + 150, SIZES.height - 396]
+                            outputRange: [SIZES.height + 150, SIZES.height - 393]
                         })
                     }
                 ]
             }}
+            opacity={animation}
         >
             {/* Header */}
             <View
