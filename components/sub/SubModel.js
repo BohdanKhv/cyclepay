@@ -183,7 +183,11 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
             <View>
                 <View style={style.totalInfo}>
                     <TotalInfo
-                        label={`$${item && utils.countTotalPaid(item.cycle, item.firstBill, item.price)}`}
+                        label={`$${item && 
+                            utils.addComaToNumber(
+                                utils.countTotalPaid(item.cycle, item.firstBill, item.price)
+                                )
+                            }`}
                         secondaryLabel='Paid'
                         icon={icons.total}
                     />

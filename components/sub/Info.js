@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableNativeFeedback } from "react-native"
 import LinearGradient from 'react-native-linear-gradient';
 import { FONTS, SIZES } from "../../constants/theme";
 import { useSelector } from "react-redux"
+import utils from "../../constants/utils";
 
 
 const Info = () => {
@@ -130,7 +131,7 @@ const Info = () => {
                         }, style.justifyBetween]}
                     >
                         <Text style={style.bill}>
-                            $ {totalPerMonth}
+                            $ {utils.addComaToNumber(totalPerMonth)}
                         </Text>
                         <Text style={style.textSecondary}>
                             / {totalType}

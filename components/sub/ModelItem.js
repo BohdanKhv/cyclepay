@@ -161,7 +161,7 @@ const ModelItem = ({
                 transparent={true}
                 visible={displayInput}
                 onShow={() => {
-                    inputRef && inputRef?.current?.focus()
+                    !date && inputRef && setTimeout(() => inputRef.current.focus(), 100);
                 }}
                 onRequestClose={() => {
                     setDisplayInput(false);
@@ -175,8 +175,7 @@ const ModelItem = ({
                     }}
                 >
                     <TouchableWithoutFeedback
-                        style={style.modalContainer}
-                    >
+                        style={style.modalContainer}>
                         <View
                             style={style.modalView}
                         >

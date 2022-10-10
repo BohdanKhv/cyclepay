@@ -8,6 +8,10 @@ const dateFormat = (date) => {
     return newDate;
 }
 
+const addComaToNumber = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 const countAmountOfCycles = (cycle, firstBill) => {
     if(cycle && firstBill){
         const today = new Date();
@@ -41,6 +45,7 @@ const calcNewBill = (firstBill, cycle) => {
 export default {
     dateConverter,
     dateFormat,
+    addComaToNumber,
     countAmountOfCycles,
     countTotalPaid,
     calcNewBill,
