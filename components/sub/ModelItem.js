@@ -197,27 +197,34 @@ const ModelItem = ({
                                 />
                             </View>
                             {date ? (
-                                <View style={{
-                                    width: '100%',
-                                    flexDirection: 'row',
-                                    justifyContent: 'center',
-                                }}>
-                                    <DatePicker
-                                        open={displayInput}
-                                        date={new Date(state)}
-                                        mode="date"
-                                        maximumDate={new Date()}
-                                        textColor={theme.textDark}
-                                        androidVariant="iosClone"
-                                        fadeToColor={theme.main}
-                                        onDateChange={(date) => {
-                                            onChange(utils.dateFormat(date));
-                                        }}
-                                        onCancel={() => {
-                                            setDisplayInput(false);
-                                        }}
-                                    />
-                                </View>
+                                // <View style={{
+                                //     flex: 2,
+                                //     alignContent: 'center',
+                                //     justifyContent: 'center',
+                                //     marginBottom: 40,
+                                // }}>
+                                    <View style={{
+                                        width: '100%',
+                                        flexDirection: 'row',
+                                        justifyContent: 'center',
+                                    }}>
+                                        <DatePicker
+                                            open={displayInput}
+                                            date={new Date(state)}
+                                            mode="date"
+                                            maximumDate={new Date()}
+                                            textColor={theme.textDark}
+                                            androidVariant="iosClone"
+                                            fadeToColor={theme.main}
+                                            onDateChange={(date) => {
+                                                onChange(utils.dateFormat(date));
+                                            }}
+                                            onCancel={() => {
+                                                setDisplayInput(false);
+                                            }}
+                                        />
+                                    </View>
+                                // </View>
                             ) : 
                                 <TextInput
                                     ref={inputRef}

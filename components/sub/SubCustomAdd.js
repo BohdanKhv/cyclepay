@@ -60,7 +60,7 @@ const SubCustomAdd = ({setSelectedItem, setModelOpen}) => {
         setSelectedItem({
             id: 0,
             name: "Custom",
-            description: "",
+            description: "Custom service",
             firstBill: utils.dateFormat(new Date()),
             image: "",
             price: '9.99',

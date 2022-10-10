@@ -13,6 +13,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
 
+    const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [cycle, setCycle] = useState("");
@@ -21,6 +22,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
 
     useEffect(() => {
         if(item) {
+            item.name && setName(item.name);
             item.description && setDescription(item.description);
             item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
@@ -55,6 +57,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
     const handleAdd = () => {
         const newItem = {
             ...item,
+            name,
             description,
             price: parseFloat(price),
             cycle: parseInt(cycle),
@@ -117,7 +120,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
                             inputRange: [0, 1],
                             outputRange: [
                                 SIZES.height + 150,
-                                SIZES.height - 326
+                                SIZES.height - 366
                             ]
                         })
                     }
@@ -164,6 +167,13 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg }) => {
 
                 {/* Body */}
                 <View>
+                    <ModelItem
+                        label='Name'
+                        stateLabel={name || 'Enter name'}
+                        state={name}
+                        maxLength={20}
+                        onChange={setName}
+                    />
                     <ModelItem
                         label='Description'
                         stateLabel={description || 'Enter description'}
