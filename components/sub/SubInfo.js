@@ -1,18 +1,17 @@
-import { useRef, useEffect, useState } from 'react';
-import { View, Text, Animated, Pressable, StyleSheet } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"
 
-import { TextButton, ModelItem, TotalInfo } from '../';
+import { TextButton, SubInfoItem, SubInfoItemTotal, Modal } from '../';
 import { FONTS, SIZES } from '../../constants/theme';
 import { updateSub, deleteSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
 import icons from '../../constants/icons';
 
 
-const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
+const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
-    const animation = useRef(new Animated.Value(0)).current;
 
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -24,7 +23,6 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
     const [cycleError, setCycleError] = useState(false);
     const [firstBillError, setFirstBillError] = useState(false);
 
-
     useEffect(() => {
         if(item) {
             item.description && setDescription(item.description);
@@ -34,26 +32,6 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
             item.reminder && setReminder(item.reminder);
         }
     }, [item])
-
-    useEffect(() => {
-        if(isOpen){
-            Animated.timing(animation, {
-                toValue: 1,
-                duration: SIZES.animationDuration,
-                useNativeDriver: true
-            }).start();
-        } else {
-            Animated.timing(animation, {
-                toValue: 0,
-                duration: SIZES.animationDuration,
-                useNativeDriver: true
-            }).start();
-            setSelectedItem(null);
-            setPriceError(false);
-            setCycleError(false);
-            setFirstBillError(false);
-        }
-    }, [isOpen]);
 
     const handleUpdate = () => {
         const newItem = {
@@ -99,53 +77,25 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
         }
     })
 
-    return (
-    <>
-        {/* Darken background */}
-        {isOpen && (
-            <Animated.View 
-                style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    height: '100%',
-                    width: SIZES.width,
-                }}
-                opacity={animation}
-            >
-                {/* Background container */}
-                <Pressable
-                    style={{
-                        flex: 1,
-                        height: '100%',
-                        width: SIZES.width,
-                        backgroundColor: "rgba(0,0,0,0.5)",
-                    }}
-                    onPress={() => setIsOpen(false)}
-                />
-            </Animated.View>
-        )}
+    const handleClose = () => {
+        setSelectedItem(null);
+        setPriceError(false);
+        setCycleError(false);
+        setFirstBillError(false);
+        setDescription("");
+        setPrice("");
+        setCycle("");
+        setFirstBill("");
+        setReminder(false);
+    }
 
-        {/* Content Container */}
-        <Animated.View
-            style={{
-                position: 'absolute',
-                height: '100%',
-                flex: 1,
-                width: SIZES.width,
-                backgroundColor: theme.main,
-                borderTopLeftRadius: SIZES.radius,
-                borderTopRightRadius: SIZES.radius,
-                transform: [
-                    {
-                        translateY: animation.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [SIZES.height + 150, SIZES.height - 393]
-                        })
-                    }
-                ]
-            }}
-            opacity={animation}
-        >
+    return (
+    <Modal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        onClose={handleClose}
+        modalHeight={393}
+    >
             {/* Header */}
             <View
                 style={{
@@ -183,7 +133,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
             {/* Body */}
             <View>
                 <View style={style.totalInfo}>
-                    <TotalInfo
+                    <SubInfoItemTotal
                         label={`$${item && 
                             utils.addComaToNumber(
                                 utils.countTotalPaid(item.cycle, item.firstBill, item.price)
@@ -192,25 +142,25 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
                         secondaryLabel='Paid'
                         icon={icons.total}
                     />
-                    <TotalInfo
+                    <SubInfoItemTotal
                         label={item && item.nextBill ? utils.dateConverter(item.nextBill) : "N/A"}
                         secondaryLabel='Next Bill'
                         icon={icons.date}
                     />
-                    <TotalInfo
+                    <SubInfoItemTotal
                         label={`${item && utils.countAmountOfCycles(item.cycle, item.firstBill)}`}
                         secondaryLabel='Cycles'
                         icon={icons.cycle}
                     />
                     </View>
-                <ModelItem
+                <SubInfoItem
                     label='Description'
                     stateLabel={description || 'No description'}
                     maxLength={20}
                     state={description}
                     onChange={setDescription}
                 />
-                <ModelItem
+                <SubInfoItem
                     label='First Bill'
                     stateLabel={firstBill ? utils.dateConverter(firstBill) : "Enter a date"}
                     state={firstBill}
@@ -218,7 +168,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
                     isError={firstBillError}
                     date
                 />
-                <ModelItem
+                <SubInfoItem
                     label='Price'
                     stateLabel={price ? `$ ${price}` : "Enter a price"}
                     maxLength={6}
@@ -227,7 +177,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
                     isError={priceError}
                     onChange={setPrice}
                 />
-                <ModelItem
+                <SubInfoItem
                     label='Cycle'
                     stateLabel={cycle ? `${cycle} months` : "Enter a cycle"}
                     maxLength={2}
@@ -236,7 +186,7 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
                     isError={cycleError}
                     onChange={setCycle}
                 />
-                <ModelItem
+                <SubInfoItem
                     label='Reminder'
                     state={reminder}
                     onChange={setReminder}
@@ -276,9 +226,8 @@ const SubModel = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => 
                     onPress={handleUpdate}
                 />
             </View>
-        </Animated.View>
-        </>
+        </Modal>
     )
 }
 
-export default SubModel;
+export default SubInfo;

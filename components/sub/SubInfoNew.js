@@ -1,14 +1,14 @@
-import { useRef, useEffect, useState, useLayoutEffect } from 'react';
-import { View, Text, Animated, Pressable, StyleSheet, KeyboardAwareScrollView } from 'react-native';
+import { useRef, useEffect, useState } from 'react';
+import { View, Text, Animated, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"
 
-import { TextButton, ModelItem } from '../';
+import { TextButton, SubInfoItem, Modal } from '../';
 import { FONTS, SIZES } from '../../constants/theme';
 import { addSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
 
 
-const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
+const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
     const { theme } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
@@ -34,36 +34,6 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
             setFirstBill(utils.dateFormat(new Date()));
         }
     }, [item])
-
-    useEffect(() => {
-        if(isOpen){
-            Animated.timing(animation, {
-                toValue: 1,
-                duration: SIZES.animationDuration,
-                useNativeDriver: true
-            }).start();
-        } else {
-            Animated.timing(animation, {
-                toValue: 0,
-                duration: SIZES.animationDuration,
-                useNativeDriver: true,
-            }).start();
-
-            setSelectedItem(null);
-            setNameError(false);
-            setPriceError(false);
-            setCycleError(false);
-            setFirstBillError(false);
-        }
-
-        return () => {
-            setDescription("");
-            setPrice("");
-            setCycle("");
-            setFirstBill("");
-            setReminder(false);
-        }
-    }, [isOpen]);
 
     const handleAdd = () => {
         const newItem = {
@@ -102,55 +72,25 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
         },
     })
 
-    return (
-    <>
-        {/* Darken background */}
-        {isOpen && (
-            <Animated.View 
-                style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    height: '100%',
-                    width: SIZES.width,
-                }}
-                opacity={animation}
-            >
-                {/* Background container */}
-                <Pressable
-                    style={{
-                        flex: 1,
-                        height: '100%',
-                        width: SIZES.width,
-                        backgroundColor: "rgba(0,0,0,0.5)",
-                    }}
-                    onPress={() => setIsOpen(false)}
-                />
-            </Animated.View>
-        )}
+    const handleClose = () => {
+        setSelectedItem(null);
+        setNameError(false);
+        setPriceError(false);
+        setCycleError(false);
+        setFirstBillError(false);
+        setDescription("");
+        setPrice("");
+        setCycle("");
+        setFirstBill("");
+        setReminder(false);
+    }
 
-        {/* Content Container */}
-        <Animated.View
-            style={{
-                position: 'absolute',
-                height: '100%',
-                flex: 1,
-                width: SIZES.width,
-                backgroundColor: theme.main,
-                borderTopLeftRadius: SIZES.radius,
-                borderTopRightRadius: SIZES.radius,
-                transform: [
-                    {
-                        translateY: animation.interpolate({
-                            inputRange: [0, 1],
-                            outputRange: [
-                                SIZES.height + 150,
-                                SIZES.height - 363
-                            ]
-                        })
-                    }
-                ]
-            }}
-            opacity={animation}
+    return (
+        <Modal
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            onClose={handleClose}
+            modalHeight={363}
         >
             <View>
                 {/* Header */}
@@ -192,7 +132,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
 
                 {/* Body */}
                 <View>
-                    <ModelItem
+                    <SubInfoItem
                         label='Name'
                         stateLabel={name || 'Enter name'}
                         state={name}
@@ -200,14 +140,14 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
                         onChange={setName}
                         isError={nameError}
                     />
-                    <ModelItem
+                    <SubInfoItem
                         label='Description'
                         stateLabel={description || 'Enter description'}
                         state={description}
                         maxLength={50}
                         onChange={setDescription}
                     />
-                    <ModelItem
+                    <SubInfoItem
                         label='First Bill'
                         stateLabel={firstBill ? utils.dateConverter(firstBill) : 'Enter first bill'}
                         state={firstBill ? firstBill : new Date()}
@@ -215,7 +155,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
                         isError={firstBillError}
                         date
                     />
-                    <ModelItem
+                    <SubInfoItem
                         label='Price'
                         stateLabel={price ? `$ ${price}` : 'Enter price'}
                         state={price}
@@ -224,7 +164,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
                         onChange={setPrice}
                         isError={priceError}
                     />
-                    <ModelItem
+                    <SubInfoItem
                         label='Cycle'
                         stateLabel={cycle ? `${cycle} month${cycle == 1 ? '' : 's'}` : 'Enter cycle'}
                         maxLength={2}
@@ -233,7 +173,7 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
                         onChange={setCycle}
                         isError={cycleError}
                     />
-                    <ModelItem
+                    <SubInfoItem
                         label='Reminder'
                         state={reminder}
                         onChange={setReminder}
@@ -261,9 +201,8 @@ const SubModelAdd = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) 
                     />
                 </View>
             </View>
-        </Animated.View>
-        </>
+        </Modal>
     )
 }
 
-export default SubModelAdd;
+export default SubInfoNew;

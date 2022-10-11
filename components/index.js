@@ -4,21 +4,22 @@ import SettingsItem from "./common/SettingsItem";
 import SettingsItemLabel from "./common/SettingsItemLabel";
 import LoadScreen from "./common/LoadScreen";
 import Alert from "./common/Alert";
+import Modal from "./common/Modal";
 
 import IconButton from "./inputs/IconButton";
 import TextButton from "./inputs/TextButton";
 import Add from "./inputs/Add";
 import Input from "./inputs/Input";
 
-import ModelItem from "./sub/ModelItem";
-import SubModel from "./sub/SubModel";
-import SubModelAdd from "./sub/SubModelAdd";
-import SubItem from "./sub/SubItem";
-import SubItemAdd from "./sub/SubItemAdd";
+import SubInfoItem from "./sub/SubInfoItem";
+import SubInfo from "./sub/SubInfo";
+import SubInfoNew from "./sub/SubInfoNew";
+import SubCard from "./sub/SubCard";
+import SubCardNew from "./sub/SubCardNew";
 import Info from "./sub/Info";
 import Sort from "./sub/Sort";
-import TotalInfo from "./sub/TotalInfo";
-import SubCustomAdd from "./sub/SubCustomAdd";
+import SubInfoItemTotal from "./sub/SubInfoItemTotal";
+import SubCardCustomNew from "./sub/SubCardCustomNew";
 
 import Menu from "./nav/Menu";
 import GoBack from "./nav/GoBack";
@@ -30,21 +31,22 @@ export {
     SettingsItemLabel,
     LoadScreen,
     Alert,
+    Modal,
 
     IconButton,
     TextButton,
     Add,
     Input,
 
-    ModelItem,
-    SubModel,
-    SubModelAdd,
-    SubItem,
-    SubItemAdd,
+    SubInfoItem,
+    SubInfo,
+    SubInfoNew,
+    SubCard,
+    SubCardNew,
     Info,
     Sort,
-    TotalInfo,
-    SubCustomAdd,
+    SubInfoItemTotal,
+    SubCardCustomNew,
 
     Menu,
     GoBack,

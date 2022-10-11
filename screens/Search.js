@@ -1,7 +1,7 @@
 import { useState } from "react"
-import { View, Text, TextInput, StyleSheet, FlatList } from "react-native"
+import { View, StyleSheet, FlatList } from "react-native"
 import { useSelector } from "react-redux"
-import { Input, SubItemAdd, SubModelAdd, GoBack, SubCustomAdd, Alert } from "../components"
+import { Input, SubCardNew, SubInfoNew, GoBack, SubCardCustomNew, Alert } from "../components"
 import { SIZES } from "../constants/theme"
 import data from "../constants/data"
 import icons from "../constants/icons"
@@ -9,7 +9,7 @@ import icons from "../constants/icons"
 const Search = ({navigation}) => {
     const [search, setSearch] = useState("");
     const [selectedItem, setSelectedItem] = useState(null);
-    const [modelOpen, setModelOpen] = useState(false);
+    const [ModalOpen, setModalOpen] = useState(false);
     const [alertMsg, setAlertMsg] = useState("");
     const { theme } = useSelector(state => state.local);
 
@@ -40,12 +40,11 @@ const Search = ({navigation}) => {
             <View
                 style={{
                     paddingTop: SIZES.padding,
-                    marginBottom: 120,
                 }}
             >
-                <SubCustomAdd
+                <SubCardCustomNew
                     setSelectedItem={setSelectedItem}
-                    setModelOpen={setModelOpen}
+                    setModalOpen={setModalOpen}
                 />
                 <FlatList
                     data={
@@ -53,21 +52,24 @@ const Search = ({navigation}) => {
                         .filter(i => search.length > 0 ? i.name.toLowerCase().includes(search.toLowerCase()) : true)
                         .slice(0, 10)
                     }
+                    ListFooterComponent={
+                        <View style={{height: 130}} />
+                    }
                     keyExtractor={(item) => `item-${item.id}`}
                     renderItem={({item}) => (
-                        <SubItemAdd
+                        <SubCardNew
                             item={item}
                             setSelectedItem={setSelectedItem}
-                            setModelOpen={setModelOpen}
+                            setModalOpen={setModalOpen}
                         />
                     )}
                 />
             </View>
         </View>
-        <SubModelAdd
+        <SubInfoNew
             item={selectedItem}
-            isOpen={modelOpen}
-            setIsOpen={setModelOpen}
+            isOpen={ModalOpen}
+            setIsOpen={setModalOpen}
             setAlertMsg={setAlertMsg}
             setSelectedItem={setSelectedItem}
         />

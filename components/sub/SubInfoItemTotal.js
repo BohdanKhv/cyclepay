@@ -2,7 +2,7 @@ import { View, Image, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 import { FONTS, SIZES } from '../../constants/theme';
 
-const TotalInfo = ({icon, label, secondaryLabel}) => {
+const SubInfoItemTotal = ({icon, label, secondaryLabel}) => {
     const { theme } = useSelector(state => state.local);
 
     const style = StyleSheet.create({
@@ -61,4 +61,4 @@ const TotalInfo = ({icon, label, secondaryLabel}) => {
     )
 }
 
-export default TotalInfo
+export default SubInfoItemTotal

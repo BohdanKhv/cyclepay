@@ -5,7 +5,7 @@ import { useSelector } from "react-redux"
 import icons from '../../constants/icons';
 
 
-const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
+const SubCardNew = ({item, setSelectedItem, setModalOpen}) => {
     const { theme } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
 
@@ -76,7 +76,7 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
                 <TouchableNativeFeedback
                     onPress={() => {
                         setSelectedItem(item);
-                        setModelOpen(true);
+                        setModalOpen(true);
                         setRippleOverflow(!rippleOverflow);
                     }}
                     background={TouchableNativeFeedback.Ripple(theme.tertiary, rippleOverflow)}
@@ -123,4 +123,4 @@ const SubItemAdd = ({item, setSelectedItem, setModelOpen}) => {
     )
 }
 
-export default SubItemAdd
+export default SubCardNew

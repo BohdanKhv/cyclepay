@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react"
-import { View, FlatList, ScrollView, StyleSheet } from "react-native"
+import { View, ScrollView, StyleSheet } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
-import { COLORS, SIZES } from "../constants/theme"
+import { SIZES } from "../constants/theme"
 import { useSelector } from "react-redux"
-import data from "../constants/data"
-import { Sort, SubItem, Header, Add, Info, SubModel, Alert } from "../components"
+import { Sort, SubCard, Header, Add, Info, SubInfo, Alert } from "../components"
 
 const Home = ({navigation}) => {
   const subItems = useSelector((state) => state.sub.items)
   const [selectedItem, setSelectedItem] = useState(null);
-  const [modelOpen, setModelOpen] = useState(false);
+  const [ModalOpen, setModalOpen] = useState(false);
   const [items, setItems] = useState([]);
   const [alertMsg, setAlertMsg] = useState("");
   const { theme } = useSelector(state => state.local);
@@ -77,21 +76,21 @@ const Home = ({navigation}) => {
             paddingVertical: SIZES.padding,
           }}>
             {items && items.map((item, index) => (
-              <SubItem
+              <SubCard
                 key={`item-${index}`}
                 item={item}
                 setSelectedItem={setSelectedItem}
-                setModelOpen={setModelOpen}
+                setModalOpen={setModalOpen}
               />
             ))}
             <Add navigation={navigation}/>
           </ScrollView>
         </View>
       </View>
-      <SubModel
+      <SubInfo
         item={selectedItem}
-        isOpen={modelOpen}
-        setIsOpen={setModelOpen}
+        isOpen={ModalOpen}
+        setIsOpen={setModalOpen}
         setSelectedItem={setSelectedItem}
         setAlertMsg={setAlertMsg}
       />

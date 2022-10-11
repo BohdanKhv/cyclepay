@@ -7,7 +7,7 @@ import itemsImg from '../../constants/itemsImg';
 import utils from '../../constants/utils';
 
 
-const SubCustomAdd = ({setSelectedItem, setModelOpen}) => {
+const SubCardCustomNew = ({setSelectedItem, setModalOpen}) => {
     const { theme } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
 
@@ -78,7 +78,7 @@ const SubCustomAdd = ({setSelectedItem, setModelOpen}) => {
             cycle: 1,
             reminder: false
         });
-        setModelOpen(true);
+        setModalOpen(true);
         setRippleOverflow(!rippleOverflow);
     }
 
@@ -136,4 +136,4 @@ const SubCustomAdd = ({setSelectedItem, setModelOpen}) => {
     )
 }
 
-export default SubCustomAdd
+export default SubCardCustomNew

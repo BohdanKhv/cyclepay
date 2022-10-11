@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableNativeFeedback } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
 import { FONTS, SIZES } from "../../constants/theme"
 import utils from '../../constants/utils';
 import { useSelector } from "react-redux"
 
 
-const SubItem = ({item, setSelectedItem, setModelOpen}) => {
+const SubCard = ({item, setSelectedItem, setModalOpen}) => {
     const { theme } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
 
@@ -79,7 +79,7 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
                 <TouchableNativeFeedback
                     onPress={() => {
                         setSelectedItem(item);
-                        setModelOpen(true);
+                        setModalOpen(true);
                         setRippleOverflow(!rippleOverflow);
                     }}
                     background={TouchableNativeFeedback.Ripple(theme.tertiary, rippleOverflow)}
@@ -130,4 +130,4 @@ const SubItem = ({item, setSelectedItem, setModelOpen}) => {
     )
 }
 
-export default SubItem
+export default SubCard

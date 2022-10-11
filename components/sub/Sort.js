@@ -28,7 +28,7 @@ const Sort = ({items, setItems}) => {
             paddingHorizontal: SIZES.padding,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-end',
         },
         wrapper: {
             flexDirection: 'row',
@@ -47,16 +47,13 @@ const Sort = ({items, setItems}) => {
 
     return (
         <View style={style.container}>
-            <Text style={style.text}>
-                Sort by:
-            </Text>
             <View style={style.wrapper}>
                 <Text style={style.info}>
                     {sortBy}
                 </Text>
                 <IconButton
                     icon={icons.sort}
-                    padding={4}
+                    padding={10}
                     onPress={() => {
                         if(sortBy === 'name') {
                             setSortBy('bill date')

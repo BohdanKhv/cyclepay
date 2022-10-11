@@ -26,20 +26,27 @@ const IconButton = ({
                     onPress ? onPress() : null;
                 }}
                 style={{
-                    padding: 8
                 }}
                 background={TouchableNativeFeedback.Ripple(theme.tertiary, false)}
             >
                 <View
                     style={{
-                        padding: padding || 8,
+                        padding: padding ? padding : 8,
+                    }}>
+                <View
+                    style={{
+                        width: width || 20,
+                        height: height || 20,
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
                     }}
                 >
                 <Image
                     resizeMode='contain'
                     style={{
-                        width: width || 25,
-                        height: height || 25,
+                        width: '100%',
+                        height: '100%',
                         tintColor: color || theme.textDark,
                         overlayColor: theme.textDark,
                         ...iconStyle,
@@ -48,6 +55,8 @@ const IconButton = ({
                     source={icon}
                 />
                 </View>
+                    
+                    </View>
             </TouchableNativeFeedback>
         </View>
     )

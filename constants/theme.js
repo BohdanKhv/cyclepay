@@ -124,8 +124,8 @@ export const darkTheme = {
 export const lightTheme = {
     name: "light",
     main: "#fff",
-    secondary: "#F5F8FA",
-    tertiary: "#E1E8ED",
+    secondary: "#F5F5F5",
+    tertiary: "#EBEBEB",
     primary: "#FC642D",
 
     textLight: "#fff",

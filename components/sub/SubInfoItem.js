@@ -7,7 +7,7 @@ import icons from "../../constants/icons";
 import utils from "../../constants/utils";
 import { useSelector } from "react-redux"
 
-const ModelItem = ({
+const SubInfoItem = ({
     stateLabel,
     state,
     onChange,
@@ -263,4 +263,4 @@ const ModelItem = ({
     )
 }
 
-export default ModelItem
+export default SubInfoItem
