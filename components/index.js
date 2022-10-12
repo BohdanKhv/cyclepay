@@ -10,6 +10,7 @@ import IconButton from "./inputs/IconButton";
 import TextButton from "./inputs/TextButton";
 import Add from "./inputs/Add";
 import Input from "./inputs/Input";
+import LineButton from "./inputs/LineButton";
 
 import SubInfoItem from "./sub/SubInfoItem";
 import SubInfo from "./sub/SubInfo";
@@ -37,6 +38,7 @@ export {
     TextButton,
     Add,
     Input,
+    LineButton,
 
     SubInfoItem,
     SubInfo,

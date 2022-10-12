@@ -1,34 +1,27 @@
 import { useState, useEffect } from "react";
 import { View, Text, StyleSheet } from 'react-native'
+import { useSelector, useDispatch } from "react-redux"
 import { FONTS, SIZES } from '../../constants/theme'
-import { IconButton} from '../'
+import { setSort } from '../../store/features/local/localSlice'
+import { sortSub } from '../../store/features/sub/subSlice'
+import { IconButton, Modal, LineButton } from '../'
 import icons from '../../constants/icons'
-import { useSelector } from "react-redux"
 
-const Sort = ({items, setItems}) => {
+const Sort = () => {
     const { theme, sort } = useSelector(state => state.local);
-    const [sortBy, setSortBy] = useState(sort || 'name')
+    const [modalOpen, setModalOpen] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setSortBy(sort)
+        dispatch(sortSub(sort));
     }, [sort])
-
-    useEffect(() => {
-        if(sortBy === 'name') {
-            items && items.length > 1 && setItems([...items].sort((a, b) => new Date(b.nextBill) - new Date(a.nextBill)))
-        } else if (sortBy === 'bill date') {
-            items && items.length > 1 && setItems([...items].sort((a, b) => b.price - a.price))
-        } else if (sortBy === 'price') {
-            items && items.length > 1 && setItems([...items].sort((a, b) => a.name.localeCompare(b.name)))
-        }
-    }, [sortBy])
 
     const style = StyleSheet.create({
         container: {
             paddingHorizontal: SIZES.padding,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
         },
         wrapper: {
             flexDirection: 'row',
@@ -37,6 +30,7 @@ const Sort = ({items, setItems}) => {
         text: {
             color: theme.textDark,
             ...FONTS.h3,
+            textTransform: 'capitalize',
         },
         info: {
             color: theme.textDark,
@@ -46,26 +40,84 @@ const Sort = ({items, setItems}) => {
     });
 
     return (
+        <>
         <View style={style.container}>
-            <View style={style.wrapper}>
-                <Text style={style.info}>
-                    {sortBy}
+            <View>
+                <Text style={style.text}>
+                    {sort.split(':')[0]}
                 </Text>
+            </View>
+            <View style={style.wrapper}>
                 <IconButton
-                    icon={icons.sort}
+                    icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
                     padding={10}
                     onPress={() => {
-                        if(sortBy === 'name') {
-                            setSortBy('bill date')
-                        } else if (sortBy === 'bill date') {
-                            setSortBy('price')
-                        } else if (sortBy === 'price') {
-                            setSortBy('name')
-                        }
+                        setModalOpen(true)
                     }}
                 />
             </View>
         </View>
+        <Modal
+            isOpen={modalOpen}
+            setIsOpen={setModalOpen}
+            modalHeight={240}
+        >
+            <View
+                style={{
+                    paddingVertical: SIZES.padding,
+                }}
+            >
+                <LineButton
+                    label="Sort by Name"
+                    icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
+                    onPress={() => {
+                        if(sort.split(':')[1] === 'asc')
+                            dispatch(setSort('name:desc'))
+                        else 
+                            dispatch(setSort('name:asc'))
+                        
+                        setModalOpen(false)
+                    }}
+                />
+                <LineButton
+                    label="Sort by First Bill Date"
+                    icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
+                    onPress={() => {
+                        if(sort.split(':')[1] === 'asc')
+                            dispatch(setSort('first bill date:desc'))
+                        else 
+                            dispatch(setSort('first bill date:asc'))
+                        
+                        setModalOpen(false)
+                    }}
+                />
+                <LineButton
+                    label="Sort by Next Bill Date"
+                    icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
+                    onPress={() => {
+                        if(sort.split(':')[1] === 'asc')
+                            dispatch(setSort('next bill date:desc'))
+                        else 
+                            dispatch(setSort('next bill date:asc'))
+                        
+                        setModalOpen(false)
+                    }}
+                />
+                <LineButton
+                    label="Sort by Price"
+                    icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
+                    onPress={() => {
+                        if(sort.split(':')[1] === 'asc')
+                            dispatch(setSort('price:desc'))
+                        else 
+                            dispatch(setSort('price:asc'))
+                        
+                        setModalOpen(false)
+                    }}
+                />
+            </View>
+        </Modal>
+        </>
     )
 }
 

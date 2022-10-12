@@ -66,15 +66,15 @@ const Search = ({navigation}) => {
                 />
             </View>
         </View>
+        <Alert
+            message={alertMsg}
+        />
         <SubInfoNew
             item={selectedItem}
             isOpen={ModalOpen}
             setIsOpen={setModalOpen}
             setAlertMsg={setAlertMsg}
             setSelectedItem={setSelectedItem}
-        />
-        <Alert
-            message={alertMsg}
         />
     </>
     )

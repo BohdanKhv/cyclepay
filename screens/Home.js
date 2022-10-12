@@ -6,16 +6,11 @@ import { useSelector } from "react-redux"
 import { Sort, SubCard, Header, Add, Info, SubInfo, Alert } from "../components"
 
 const Home = ({navigation}) => {
-  const subItems = useSelector((state) => state.sub.items)
+  const { items } = useSelector((state) => state.sub)
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalOpen, setModalOpen] = useState(false);
-  const [items, setItems] = useState([]);
   const [alertMsg, setAlertMsg] = useState("");
   const { theme } = useSelector(state => state.local);
-
-  useEffect(() => {
-    setItems(subItems);
-  }, [subItems]);
 
   const style = StyleSheet.create({
     body: {
@@ -61,10 +56,7 @@ const Home = ({navigation}) => {
           navigation={navigation}
         />
         <Info/>
-        <Sort
-          items={items}
-          setItems={setItems}
-        />
+        <Sort />
         <View
           style={{
             position: 'relative',
@@ -87,15 +79,15 @@ const Home = ({navigation}) => {
           </ScrollView>
         </View>
       </View>
+      <Alert
+        message={alertMsg}
+      />
       <SubInfo
         item={selectedItem}
         isOpen={ModalOpen}
         setIsOpen={setModalOpen}
         setSelectedItem={setSelectedItem}
         setAlertMsg={setAlertMsg}
-      />
-      <Alert
-        message={alertMsg}
       />
       </>
   )

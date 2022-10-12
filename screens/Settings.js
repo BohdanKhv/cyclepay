@@ -33,12 +33,14 @@ const Settings = ({ navigation }) => {
     }
 
     const handleSetSort = () => {
-        if(sort === 'name') {
-            dispatch(setSort('bill date'))
-        } else if (sort === 'bill date') {
-            dispatch(setSort('price'))
-        } else if (sort === 'price') {
-            dispatch(setSort('name'))
+        if(sort.split(':')[0] === 'name') {
+            dispatch(setSort('first bill date:asc'))
+        } else if (sort.split(':')[0] === 'first bill date') {
+            dispatch(setSort('next bill date:asc'))
+        } else if (sort.split(':')[0] === 'next bill date') {
+            dispatch(setSort('price:asc'))
+        } else if (sort.split(':')[0] === 'price') {
+            dispatch(setSort('name:asc'))
         }
     }
 
@@ -70,7 +72,7 @@ const Settings = ({ navigation }) => {
                     <SettingsItemLabel
                         onPress={handleSetSort}
                         label="Sort Subscriptions"
-                        value={sort}
+                        value={sort.split(':')[0]}
                     />
                     <SettingsItemLabel
                         onPress={handleClearSub}

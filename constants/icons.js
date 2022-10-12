@@ -12,6 +12,8 @@ const arrowRight = require("../assets/icons/arrowRight.png");
 const date = require("../assets/icons/date.png");
 const cycle = require("../assets/icons/cycle.png");
 const total = require("../assets/icons/total.png");
+const sortUp = require("../assets/icons/sortUp.png");
+const sortDown = require("../assets/icons/sortDown.png");
 
 export default {
     close,
@@ -28,4 +30,6 @@ export default {
     date,
     cycle,
     total,
+    sortUp,
+    sortDown
 }

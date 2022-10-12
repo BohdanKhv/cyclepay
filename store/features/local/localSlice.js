@@ -3,7 +3,7 @@ import { darkTheme, lightTheme } from '../../../constants/theme';
 
 const initialState = {
     theme: lightTheme,
-    sort: 'bill date',
+    sort: "name:asc",
     infoDisplay: 'monthly',
 };
 

@@ -33,7 +33,7 @@ const Modal = ({
     }, [isOpen]);
 
     const handleClose = () => {
-        onClose();
+        onClose && onClose();
         setIsOpen(false);
     }
 

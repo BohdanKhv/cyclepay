@@ -8,14 +8,9 @@ import utils from "../../constants/utils";
 
 const Info = () => {
     const { theme, infoDisplay } = useSelector(state => state.local);
-    const subItem = useSelector(state => state.sub.items);
-    const [items, setItems] = useState([]);
+    const { items } = useSelector(state => state.sub);
     const [ totalPerMonth, setTotalPerMonth ] = useState(0)
     const [ totalType, setTotalType ] = useState(infoDisplay || 'monthly')
-
-    useEffect(() => {
-        setItems(subItem);
-    }, [subItem])
 
     useEffect(() => {
         setTotalType(infoDisplay)
@@ -40,6 +35,7 @@ const Info = () => {
     }
 
     const calcPerMonth = (items) => {
+        if(!items || items.length === 0) return 0;
         const tpm = items.reduce((acc, item) => {
             return (+acc + item.price / item.cycle).toFixed(2)
         }, 0)
@@ -47,11 +43,13 @@ const Info = () => {
     }
 
     const calcPerYear = (items) => {
+        if(!items || items.length === 0) return 0;
         const tpy = (calcPerMonth(items) * 12).toFixed(2);
         return tpy;
     }
 
     const calcPerDay = (items) => {
+        if(!items || items.length === 0) return 0;
         const tpy = calcPerMonth(items) / 30;
         return tpy.toFixed(2);
     }
@@ -122,7 +120,7 @@ const Info = () => {
                             ...FONTS.h4,
                             color: '#fff',
                         }}>
-                            {items.length}
+                            {items ?  items.length : 0}
                         </Text>
                     </View>
                     <View
