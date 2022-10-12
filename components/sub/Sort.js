@@ -60,7 +60,7 @@ const Sort = () => {
         <Modal
             isOpen={modalOpen}
             setIsOpen={setModalOpen}
-            modalHeight={240}
+            modalHeight={245}
         >
             <View
                 style={{
@@ -69,6 +69,7 @@ const Sort = () => {
             >
                 <LineButton
                     label="Sort by Name"
+                    active={sort.split(':')[0] === 'name'}
                     icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
                     onPress={() => {
                         if(sort.split(':')[1] === 'asc')
@@ -81,6 +82,7 @@ const Sort = () => {
                 />
                 <LineButton
                     label="Sort by First Bill Date"
+                    active={sort.split(':')[0] === 'first bill date'}
                     icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
                     onPress={() => {
                         if(sort.split(':')[1] === 'asc')
@@ -93,6 +95,7 @@ const Sort = () => {
                 />
                 <LineButton
                     label="Sort by Next Bill Date"
+                    active={sort.split(':')[0] === 'next bill date'}
                     icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
                     onPress={() => {
                         if(sort.split(':')[1] === 'asc')
@@ -105,6 +108,7 @@ const Sort = () => {
                 />
                 <LineButton
                     label="Sort by Price"
+                    active={sort.split(':')[0] === 'price'}
                     icon={sort.split(':')[1] === 'asc' ? icons.sortDown : icons.sortUp}
                     onPress={() => {
                         if(sort.split(':')[1] === 'asc')
