@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.73% </span>
+                <span class="strong">74.35% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>29/41</span>
+                <span class='fraction'>29/39</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">57.14% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>4/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">70.73% </span>
+                <span class="strong">74.35% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>29/41</span>
+                <span class='fraction'>29/39</span>
             </div>
         
             
@@ -140,30 +140,18 @@
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -176,15 +164,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-yes">5x</span>
@@ -201,16 +181,20 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -238,17 +222,13 @@
 <span class="cstat-no" title="statement not covered" >    return newDate;</span>
 }
 &nbsp;
-const dateFormat = <span class="fstat-no" title="function not covered" >(d</span>ate) =&gt; {
-    const newDate = <span class="cstat-no" title="statement not covered" >date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate();</span>
-<span class="cstat-no" title="statement not covered" >    return newDate;</span>
+const dateFormat = (date) =&gt; {
+    const str = date.toISOString();
+    return str.substring(0, str.indexOf('T'));
 }
 &nbsp;
 const addComaToNumber = <span class="fstat-no" title="function not covered" >(n</span>umber) =&gt; {
 <span class="cstat-no" title="statement not covered" >    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");</span>
-}
-&nbsp;
-const padTo2Digits = (num) =&gt; {
-    return num.toString().padStart(2, '0');
 }
 &nbsp;
 function monthDiff(to, from) {
@@ -259,19 +239,11 @@ function monthDiff(to, from) {
     return months;
 }
 &nbsp;
-const formatDate = (date) =&gt; {
-    // 2022-01-18 (yyyy-mm-dd)
-    return [
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-    ].join('-');
-}
-&nbsp;
 const countAmountOfCycles = (cycle, firstBill, currDate) =&gt; {
     // firstBill (yyyy-mm-dd)
     <span class="missing-if-branch" title="else path not taken" >E</span>if(cycle &amp;&amp; firstBill){
-        const today = new Date(currDate) || <span class="branch-1 cbranch-no" title="branch not covered" >new Date();</span>
+        const date = new Date();
+        const today = currDate ? new Date(currDate) : <span class="branch-1 cbranch-no" title="branch not covered" >new Date(date.getFullYear(), date.getMonth(), date.getDate());</span>
         const startDate = new Date(firstBill);
         // Count amount of cycles between today and first bill.
         // First date counts as a cycle.
@@ -284,7 +256,8 @@ const countAmountOfCycles = (cycle, firstBill, currDate) =&gt; {
 const calcNewBill = (firstBill, cycle, currDate) =&gt; {
     // firstBill (yyyy-mm-dd)
     <span class="missing-if-branch" title="else path not taken" >E</span>if(cycle &amp;&amp; firstBill){
-        const today = new Date(currDate) || <span class="branch-1 cbranch-no" title="branch not covered" >new Date();</span>
+        const date = new Date();
+        const today = currDate ? new Date(currDate) : <span class="branch-1 cbranch-no" title="branch not covered" >new Date(date.getFullYear(), date.getMonth(), date.getDate());</span>
         const startDate = new Date(firstBill);
         // Count amount of cycles between today and first bill.
         // First date counts as a cycle.
@@ -294,9 +267,12 @@ const calcNewBill = (firstBill, cycle, currDate) =&gt; {
         // Get date n months from first bill date.
         const newBill = new Date(firstBill);
         newBill.setMonth(newBill.getMonth() + cycles * cycle + cycle);
-        // Add 1 day to the new bill date. The subscription is paid on the first day of the month.
-        newBill.setDate(newBill.getDate() + 1);
-        return formatDate(newBill);
+&nbsp;
+        // Set the same day as the first bill.
+        // Regardless of the hours, minutes, seconds, milliseconds.
+        newBill.setDate(startDate.getDate());
+&nbsp;
+        return dateFormat(newBill);
     }
 }
 &nbsp;
@@ -325,7 +301,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-10-12T23:35:27.243Z
+                at 2022-10-13T00:34:26.720Z
             </div>
         <script src="prettify.js"></script>
         <script>

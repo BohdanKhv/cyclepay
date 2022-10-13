@@ -4,8 +4,8 @@ const dateConverter = (date) => {
 }
 
 const dateFormat = (date) => {
-    const newDate = date.getFullYear() + '-' +  (date.getMonth() + 1) + '-' + date.getDate();
-    return newDate;
+    const str = date.toISOString();
+    return str.substring(0, str.indexOf('T'));
 }
 
 const addComaToNumber = (number) => {
@@ -48,7 +48,9 @@ const calcNewBill = (firstBill, cycle, currDate) => {
         // Get date n months from first bill date.
         const newBill = new Date(firstBill);
         newBill.setMonth(newBill.getMonth() + cycles * cycle + cycle);
-        // Add 1 day to the new bill date. The subscription is paid on the first day of the month.
+
+        // Set the same day as the first bill.
+        // Regardless of the hours, minutes, seconds, milliseconds.
         newBill.setDate(startDate.getDate());
 
         return dateFormat(newBill);
