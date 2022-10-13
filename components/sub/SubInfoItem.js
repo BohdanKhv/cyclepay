@@ -187,7 +187,6 @@ const SubInfoItem = ({
                                     onPress={() => {
                                         setDisplayInput(false);
                                         date && onChange(utils.dateFormat(currDate));
-                                        console.log(currDate);
                                     }}
                                 />
                             </View>

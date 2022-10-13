@@ -68,6 +68,7 @@ const Search = ({navigation}) => {
         </View>
         <Alert
             message={alertMsg}
+            setAlertMsg={setAlertMsg}
         />
         <SubInfoNew
             item={selectedItem}

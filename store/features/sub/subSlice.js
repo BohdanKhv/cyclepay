@@ -36,9 +36,9 @@ export const subSlice = createSlice({
             } else if (action.payload === 'first bill date:desc') {
                 state.items = state.items.sort((a, b) => new Date(b.firstBill) - new Date(a.firstBill));
             } else if (action.payload === 'next bill date:asc') {
-                state.items = state.items.sort((a, b) => utils.calcNewBill(a.firstBill, a.cycle) - utils.calcNewBill(b.firstBill, b.cycle));
+                state.items = state.items.sort((a, b) => new Date(a.nextBill) - new Date(b.nextBill));
             } else if (action.payload === 'next bill date:desc') {
-                state.items = state.items.sort((a, b) => utils.calcNewBill(b.firstBill, b.cycle) - utils.calcNewBill(a.firstBill, a.cycle));
+                state.items = state.items.sort((a, b) => new Date(b.nextBill) - new Date(a.nextBill));
             }
         }
     }

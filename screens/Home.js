@@ -81,6 +81,7 @@ const Home = ({navigation}) => {
       </View>
       <Alert
         message={alertMsg}
+        setAlertMsg={setAlertMsg}
       />
       <SubInfo
         item={selectedItem}

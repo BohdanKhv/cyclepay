@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Animated } from "react-native"
 import { useSelector } from "react-redux"
 import { SIZES, FONTS } from "../../constants/theme";
 
-const Alert = ({message, color}) => {
+const Alert = ({message, color, setAlertMsg}) => {
     const { theme } = useSelector(state => state.local);
     const [showAlert, setShowAlert] = useState(true);
     const animation = useRef(new Animated.Value(0)).current;
@@ -23,6 +23,10 @@ const Alert = ({message, color}) => {
                     duration: 250,
                     useNativeDriver: true,
                 }).start();
+                setTimeout(() => {
+                    setAlertMsg("");
+                    setShowAlert(false);
+                }, 250);
             }, 2000);
         }
         return () => {

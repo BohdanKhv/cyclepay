@@ -49,7 +49,7 @@ const calcNewBill = (firstBill, cycle, currDate) => {
         const newBill = new Date(firstBill);
         newBill.setMonth(newBill.getMonth() + cycles * cycle + cycle);
         // Add 1 day to the new bill date. The subscription is paid on the first day of the month.
-        newBill.setDate(newBill.getDate() + 1);
+        newBill.setDate(startDate.getDate());
 
         return dateFormat(newBill);
     }
