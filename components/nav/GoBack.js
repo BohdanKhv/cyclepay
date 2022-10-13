@@ -27,7 +27,9 @@ const GoBack = ({navigation}) => {
                 width={25}
                 height={25}
             />
-            <TouchableWithoutFeedback onPress={() => navigation.goBack()}>
+            <TouchableWithoutFeedback
+                // onPress={() => navigation.goBack()}
+            >
                 <Text
                     style={{
                         color: theme.textDark,

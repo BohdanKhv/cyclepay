@@ -12,10 +12,6 @@ const addComaToNumber = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-const padTo2Digits = (num) => {
-    return num.toString().padStart(2, '0');
-}
-
 function monthDiff(to, from) {
     var months = to.getMonth() - from.getMonth() + (12 * (to.getFullYear() - from.getFullYear()));
     if(to.getDate() < from.getDate()){
@@ -24,19 +20,11 @@ function monthDiff(to, from) {
     return months;
 }
 
-const formatDate = (date) => {
-    // 2022-01-18 (yyyy-mm-dd)
-    return [
-        date.getFullYear(),
-        padTo2Digits(date.getMonth() + 1),
-        padTo2Digits(date.getDate()),
-    ].join('-');
-}
-
 const countAmountOfCycles = (cycle, firstBill, currDate) => {
     // firstBill (yyyy-mm-dd)
     if(cycle && firstBill){
-        const today = new Date(currDate) || new Date();
+        const date = new Date();
+        const today = currDate ? new Date(currDate) : new Date(date.getFullYear(), date.getMonth(), date.getDate());
         const startDate = new Date(firstBill);
         // Count amount of cycles between today and first bill.
         // First date counts as a cycle.
@@ -49,7 +37,8 @@ const countAmountOfCycles = (cycle, firstBill, currDate) => {
 const calcNewBill = (firstBill, cycle, currDate) => {
     // firstBill (yyyy-mm-dd)
     if(cycle && firstBill){
-        const today = new Date(currDate) || new Date();
+        const date = new Date();
+        const today = currDate ? new Date(currDate) : new Date(date.getFullYear(), date.getMonth(), date.getDate());
         const startDate = new Date(firstBill);
         // Count amount of cycles between today and first bill.
         // First date counts as a cycle.
@@ -61,7 +50,8 @@ const calcNewBill = (firstBill, cycle, currDate) => {
         newBill.setMonth(newBill.getMonth() + cycles * cycle + cycle);
         // Add 1 day to the new bill date. The subscription is paid on the first day of the month.
         newBill.setDate(newBill.getDate() + 1);
-        return formatDate(newBill);
+
+        return dateFormat(newBill);
     }
 }
 

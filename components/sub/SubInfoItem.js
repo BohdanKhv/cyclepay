@@ -89,16 +89,6 @@ const SubInfoItem = ({
             padding: SIZES.padding,
             width: '100%',
             height: '100%',
-            // borderBottomLeftRadius: SIZES.radius,
-            // borderBottomRightRadius: SIZES.radius,
-            // shadowColor: "#000",
-            // shadowOffset: {
-            //     width: 0,
-            //     height: 2
-            // },
-            // shadowOpacity: 0.25,
-            // shadowRadius: 3.84,
-            // elevation: 5
         },
         modalText: {
             fontSize: SIZES.h3,
@@ -202,34 +192,27 @@ const SubInfoItem = ({
                                 />
                             </View>
                             {date ? (
-                                // <View style={{
-                                //     flex: 2,
-                                //     alignContent: 'center',
-                                //     justifyContent: 'center',
-                                //     marginBottom: 40,
-                                // }}>
-                                    <View style={{
-                                        width: '100%',
-                                        flexDirection: 'row',
-                                        justifyContent: 'center',
-                                    }}>
-                                        <DatePicker
-                                            open={displayInput}
-                                            date={currDate}
-                                            mode="date"
-                                            maximumDate={new Date()}
-                                            textColor={theme.textDark}
-                                            androidVariant="iosClone"
-                                            fadeToColor={theme.main}
-                                            onDateChange={(date) => {
-                                                setCurrDate(date);
-                                            }}
-                                            onCancel={() => {
-                                                setDisplayInput(false);
-                                            }}
-                                        />
-                                    </View>
-                                // </View>
+                                <View style={{
+                                    width: '100%',
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                }}>
+                                    <DatePicker
+                                        open={displayInput}
+                                        date={currDate}
+                                        mode="date"
+                                        maximumDate={new Date()}
+                                        textColor={theme.textDark}
+                                        androidVariant="iosClone"
+                                        fadeToColor={theme.main}
+                                        onDateChange={(date) => {
+                                            setCurrDate(date);
+                                        }}
+                                        onCancel={() => {
+                                            setDisplayInput(false);
+                                        }}
+                                    />
+                                </View>
                             ) : 
                                 <TextInput
                                     ref={inputRef}

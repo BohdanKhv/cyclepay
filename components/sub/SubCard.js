@@ -27,7 +27,6 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
             paddingVertical: 12,
             borderRadius: SIZES.radius,
             flexDirection: 'row',
-            alignItems: 'center',
             justifyContent: 'space-between',
         },
         textMain: {
@@ -56,6 +55,7 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
             overflow: 'hidden',
             backgroundColor: "white",
             flexDirection: 'row',
+            alignSelf: 'center',
             alignItems: 'center',
             justifyContent: 'center',
             marginRight: 10,
@@ -85,43 +85,39 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
                     background={TouchableNativeFeedback.Ripple(theme.tertiary, rippleOverflow)}
                 >
                     <View style={style.itemWrapper}>
-                    <View
-                        style={{
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <View style={style.thumbnailWrapper}>
-                            <Image
-                                source={item.thumbnail}
-                                style={style.thumbnail}
-                            />
+                        <View
+                            style={{
+                                flexDirection: 'row',
+                            }}
+                        >
+                            <View style={style.thumbnailWrapper}>
+                                <Image
+                                    source={item.thumbnail}
+                                    style={style.thumbnail}
+                                />
+                            </View>
+                            <View>
+                                <Text style={style.textMain}>
+                                    {item.name}
+                                </Text>
+                                <Text style={style.textSecondary}>
+                                    {item.description}
+                                </Text>
+                            </View>
                         </View>
-                        <View>
+                        <View
+                            style={style.columnEmd}
+                        >
                             <Text style={style.textMain}>
-                                {item.name}
-                            </Text>
-                            <Text style={style.textTertiary}>
-                                Next Bill:
+                                $ {item.price}
                             </Text>
                             <Text style={style.textSecondary}>
-                                {item.description}
+                                {item.cycle} Month{item.cycle > 1 ? 's' : ''}
+                            </Text>
+                            <Text style={style.textTertiary}>
+                                {utils.dateConverter(item.nextBill)}
                             </Text>
                         </View>
-                    </View>
-                    <View
-                        style={style.columnEmd}
-                    >
-                        <Text style={style.textMain}>
-                            $ {item.price}
-                        </Text>
-                        <Text style={style.textTertiary}>
-                            {utils.dateConverter(item.nextBill)}
-                        </Text>
-                        <Text style={style.textSecondary}>
-                            {item.cycle} Month{item.cycle > 1 ? 's' : ''}
-                        </Text>
-                    </View>
                     </View>
                 </TouchableNativeFeedback>
             </View>

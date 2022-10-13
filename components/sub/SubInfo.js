@@ -40,7 +40,7 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
             price: parseFloat(price),
             cycle: parseInt(cycle),
             firstBill,
-            nextBill: utils.dateFormat(utils.calcNewBill(firstBill, parseInt(cycle))),
+            nextBill: utils.calcNewBill(firstBill, parseInt(cycle)),
             reminder,
         }
 
