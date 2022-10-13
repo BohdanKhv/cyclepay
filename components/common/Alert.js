@@ -5,12 +5,12 @@ import { SIZES, FONTS } from "../../constants/theme";
 
 const Alert = ({message, color, setAlertMsg}) => {
     const { theme } = useSelector(state => state.local);
-    const [showAlert, setShowAlert] = useState(true);
     const animation = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         let timeout = null;
-        if (showAlert && message !== "") {
+        let timeout2 = null;
+        if (message !== "") {
             Animated.timing(animation, {
                 toValue: 1,
                 duration: 250,
@@ -23,14 +23,14 @@ const Alert = ({message, color, setAlertMsg}) => {
                     duration: 250,
                     useNativeDriver: true,
                 }).start();
-                setTimeout(() => {
+                timeout2 = setTimeout(() => {
                     setAlertMsg("");
-                    setShowAlert(false);
                 }, 250);
             }, 2000);
         }
         return () => {
             clearTimeout(timeout);
+            clearTimeout(timeout2);
         }
     }, [message]);
 
