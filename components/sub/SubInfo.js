@@ -30,7 +30,9 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
             item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
             item.firstBill && setFirstBill(item.firstBill);
-            item.reminder && setReminder(item.reminder);
+            if(item.reminder === false || item.reminder === true) {
+            setReminder(item.reminder);
+            }
         }
     }, [item])
 

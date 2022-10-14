@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Text, TextInput, StyleSheet, ScrollView } from "react-native"
+import { View, Text, StatusBar, StyleSheet, ScrollView } from "react-native"
 import { SettingsItem, SettingsItemLabel, GoBack } from "../components"
 import { SIZES } from "../constants/theme"
 import { useDispatch, useSelector } from "react-redux"
@@ -63,7 +63,15 @@ const Settings = ({ navigation }) => {
     }
 
     return (
-        <>
+        <View style={{
+            flex: 1,
+            backgroundColor: theme.main,
+        }}>
+        <StatusBar
+            backgroundColor="rgba(0,0,0,0.25)"
+            translucent={true}
+            barStyle="light-content"
+        />
         <GoBack navigation={navigation} />
             <View style={style.container}>
                 <ScrollView>
@@ -94,7 +102,7 @@ const Settings = ({ navigation }) => {
                     />
                 </ScrollView>
             </View>
-        </>
+        </View>
     )
 }
 

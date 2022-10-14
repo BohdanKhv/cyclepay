@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, StyleSheet, FlatList } from "react-native"
+import { View, StyleSheet, FlatList, StatusBar } from "react-native"
 import { useSelector } from "react-redux"
 import { Input, SubCardNew, SubInfoNew, GoBack, SubCardCustomNew, Alert } from "../components"
 import { SIZES } from "../constants/theme"
@@ -30,7 +30,15 @@ const Search = ({navigation}) => {
     })
 
     return (
-    <>
+    <View style={{
+        flex: 1,
+        backgroundColor: theme.main,
+    }}>
+        <StatusBar
+            backgroundColor="rgba(0,0,0,0.25)"
+            translucent={true}
+            barStyle="light-content"
+        />
         <GoBack navigation={navigation} />
         <View style={style.container}>
             <View style={style.input}>
@@ -84,7 +92,7 @@ const Search = ({navigation}) => {
             setAlertMsg={setAlertMsg}
             setSelectedItem={setSelectedItem}
         />
-    </>
+    </View>
     )
 }
 
