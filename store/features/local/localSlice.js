@@ -5,6 +5,7 @@ const initialState = {
     theme: lightTheme,
     sort: "name:asc",
     infoDisplay: 'monthly',
+    infoNextBill: 'date',
 };
 
 
@@ -20,6 +21,9 @@ export const localSlice = createSlice({
         },
         setInfoDisplay: (state, action) => {
             state.infoDisplay = action.payload;
+        },
+        setInfoNextBill: (state, action) => {
+            state.infoNextBill = action.payload;
         }
     }
 });
@@ -27,6 +31,7 @@ export const localSlice = createSlice({
 export const {
     setTheme,
     setSort,
-    setInfoDisplay
+    setInfoDisplay,
+    setInfoNextBill,
 } = localSlice.actions;
 export default localSlice.reducer;

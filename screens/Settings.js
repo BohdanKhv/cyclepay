@@ -4,13 +4,13 @@ import { SettingsItem, SettingsItemLabel, GoBack } from "../components"
 import { SIZES } from "../constants/theme"
 import { useDispatch, useSelector } from "react-redux"
 import { darkTheme, lightTheme } from "../constants/theme"
-import { setTheme, setSort, setInfoDisplay } from "../store/features/local/localSlice"
+import { setTheme, setSort, setInfoDisplay, setInfoNextBill } from "../store/features/local/localSlice"
 import { clearSub } from "../store/features/sub/subSlice"
 
 
 const Settings = ({ navigation }) => {
     const dispatch = useDispatch();
-    const { theme, sort, infoDisplay } = useSelector(state => state.local);
+    const { theme, sort, infoDisplay, infoNextBill } = useSelector(state => state.local);
 
     const style = StyleSheet.create({
         container: {
@@ -34,7 +34,7 @@ const Settings = ({ navigation }) => {
 
     const handleSetSort = () => {
         if(sort.split(':')[0] === 'name') {
-            dispatch(setSort('first bill date:asc'))
+            dispatch(setInfoNextBill('first bill date:asc'))
         } else if (sort.split(':')[0] === 'first bill date') {
             dispatch(setSort('next bill date:asc'))
         } else if (sort.split(':')[0] === 'next bill date') {
@@ -51,6 +51,14 @@ const Settings = ({ navigation }) => {
             dispatch(setInfoDisplay('daily'))
         } else if (infoDisplay === 'daily') {
             dispatch(setInfoDisplay('monthly'))
+        }
+    }
+
+    const handleInfoNextBill = () => {
+        if(infoNextBill === 'date') {
+            dispatch(setInfoNextBill('days'))
+        } else if (infoNextBill === 'days') {
+            dispatch(setInfoNextBill('date'))
         }
     }
 
@@ -73,6 +81,11 @@ const Settings = ({ navigation }) => {
                         onPress={handleSetSort}
                         label="Sort Subscriptions"
                         value={sort.split(':')[0]}
+                    />
+                    <SettingsItemLabel
+                        onPress={handleInfoNextBill}
+                        label="Display next bill"
+                        value={infoNextBill}
                     />
                     <SettingsItemLabel
                         onPress={handleClearSub}

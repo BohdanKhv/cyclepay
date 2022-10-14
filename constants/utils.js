@@ -72,6 +72,15 @@ const generateId = () => {
     return Math.random().toString(36).substr(2, 9);
 }
 
+const amountOfDaysBetweenTwoDates = (date1, date2) => {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+    d1.setHours(0,0,0,0);
+    d2.setHours(0,0,0,0);
+    const diff = Math.abs(d1.getTime() - d2.getTime());
+    return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
 export default {
     dateConverter,
     dateFormat,
@@ -80,4 +89,5 @@ export default {
     countTotalPaid,
     calcNewBill,
     generateId,
+    amountOfDaysBetweenTwoDates,
 }

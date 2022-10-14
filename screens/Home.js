@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { View, StyleSheet, FlatList } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 import { SIZES } from "../constants/theme"
@@ -60,6 +60,7 @@ const Home = ({navigation}) => {
         <View
           style={{
             flex: 1,
+            zIndex: -1,
           }}
         >
           <FlatList 
@@ -71,6 +72,9 @@ const Home = ({navigation}) => {
                 setSelectedItem={setSelectedItem}
                 setModalOpen={setModalOpen}
               />
+            )}
+            ListHeaderComponent={() => (
+              <View style={{height: SIZES.padding}}/>
             )}
             ListFooterComponent={
               <>

@@ -1,13 +1,29 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableNativeFeedback } from 'react-native'
+import { useSelector, useDispatch } from "react-redux"
 import { FONTS, SIZES } from "../../constants/theme"
+import { updateSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
-import { useSelector } from "react-redux"
 
 
 const SubCard = ({item, setSelectedItem, setModalOpen}) => {
-    const { theme } = useSelector(state => state.local);
+    const { theme, infoNextBill } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (item) {
+            if(new Date(item.nextBill) < new Date()) {
+                dispatch(updateSub({
+                    ...item,
+                    nextBill: utils.calcNewBill(item.nextBill, item.cycle),
+                }))
+            }
+        }
+
+        return () => {
+        }
+    }, [item])
 
     const style = StyleSheet.create({
         container: {
@@ -41,7 +57,7 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
         textTertiary: {
             color: theme.textDark,
             opacity: 0.5,
-            ...FONTS.body5,
+            ...FONTS.h5,
         },
         columnEmd: {
             flexDirection: 'column',
@@ -115,7 +131,11 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
                                 {item.cycle} Month{item.cycle > 1 ? 's' : ''}
                             </Text>
                             <Text style={style.textTertiary}>
-                                {utils.dateConverter(item.nextBill)}
+                                {infoNextBill === 'date' ? (
+                                    utils.dateConverter(item.nextBill)
+                                ) : (
+                                    '~' + utils.amountOfDaysBetweenTwoDates(new Date(), item.nextBill) + ' Days'
+                                )}
                             </Text>
                         </View>
                     </View>

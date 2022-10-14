@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
-import { StatusBar, ActivityIndicator } from 'react-native';
+import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Provider } from 'react-redux';
 import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import SplashScreen from 'react-native-splash-screen';
-import { useDispatch, useSelector } from 'react-redux';
-import { darkTheme, lightTheme } from './constants/theme';
-import { setTheme } from './store/features/local/localSlice';
 
 import { Home, Search, Settings, About } from './screens';
 import { LoadScreen } from './components';
