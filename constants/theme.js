@@ -44,7 +44,7 @@ export const SIZES = {
     radius: 12,
     radiusSm: 6,
     padding: 16,
-    top: 48,
+    top: 24,
 
     s2: 2,
     s4: 4,

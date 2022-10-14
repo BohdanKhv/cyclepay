@@ -28,7 +28,8 @@ const Header = ({ navigation }) => {
         container: {
             backgroundColor: 'transparent',
             paddingHorizontal: SIZES.padding,
-            paddingTop: SIZES.top,
+            paddingVertical: 12,
+            marginTop: SIZES.top,
             backgroundColor: 'transparent',
             position: 'relative',
             zIndex: 1,

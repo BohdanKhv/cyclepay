@@ -11,13 +11,16 @@ const GoBack = ({navigation}) => {
         navigation.canGoBack() ? (
         <View
             style={{
-                paddingTop: SIZES.top,
-                paddingBottom: SIZES.padding,
+                marginTop: SIZES.top,
+                paddingVertical: 12,
                 paddingHorizontal: SIZES.padding,
                 backgroundColor: theme.main,
                 flexDirection: 'row',
                 backgroundColor: theme.main,
                 alignItems: 'center',
+                elevation: 12,
+                borderBottomColor: theme.primary,
+                borderBottomWidth: 1,
                 // justifyContent: 'space-between',
             }}
         >

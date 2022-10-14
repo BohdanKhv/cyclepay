@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { View, ScrollView, StyleSheet } from "react-native"
+import { View, StyleSheet, FlatList } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 import { SIZES } from "../constants/theme"
 import { useSelector } from "react-redux"
@@ -64,19 +64,23 @@ const Home = ({navigation}) => {
             flex: 1,
           }}
         >
-          <ScrollView style={{
-            paddingVertical: SIZES.padding,
-          }}>
-            {items && items.map((item, index) => (
+          <FlatList 
+            data={items}
+            keyExtractor={(item, index) => `item-${index}`}
+            renderItem={({item}) => (
               <SubCard
-                key={`item-${index}`}
                 item={item}
                 setSelectedItem={setSelectedItem}
                 setModalOpen={setModalOpen}
               />
-            ))}
-            <Add navigation={navigation}/>
-          </ScrollView>
+            )}
+            ListFooterComponent={
+              <>
+                <Add navigation={navigation}/>
+                <View style={{height: 130}} />
+              </>
+            }
+          />
         </View>
       </View>
       <Alert

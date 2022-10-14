@@ -11,7 +11,12 @@ const Search = ({navigation}) => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [ModalOpen, setModalOpen] = useState(false);
     const [alertMsg, setAlertMsg] = useState("");
+    const [itemsLimit, setItemsLimit] = useState(10);
     const { theme } = useSelector(state => state.local);
+
+    const setMoreItems = () => {
+        setItemsLimit(itemsLimit + 10);
+    }
 
     const style = StyleSheet.create({
         container: {
@@ -42,27 +47,31 @@ const Search = ({navigation}) => {
                     paddingTop: SIZES.padding,
                 }}
             >
-                <SubCardCustomNew
-                    setSelectedItem={setSelectedItem}
-                    setModalOpen={setModalOpen}
-                />
                 <FlatList
                     data={
                         data
                         .filter(i => search.length > 0 ? i.name.toLowerCase().includes(search.toLowerCase()) : true)
-                        .slice(0, 10)
+                        .slice(0, itemsLimit)
+                    }
+                    ListHeaderComponent={
+                        <SubCardCustomNew
+                            setSelectedItem={setSelectedItem}
+                            setModalOpen={setModalOpen}
+                        />
                     }
                     ListFooterComponent={
-                        <View style={{height: 130}} />
+                        <View style={{height: 60}} />
                     }
                     keyExtractor={(item) => `item-${item.id}`}
-                    renderItem={({item}) => (
+                    renderItem={({item, index}) => (
                         <SubCardNew
                             item={item}
                             setSelectedItem={setSelectedItem}
                             setModalOpen={setModalOpen}
                         />
-                    )}
+                        )
+                    }
+                    onEndReached={setMoreItems}
                 />
             </View>
         </View>
