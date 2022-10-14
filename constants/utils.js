@@ -81,6 +81,12 @@ const amountOfDaysBetweenTwoDates = (date1, date2) => {
     return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
+const thirtySecondsFromNow = () => {
+    const date = new Date();
+    date.setSeconds(date.getSeconds() + 30);
+    return date;
+}
+
 export default {
     dateConverter,
     dateFormat,
@@ -90,4 +96,5 @@ export default {
     calcNewBill,
     generateId,
     amountOfDaysBetweenTwoDates,
+    thirtySecondsFromNow
 }
