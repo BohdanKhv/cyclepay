@@ -38,12 +38,13 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
     const handleAdd = () => {
         const newItem = {
             ...item,
+            id: utils.generateId(),
             name,
             description,
             price: parseFloat(price),
             cycle: parseInt(cycle),
             firstBill,
-            nextBill: utils.dateFormat(utils.calcNewBill(firstBill, parseInt(cycle))),
+            nextBill: utils.calcNewBill(firstBill, parseInt(cycle)),
             reminder,
         }
 

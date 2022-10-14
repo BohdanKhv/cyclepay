@@ -44,6 +44,7 @@ const Search = ({navigation}) => {
             </View>
             <View
                 style={{
+                    flex: 1,
                     paddingTop: SIZES.padding,
                 }}
             >
@@ -58,9 +59,6 @@ const Search = ({navigation}) => {
                             setSelectedItem={setSelectedItem}
                             setModalOpen={setModalOpen}
                         />
-                    }
-                    ListFooterComponent={
-                        <View style={{height: 60}} />
                     }
                     keyExtractor={(item) => `item-${item.id}`}
                     renderItem={({item, index}) => (

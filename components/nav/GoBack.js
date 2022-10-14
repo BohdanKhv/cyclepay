@@ -18,9 +18,6 @@ const GoBack = ({navigation}) => {
                 flexDirection: 'row',
                 backgroundColor: theme.main,
                 alignItems: 'center',
-                elevation: 12,
-                borderBottomColor: theme.primary,
-                borderBottomWidth: 1,
                 // justifyContent: 'space-between',
             }}
         >

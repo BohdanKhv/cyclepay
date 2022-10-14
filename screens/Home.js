@@ -59,8 +59,6 @@ const Home = ({navigation}) => {
         <Sort />
         <View
           style={{
-            position: 'relative',
-            zIndex: -1,
             flex: 1,
           }}
         >
@@ -77,7 +75,6 @@ const Home = ({navigation}) => {
             ListFooterComponent={
               <>
                 <Add navigation={navigation}/>
-                <View style={{height: 130}} />
               </>
             }
           />
