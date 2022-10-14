@@ -40,7 +40,6 @@ const Alert = ({message, color, setAlertMsg}) => {
             position: 'absolute',
             height: '100%',
             width: SIZES.width,
-            zIndex: 100,
             flex: 1,
             padding: SIZES.padding,
         },

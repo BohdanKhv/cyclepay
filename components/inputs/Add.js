@@ -10,7 +10,7 @@ const Add = ({navigation}) => {
     return (
         <View style={{
             paddingHorizontal: SIZES.padding,
-            paddingBottom: 40,
+            paddingBottom: SIZES.padding,
         }}>
             <TextButton
                 onPress={() => navigation.navigate('Search')}
