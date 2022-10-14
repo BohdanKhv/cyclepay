@@ -4,24 +4,59 @@ import { useSelector, useDispatch } from "react-redux"
 import { FONTS, SIZES } from "../../constants/theme"
 import { updateSub } from "../../store/features/sub/subSlice"
 import utils from '../../constants/utils';
+import notifee, { TriggerType } from '@notifee/react-native';
 
 
 const SubCard = ({item, setSelectedItem, setModalOpen}) => {
-    const { theme, infoNextBill } = useSelector(state => state.local);
+    const { theme, infoNextBill, channelId } = useSelector(state => state.local);
     const [rippleOverflow, setRippleOverflow] = useState(false);
     const dispatch = useDispatch();
+
+    const createNotification = async (date) => {
+        const newDate = new Date(date);
+        newDate.setHours(11);
+        newDate.setMinutes(10);
+
+        // Set date to 10 seconds from now to test
+        // const newDate = new Date(Date.now() + 10000);
+
+        const trigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: newDate.getTime(),
+        };
+
+        const onlyNumberFromId = `${item.id}`.replaceAll(/\D/g, '')+'42';
+
+        await notifee.createTriggerNotification(
+            {
+                id: onlyNumberFromId,
+                title: item.name, 
+                subtitle: 'Reminder',
+                body: `Your $${item.price} subscription is due today!`,
+                android: {
+                    channelId: channelId || 'reminder',
+                },
+            },
+            trigger,
+        );
+    }
+
+    const updateItem = async () => {
+        const newDate = utils.calcNewBill(item.nextBill, item.cycle);
+        if(item.reminder) {
+            createNotification(newDate);
+        }
+        dispatch(updateSub({
+            ...item,
+            nextBill: newDate,
+        }))
+    }
 
     useEffect(() => {
         if (item) {
             if(new Date(item.nextBill) < new Date()) {
-                dispatch(updateSub({
-                    ...item,
-                    nextBill: utils.calcNewBill(item.nextBill, item.cycle),
-                }))
+                updateItem();
             }
-        }
-
-        return () => {
         }
     }, [item])
 

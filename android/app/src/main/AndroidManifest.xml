@@ -2,6 +2,10 @@
   package="com.submanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permissions for notifications -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
       android:name=".MainApplication"

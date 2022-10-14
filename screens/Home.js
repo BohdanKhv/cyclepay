@@ -1,8 +1,9 @@
-import { useState } from "react"
-import { View, StyleSheet, FlatList } from "react-native"
+import { useState, useEffect } from "react"
+import { View, StyleSheet, FlatList, Button } from "react-native"
 import LinearGradient from "react-native-linear-gradient"
 import { SIZES } from "../constants/theme"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { setChannelId } from "../store/features/local/localSlice"
 import { Sort, SubCard, Header, Add, Info, SubInfo, Alert } from "../components"
 
 const Home = ({navigation}) => {
@@ -10,7 +11,15 @@ const Home = ({navigation}) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [ModalOpen, setModalOpen] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
-  const { theme } = useSelector(state => state.local);
+  const { theme, channelId } = useSelector(state => state.local);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    if(!channelId) {
+      dispatch(setChannelId());
+    }
+  }, [])
 
   const style = StyleSheet.create({
     body: {

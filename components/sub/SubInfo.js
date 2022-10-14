@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"
+import notifee, { TriggerType } from '@notifee/react-native';
 
 import { TextButton, SubInfoItem, SubInfoItemTotal, Modal } from '../';
 import { FONTS, SIZES } from '../../constants/theme';
@@ -10,7 +11,7 @@ import icons from '../../constants/icons';
 
 
 const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
-    const { theme } = useSelector(state => state.local);
+    const { theme, channelId } = useSelector(state => state.local);
     const dispatch = useDispatch();
 
     const [description, setDescription] = useState("");
@@ -33,20 +34,54 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
         }
     }, [item])
 
+    const createNotification = async (date) => {
+        const newDate = new Date(date);
+        newDate.setHours(11);
+        newDate.setMinutes(10);
+        console.log(new Date(newDate));
+
+        const trigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: newDate.getTime(),
+        };
+
+        const onlyNumberFromId = `${item.id}`.replaceAll(/\D/g, '')+'42';
+
+        await notifee.createTriggerNotification(
+            {
+                id: onlyNumberFromId,
+                title: item.name, 
+                subtitle: 'Reminder',
+                body: `Your $${item.price} subscription is due today!`,
+                android: {
+                    channelId: channelId || 'reminder',
+                },
+            },
+            trigger,
+        );
+    }
+
+
     const handleUpdate = () => {
+        const newDate = utils.calcNewBill(firstBill, parseInt(cycle));
         const newItem = {
             ...item,
             description,
             price: parseFloat(price),
             cycle: parseInt(cycle),
             firstBill,
-            nextBill: utils.calcNewBill(firstBill, parseInt(cycle)),
+            nextBill: newDate,
             reminder,
         }
+        console.log(newItem);
 
         if(newItem.price) setPriceError(false);
         if(newItem.cycle) setCycleError(false);
         if(newItem.firstBill) setFirstBillError(false);
+
+        if(reminder) {
+            createNotification(newDate);
+        }
 
         if(newItem.name && newItem.price && newItem.cycle && newItem.firstBill) {
             dispatch(updateSub(newItem));

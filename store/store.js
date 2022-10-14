@@ -7,7 +7,7 @@ import subReducer from './features/sub/subSlice';
 const localPersistConfig = {
   key: 'local',
   storage: AsyncStorage,
-  whitelist: ['theme', 'sort', 'infoDisplay', 'infoNextBill'],
+  whitelist: ['theme', 'sort', 'infoDisplay', 'infoNextBill', 'channelId'],
 }
 
 const subPersistConfig = {

@@ -7,7 +7,6 @@ import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import SplashScreen from 'react-native-splash-screen';
 
-// import notification from './notification';
 import { Home, Search, Settings, About } from './screens';
 import { LoadScreen } from './components';
 
@@ -15,14 +14,8 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
 
-  // const setNotification = () => {
-  //   // Test notification for 5 seconds from now
-  //   notification.createNotification('Test', 'Test', new Date(Date.now() + 5000));
-  // }
-
   useEffect(() => {
     SplashScreen.hide();
-    // setNotification();
   }, [])
 
   return (

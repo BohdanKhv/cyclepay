@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
 import { View, Text, Animated, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"
+import notifee, { TriggerType } from '@notifee/react-native';
 
 import { TextButton, SubInfoItem, Modal } from '../';
 import { FONTS, SIZES } from '../../constants/theme';
@@ -9,7 +10,7 @@ import utils from '../../constants/utils';
 
 
 const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
-    const { theme } = useSelector(state => state.local);
+    const { theme, channelId } = useSelector(state => state.local);
     const dispatch = useDispatch();
     const animation = useRef(new Animated.Value(0)).current;
 
@@ -35,7 +36,34 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
         }
     }, [item])
 
+    const createNotification = async (date) => {
+        const newDate = new Date(date);
+        newDate.setHours(11);
+        newDate.setMinutes(10);
+
+        const trigger = {
+            type: TriggerType.TIMESTAMP,
+            timestamp: newDate.getTime(),
+        };
+
+        const onlyNumberFromId = `${item.id}`.replaceAll(/\D/g, '')+'42';
+
+        await notifee.createTriggerNotification(
+            {
+                id: onlyNumberFromId,
+                title: item.name, 
+                subtitle: 'Reminder',
+                body: `Your $${item.price} subscription is due today!`,
+                android: {
+                    channelId: channelId || 'reminder',
+                },
+            },
+            trigger,
+        );
+    }
+
     const handleAdd = () => {
+        const newDate = utils.calcNewBill(firstBill, parseInt(cycle));
         const newItem = {
             ...item,
             id: utils.generateId(),
@@ -46,6 +74,10 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
             firstBill,
             nextBill: utils.calcNewBill(firstBill, parseInt(cycle)),
             reminder,
+        }
+
+        if(reminder) {
+            createNotification(newDate);
         }
 
         if(newItem.name) setNameError(false);
