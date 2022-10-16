@@ -16,6 +16,19 @@ const fashion = require("../assets/items/fashion.png");
 const beauty = require("../assets/items/beauty.png");
 const pet = require("../assets/items/pet.png");
 const gaming = require("../assets/items/gaming.png");
+const alcohol = require("../assets/items/alcohol.png");
+const bar = require("../assets/items/bar.png");
+const children = require("../assets/items/children.png");
+const foodService = require("../assets/items/food-service.png");
+const coffee = require("../assets/items/coffee.png");
+const housekeeping = require("../assets/items/housekeeping.png");
+const medicine = require("../assets/items/medicine.png");
+const education = require("../assets/items/education.png");
+const transportation = require("../assets/items/transportation.png");
+const water = require("../assets/items/water.png");
+const tobacco = require("../assets/items/tobacco.png");
+
+
 
 // Brands
 const amazon = require("../assets/items/amazon.png");
@@ -37,6 +50,11 @@ const apple = require("../assets/items/apple.png");
 const audible = require("../assets/items/audible.png");
 const roblox = require("../assets/items/roblox.png");
 const github = require("../assets/items/github.png");
+const adobe = require("../assets/items/adobe.png");
+const microsoft = require("../assets/items/microsoft.png");
+const slack = require("../assets/items/slack.png");
+const crunchyroll = require("../assets/items/crunchyroll.png");
+const zoom = require("../assets/items/zoom.png");
 
 
 
@@ -59,6 +77,17 @@ export default {
     beauty,
     pet,
     gaming,
+    alcohol,
+    bar,
+    children,
+    foodService,
+    coffee,
+    housekeeping,
+    medicine,
+    transportation,
+    education,
+    water,
+    tobacco,
 
     amazon,
     netflix,
@@ -79,4 +108,9 @@ export default {
     audible,
     roblox,
     github,
+    adobe,
+    microsoft,
+    slack,
+    crunchyroll,
+    zoom,
 }

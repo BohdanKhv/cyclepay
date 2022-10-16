@@ -76,6 +76,7 @@ const SubCardCustomNew = ({setSelectedItem, setModalOpen}) => {
             image: "",
             price: '9.99',
             cycle: 1,
+            thumbnail: itemsImg.money,
             reminder: false
         });
         setModalOpen(true);
