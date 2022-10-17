@@ -9,10 +9,10 @@ For any questions, suggestions or bug reports, please contact me via email or Gi
 
 ## Screenshots
 
-[![Main screen][screen1th][screen1]]
-[![Main screen dark mode][screen2th][screen2]]
-[![Cycle details][screen3th][screen3]]
-[![Search screen][screen4th][screen4]]
+[![Main screen][screen1th]][screen1]
+[![Main screen dark mode][screen2th]][screen2]
+[![Cycle details][screen3th]][screen3]
+[![Search screen][screen4th]][screen4]
 
 ## Features
 
