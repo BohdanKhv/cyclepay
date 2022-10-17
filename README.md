@@ -9,10 +9,10 @@ For any questions, suggestions or bug reports, please contact me via email or Gi
 
 ## Screenshots
 
-[![Main screen][screen1]]
-[![Main screen dark mode][screen2]]
-[![Cycle details][screen3]]
-[![Search screen][screen4]]
+[![Main screen][screen1th][screen1]]
+[![Main screen dark mode][screen2th][screen2]]
+[![Cycle details][screen3th][screen3]]
+[![Search screen][screen4th][screen4]]
 
 ## Features
 
@@ -41,3 +41,7 @@ And then run
 [screen2]: screenshots/2.jpg
 [screen3]: screenshots/3.jpg
 [screen4]: screenshots/4.jpg
+[screen1th]: screenshots/1.thumb.jpg
+[screen2th]: screenshots/2.thumb.jpg
+[screen3th]: screenshots/3.thumb.jpg
+[screen4th]: screenshots/4.thumb.jpg
