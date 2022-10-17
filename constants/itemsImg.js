@@ -27,7 +27,7 @@ const education = require("../assets/items/education.png");
 const transportation = require("../assets/items/transportation.png");
 const water = require("../assets/items/water.png");
 const tobacco = require("../assets/items/tobacco.png");
-
+const utilities = require("../assets/items/utilities.png");
 
 
 // Brands
@@ -88,6 +88,7 @@ export default {
     education,
     water,
     tobacco,
+    utilities,
 
     amazon,
     netflix,

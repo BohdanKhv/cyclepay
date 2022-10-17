@@ -114,7 +114,7 @@ const Info = () => {
                             color: '#fff',
                             opacity: 0.5,
                         }}>
-                            Total Subscriptions
+                            Total Cycles
                         </Text>
                         <Text style={{
                             ...FONTS.h4,

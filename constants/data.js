@@ -75,7 +75,7 @@ const data = [
     },
     {
         id: 10,
-        name: 'Phone',
+        name: 'Cellphone',
         description: 'Phone bill',
         cycle: 1,
         price: 49.99,
@@ -236,7 +236,7 @@ const data = [
     },
     {
         id: 30,
-        name: 'Pets',
+        name: 'Pet Care',
         description: 'Pets expenses',
         cycle: 1,
         price: 9.99,
@@ -364,8 +364,8 @@ const data = [
     },
     {
         id: 46,
-        name: 'Eating Out',
-        description: 'Eating Out expenses',
+        name: 'Dining Out',
+        description: 'Dining Out expenses',
         cycle: 1,
         price: 299.99,
         thumbnail: itemsImg.foodService,
@@ -396,8 +396,8 @@ const data = [
     },
     {
         id: 50,
-        name: 'Children',
-        description: 'Children expenses',
+        name: 'Child Care',
+        description: 'Child care expenses',
         cycle: 1,
         price: 599.99,
         thumbnail: itemsImg.children,
@@ -409,6 +409,14 @@ const data = [
         cycle: 1,
         price: 599.99,
         thumbnail: itemsImg.tobacco,
+    },
+    {
+        id: 52,
+        name: 'Utilities',
+        description: 'Utilities expenses',
+        cycle: 1,
+        price: 399.99,
+        thumbnail: itemsImg.utilities,
     },
 ]
 

@@ -85,8 +85,30 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
         if(newItem.cycle) setCycleError(false);
         if(newItem.firstBill) setFirstBillError(false);
 
+        // Check if name is empty
+        if(newItem.name.replaceAll(/\s/g, '').length === 0) {
+            setNameError(true);
+            return;
+        }
+
+        // Check if price is empty
+        if(newItem.price.toString().replaceAll(/\s/g, '').length === 0) {
+            setPriceError(true);
+            return;
+        }
+
+        // Check if cycle is empty
+        if(newItem.cycle.toString().replaceAll(/\s/g, '').length === 0) {
+            setCycleError(true);
+            return;
+        }
+
         if(newItem.name && newItem.price && newItem.cycle && newItem.firstBill) {
-            dispatch(addSub(newItem));
+            dispatch(addSub({
+                ...newItem,
+                name: newItem.name.trim(),
+                description: newItem.description.trim(),
+            }));
             setIsOpen(false);
             setAlertMsg("Subscription added");
         } else {

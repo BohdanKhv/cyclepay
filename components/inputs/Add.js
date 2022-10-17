@@ -19,7 +19,7 @@ const Add = ({navigation}) => {
                     color: theme.primary,
                 }}
                 height={70}
-                label={'Add Subscription'}
+                label={'Add Cycle'}
                 icon={icons.plus}
             />
         </View>

@@ -73,7 +73,7 @@ const About = ({ navigation }) => {
                 </Text>
                 <View style={style.ptSm}>
                     <LineButton
-                        label="Source Code (GitHub)"
+                        label="View Source Code (GitHub)"
                         onPress={async () => {
                             await Linking.openURL('https://github.com/BohdanKhv/subscriptions-manager-react-native')
                         }}
@@ -107,9 +107,10 @@ const About = ({ navigation }) => {
                     <Text style={[style.px, {...FONTS.body4, color: theme.textDark}]}>
                         This app lets you keep track of your subscriptions and other expenses.
                     </Text>
-                    <Text style={[style.px, {...FONTS.body4, color: theme.textDark}]}>
-                        This is a personal project, so it is not intended to be used by anyone else.
+                    <Text style={[style.px, style.ptSm, {...FONTS.body4, color: theme.textDark}]}>
                         It is an open source project, so feel free to use it as you wish, if you find it useful.
+                    </Text>
+                    <Text style={[style.px, {...FONTS.body4, color: theme.textDark}]}>
                         Feel free to contribute to the project.
                     </Text>
                     <Text style={[style.px, style.ptSm, {...FONTS.body4, color: theme.textDark}]}>

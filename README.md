@@ -2,7 +2,6 @@
 
 
 Cyclepay is the app that lets you keep track of your subscriptions and other expenses.
-This is a personal project, so it is not intended to be used by anyone else.
 It is an open source project, so feel free to use it as you wish, if you find it useful.
 Feel free to contribute to the project.
 For any questions, suggestions or bug reports, please contact me via email or GitHub.

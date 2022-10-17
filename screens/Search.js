@@ -59,7 +59,16 @@ const Search = ({navigation}) => {
                 <FlatList
                     data={
                         data
-                        .filter(i => search.length > 0 ? i.name.toLowerCase().includes(search.toLowerCase()) : true)
+                        .sort((a, b) => {
+                            if (a.name < b.name) {
+                                return -1;
+                            }
+                            if (a.name > b.name) {
+                                return 1;
+                            }
+                            return 0;
+                        })
+                        .filter(i => search.length > 0 ? i.name.toLowerCase().includes(search.toLowerCase()) || i.description.toLowerCase().includes(search.toLowerCase()) : true)
                         .slice(0, itemsLimit)
                     }
                     ListHeaderComponent={
