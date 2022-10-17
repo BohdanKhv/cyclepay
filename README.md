@@ -1,15 +1,5 @@
 <h1 align="center">Cyclepay</h1>
-<p align="center">
-  <a href="https://github.com/iSoron/uhabits/actions?query=workflow%3A%22Build+%26+Test%22">
-    <img src="https://github.com/iSoron/uhabits/workflows/Build%20&%20Test/badge.svg" />
-  </a>
-  <a href="https://github.com/iSoron/uhabits/releases/latest">
-    <img src="https://img.shields.io/github/v/release/iSoron/uhabits" />
-  </a>
-  <a href="https://github.com/iSoron/uhabits/discussions">
-    <img src="https://img.shields.io/badge/GitHub-Discussions-%23fc4ebc" />
-  </a>
-</p>
+
 
 Cyclepay is the app that lets you keep track of your subscriptions and other expenses.
 This is a personal project, so it is not intended to be used by anyone else.
@@ -47,7 +37,7 @@ And then run
 `cd android && ./gradlew assembleDebug && cd ..`
 `cd android && ./gradlew assembleRelease && cd ..`
 
-[screen1]: screenshots/1.png
-[screen2]: screenshots/2.png
-[screen3]: screenshots/3.png
-[screen4]: screenshots/4.png
+[screen1]: screenshots/1.jpg
+[screen2]: screenshots/2.jpg
+[screen3]: screenshots/3.jpg
+[screen4]: screenshots/4.jpg
