@@ -211,7 +211,7 @@ android {
         }
     }
     signingConfigs {
-            release {
+        release {
             storeFile file('your_key_name.keystore')
             storePassword 'qwe123'
             keyAlias 'XYZ'
