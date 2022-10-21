@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "submanager.app"
-               BlueprintName = "submanager"
-               ReferencedContainer = "container:submanager.xcodeproj">
+               BuildableName = "cyclepay.app"
+               BlueprintName = "cyclepay"
+               ReferencedContainer = "container:cyclepay.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "submanagerTests.xctest"
-               BlueprintName = "submanagerTests"
-               ReferencedContainer = "container:submanager.xcodeproj">
+               BuildableName = "cyclepayTests.xctest"
+               BlueprintName = "cyclepayTests"
+               ReferencedContainer = "container:cyclepay.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "submanager.app"
-            BlueprintName = "submanager"
-            ReferencedContainer = "container:submanager.xcodeproj">
+            BuildableName = "cyclepay.app"
+            BlueprintName = "cyclepay"
+            ReferencedContainer = "container:cyclepay.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "submanager.app"
-            BlueprintName = "submanager"
-            ReferencedContainer = "container:submanager.xcodeproj">
+            BuildableName = "cyclepay.app"
+            BlueprintName = "cyclepay"
+            ReferencedContainer = "container:cyclepay.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

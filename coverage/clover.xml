@@ -2,7 +2,7 @@
 <coverage generated="1665621266730" clover="3.2.0">
   <project timestamp="1665621266730" name="All files">
     <metrics statements="39" coveredstatements="29" conditionals="20" coveredconditionals="10" methods="7" coveredmethods="4" elements="66" coveredelements="43" complexity="0" loc="39" ncloc="39" packages="1" files="1" classes="1"/>
-    <file name="utils.js" path="D:\Projects\react native\submanager\constants\utils.js">
+    <file name="utils.js" path="D:\Projects\react native\cyclepay\constants\utils.js">
       <metrics statements="39" coveredstatements="29" conditionals="20" coveredconditionals="10" methods="7" coveredmethods="4"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="0" type="stmt"/>
