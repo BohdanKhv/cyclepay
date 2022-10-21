@@ -1,27 +1,21 @@
-**Privacy Policy**
+MIT License
 
-Bohdan Khvorostovskyi built the Cyclepay app as an Open Source app. This SERVICE is provided by Bohdan Khvorostovskyi at no cost and is intended for use as is.
+Copyright (c) [2022] [Bohdan Khvorostovskyi]
 
-This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-If you choose to use my Service, then you agree to the collection and use of information in relation to this policy. The Personal Information that I collect is used for providing and improving the Service. I will not use or share your information with anyone except as described in this Privacy Policy.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-The terms used in this Privacy Policy have the same meanings as in our Terms and Conditions, which are accessible at Cyclepay unless otherwise defined in this Privacy Policy.
-
-**Information Collection and Use**
-
-All data is stored locally on your device. No data is sent to any server.
-
-**Security**
-
-The app does not collect any personal data. 
-
-**Changes to This Privacy Policy**
-
-I may update our Privacy Policy from time to time. Thus, you are advised to review this page periodically for any changes.
-
-This policy is effective as of 2022-10-21
-
-**Contact Us**
-
-If you have any questions or suggestions about my Privacy Policy, do not hesitate to contact me at bohdankhv@gmail.com.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
