@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { View, Text, Animated, StyleSheet } from 'react-native';
+import { View, Text, Animated, StyleSheet, BackHandler } from 'react-native';
 import { useSelector, useDispatch } from "react-redux"
 import notifee, { TriggerType } from '@notifee/react-native';
 
@@ -35,6 +35,19 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
             setFirstBill(utils.dateFormat(new Date()));
         }
     }, [item])
+
+    const handleBackPress = () => {
+        setIsOpen(false);
+        return true;
+    }
+
+    useEffect(() => {
+        BackHandler.addEventListener("hardwareBackPress", handleBackPress);
+
+        return () => {
+            BackHandler.removeEventListener("hardwareBackPress", handleBackPress);
+        }
+    }, [isOpen])
 
     const createNotification = async (date) => {
         const newDate = new Date(date);
