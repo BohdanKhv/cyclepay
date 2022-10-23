@@ -1,16 +1,19 @@
-import { useState } from "react"
+import { useState } from "react";
 import { View, Text, StatusBar, StyleSheet, ScrollView } from "react-native"
-import { SettingsItem, SettingsItemLabel, GoBack } from "../components"
-import { SIZES } from "../constants/theme"
 import { useDispatch, useSelector } from "react-redux"
+import rnfs from 'react-native-fs';
+import { SettingsItem, SettingsItemLabel, GoBack, Alert } from "../components"
+import { SIZES } from "../constants/theme"
 import { darkTheme, lightTheme } from "../constants/theme"
 import { setTheme, setSort, setInfoDisplay, setInfoNextBill } from "../store/features/local/localSlice"
-import { clearSub } from "../store/features/sub/subSlice"
+import { clearSub, importSub } from "../store/features/sub/subSlice"
 
 
 const Settings = ({ navigation }) => {
     const dispatch = useDispatch();
     const { theme, sort, infoDisplay, infoNextBill } = useSelector(state => state.local);
+    const [alertMsg, setAlertMsg] = useState("");
+    const items = useSelector(state => state.sub.items);
 
     const style = StyleSheet.create({
         container: {
@@ -62,7 +65,34 @@ const Settings = ({ navigation }) => {
         }
     }
 
+    const handleExport = () => {
+        // save file to downloads
+        const path = rnfs.ExternalStorageDirectoryPath + '/subscriptions.json';
+        rnfs.writeFile(path, JSON.stringify(items), 'utf8')
+        .then((success) => {
+            setAlertMsg("Exported to Downloads");
+        })
+        .catch((err) => {
+            console.log(err.message);
+        });
+    }
+
+    const handleImport = () => {
+        const path = `${rnfs.DocumentDirectoryPath}/subscriptions.json`;
+        rnfs.readFile(path, 'utf8')
+        .then((data) => {
+            setAlertMsg('File imported from subscriptions.json')
+            dispatch(importSub(JSON.parse(data)));
+            console.log(data);
+        })
+        .catch((err) => {
+            setAlertMsg('Error importing data.');
+            console.log(err.message);
+        });
+    }
+
     return (
+    <>
         <View style={{
             flex: 1,
             backgroundColor: theme.main,
@@ -96,6 +126,14 @@ const Settings = ({ navigation }) => {
                         value={infoNextBill}
                     />
                     <SettingsItemLabel
+                        onPress={handleExport}
+                        label="Export as JSON"
+                    />
+                    <SettingsItemLabel
+                        onPress={handleImport}
+                        label="Import from JSON"
+                    />
+                    <SettingsItemLabel
                         onPress={handleClearSub}
                         label="Clear Subscriptions"
                         confirm="Are you sure you want to clear all subscriptions?"
@@ -103,6 +141,11 @@ const Settings = ({ navigation }) => {
                 </ScrollView>
             </View>
         </View>
+        <Alert
+            message={alertMsg}
+            setAlertMsg={setAlertMsg}
+        />
+    </>
     )
 }
 
