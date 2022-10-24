@@ -97,7 +97,7 @@ export const FONTS = {
 
 export const darkTheme = {
     name: "dark",
-    main: "#202020",
+    main: "#121212",
     secondary: "#363636",
     tertiary: "#999999",
     primary: "#ff9000",

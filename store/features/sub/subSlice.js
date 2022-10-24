@@ -22,6 +22,9 @@ export const subSlice = createSlice({
         updateSub: (state, action) => {
             state.items = state.items.map(item => item.id === action.payload.id ? action.payload : item);
         },
+        importSub: (state, action) => {
+            state.items = action.payload;
+        },
         sortSub: (state, action) => {
             if(action.payload === 'name:asc') {
                 state.items = state.items.sort((a, b) => a.name.localeCompare(b.name));
@@ -44,5 +47,5 @@ export const subSlice = createSlice({
     }
 });
 
-export const { clearSub, addSub, updateSub, deleteSub, sortSub } = subSlice.actions;
+export const { clearSub, addSub, updateSub, importSub, deleteSub, sortSub } = subSlice.actions;
 export default subSlice.reducer;
