@@ -135,7 +135,7 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.cyclepay"
+        applicationId "com.submanager"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -213,9 +213,9 @@ android {
     signingConfigs {
         release {
             storeFile file('your_key_name.keystore')
-            storePassword 'qwe123'
-            keyAlias 'XYZ'
-            keyPassword 'qwe123'
+            storePassword 'qweasdzxc'
+            keyAlias 'your_key_alias'
+            keyPassword 'qweasdzxc'
         }
         debug {
             storeFile file('debug.keystore')

@@ -1,4 +1,4 @@
-package com.cyclepay;
+package com.submanager;
 import android.os.Bundle; // here
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen; // here
@@ -9,7 +9,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "cyclepay";
+    return "submanager";
   }
 
   @Override

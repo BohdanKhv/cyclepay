@@ -1,4 +1,4 @@
-package com.cyclepay.newarchitecture;
+package com.submanager.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.cyclepay.BuildConfig;
-import com.cyclepay.newarchitecture.components.MainComponentsRegistry;
-import com.cyclepay.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.submanager.BuildConfig;
+import com.submanager.newarchitecture.components.MainComponentsRegistry;
+import com.submanager.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

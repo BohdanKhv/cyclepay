@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.cyclepay">
+  package="com.submanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Permissions for notifications -->
