@@ -23,6 +23,8 @@ const Info = () => {
             setTotalPerMonth(calcPerYear(items));
         else if (totalType === 'daily')
             setTotalPerMonth(calcPerDay(items));
+        else if (totalType === 'weekly')
+            setTotalPerMonth(calcPerWeek(items));
     }, [totalType, items])
 
     const handleSwitch = () => {
@@ -31,6 +33,8 @@ const Info = () => {
         else if (totalType === 'yearly')
             setTotalType('daily');
         else if (totalType === 'daily')
+            setTotalType('weekly');
+        else if (totalType === 'weekly')
             setTotalType('monthly');
     }
 
@@ -46,6 +50,12 @@ const Info = () => {
         if(!items || items.length === 0) return 0;
         const tpy = (calcPerMonth(items) * 12).toFixed(2);
         return tpy;
+    }
+
+    const calcPerWeek = (items) => {
+        if(!items || items.length === 0) return 0;
+        const tpw = calcPerMonth(items) / 30 * 7;
+        return tpw.toFixed(2);
     }
 
     const calcPerDay = (items) => {

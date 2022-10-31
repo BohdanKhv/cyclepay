@@ -37,7 +37,7 @@ const Settings = ({ navigation }) => {
 
     const handleSetSort = () => {
         if(sort.split(':')[0] === 'name') {
-            dispatch(setInfoNextBill('first bill date:asc'))
+            dispatch(setSort('first bill date:asc'))
         } else if (sort.split(':')[0] === 'first bill date') {
             dispatch(setSort('next bill date:asc'))
         } else if (sort.split(':')[0] === 'next bill date') {
@@ -48,11 +48,15 @@ const Settings = ({ navigation }) => {
     }
 
     const handleInfoDisplay = () => {
-        if(infoDisplay === 'monthly') {
+        if(infoDisplay === 'weekly') {
             dispatch(setInfoDisplay('yearly'))
         } else if (infoDisplay === 'yearly') {
             dispatch(setInfoDisplay('daily'))
         } else if (infoDisplay === 'daily') {
+            dispatch(setInfoDisplay('monthly'))
+        } else if (infoDisplay === 'monthly') {
+            dispatch(setInfoDisplay('weekly'))
+        } else {
             dispatch(setInfoDisplay('monthly'))
         }
     }
@@ -61,6 +65,8 @@ const Settings = ({ navigation }) => {
         if(infoNextBill === 'date') {
             dispatch(setInfoNextBill('days'))
         } else if (infoNextBill === 'days') {
+            dispatch(setInfoNextBill('date'))
+        } else {
             dispatch(setInfoNextBill('date'))
         }
     }
