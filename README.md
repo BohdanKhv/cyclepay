@@ -1,7 +1,7 @@
-<h1 align="center">Cyclepay</h1>
+<h1 align="center">cyclepay</h1>
 
 
-Cyclepay is the app that lets you keep track of your subscriptions and other expenses.
+cyclepay is the app that lets you keep track of your subscriptions and other expenses.
 It is an open source project, so feel free to use it as you wish, if you find it useful.
 Feel free to contribute to the project.
 For any questions, suggestions or bug reports, please contact me via email or GitHub.
@@ -35,6 +35,11 @@ run the command:
 And then run
 `cd android && ./gradlew assembleDebug && cd ..`
 `cd android && ./gradlew assembleRelease && cd ..`
+
+## ----------------------------
+## ??? 😬🤯
+`./gradlew clean`
+`./gradlew assembleRelease -x bundleReleaseJsAndAssets`
 
 [screen1]: screenshots/1.jpg
 [screen2]: screenshots/2.jpg

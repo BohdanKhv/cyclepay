@@ -59,7 +59,7 @@ const About = ({ navigation }) => {
                     source={logo}
                     style={style.icon}
                 />
-                <Text style={style.textMain}>Cyclepay</Text>
+                <Text style={style.textMain}>cyclepay</Text>
                 <Text style={style.textSecondary}>
                     Version 0.0.1
                 </Text>
