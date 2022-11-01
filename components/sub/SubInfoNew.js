@@ -42,8 +42,11 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
     }
 
     useEffect(() => {
-        BackHandler.addEventListener("hardwareBackPress", handleBackPress);
-
+        if(isOpen) {
+            BackHandler.addEventListener("hardwareBackPress", handleBackPress);
+        } else {
+            BackHandler.removeEventListener("hardwareBackPress", handleBackPress);
+        }
         return () => {
             BackHandler.removeEventListener("hardwareBackPress", handleBackPress);
         }

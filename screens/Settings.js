@@ -72,22 +72,15 @@ const Settings = ({ navigation }) => {
     }
 
     const handleExport = async () => {
-        const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-            {
-                title: "Storage Permission",
-                message: "App needs access to your storage to download the file"
-            }
-        );
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
 
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            // const rootPath = rnfs.DocumentDirectoryPath;
-            const downloadPath = `/storage/emulated/0/Download/`;
-            const path = `${downloadPath}cyclepay.json`;
+            const path = `${rnfs.DocumentDirectoryPath}/cyclepay.json`;
+            console.log(path)
 
             rnfs.writeFile(path, JSON.stringify(items), 'utf8')
             .then((success) => {
-                setAlertMsg(`Exported to download folder as cyclepay.json`);
+                setAlertMsg(`Exported to ${path}`);
             })
             .catch((err) => {
                 console.log(err.message);
@@ -98,18 +91,11 @@ const Settings = ({ navigation }) => {
     }
 
     const handleImport = async () => {
-        const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-            {
-                title: "Storage Permission",
-                message: "App needs access to your storage to download the file"
-            }
-        );
+        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
 
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            // const rootPath = rnfs.DocumentDirectoryPath;
-            const downloadPath = `/storage/emulated/0/Download/`;
-            const path = `${downloadPath}cyclepay.json`;
+            const path = `${rnfs.DocumentDirectoryPath}/cyclepay.json`;
+
             rnfs.readFile(path, 'utf8')
             .then((data) => {
                 setAlertMsg('Imported successfully');
