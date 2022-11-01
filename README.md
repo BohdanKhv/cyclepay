@@ -1,7 +1,7 @@
-<h1 align="center">cyclepay</h1>
+<h1 align="center">Cyclepay</h1>
 
 
-cyclepay is the app that lets you keep track of your subscriptions and other expenses.
+Cyclepay is the app that lets you keep track of your subscriptions and other expenses.
 It is an open source project, so feel free to use it as you wish, if you find it useful.
 Feel free to contribute to the project.
 For any questions, suggestions or bug reports, please contact me via email or GitHub.

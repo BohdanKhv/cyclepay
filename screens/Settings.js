@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, StatusBar, StyleSheet, ScrollView } from "react-native"
+import { View, Text, StatusBar, StyleSheet, ScrollView, PermissionsAndroid } from "react-native"
 import { useDispatch, useSelector } from "react-redux"
 import rnfs from 'react-native-fs';
 import { SettingsItem, SettingsItemLabel, GoBack, Alert } from "../components"
@@ -71,30 +71,59 @@ const Settings = ({ navigation }) => {
         }
     }
 
-    const handleExport = () => {
-        // save file to downloads
-        const path = rnfs.ExternalStorageDirectoryPath + '/subscriptions.json';
-        rnfs.writeFile(path, JSON.stringify(items), 'utf8')
-        .then((success) => {
-            setAlertMsg("Exported to Downloads");
-        })
-        .catch((err) => {
-            console.log(err.message);
-        });
+    const handleExport = async () => {
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            {
+                title: "Storage Permission",
+                message: "App needs access to your storage to download the file"
+            }
+        );
+
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            // const rootPath = rnfs.DocumentDirectoryPath;
+            const downloadPath = `/storage/emulated/0/Download/`;
+            const path = `${downloadPath}cyclepay.json`;
+
+            rnfs.writeFile(path, JSON.stringify(items), 'utf8')
+            .then((success) => {
+                setAlertMsg(`Exported to download folder as cyclepay.json`);
+            })
+            .catch((err) => {
+                console.log(err.message);
+            });
+        } else {
+            setAlertMsg("Permission Denied");
+        }
     }
 
-    const handleImport = () => {
-        const path = `${rnfs.DocumentDirectoryPath}/subscriptions.json`;
-        rnfs.readFile(path, 'utf8')
-        .then((data) => {
-            setAlertMsg('File imported from subscriptions.json')
-            dispatch(importSub(JSON.parse(data)));
-            console.log(data);
-        })
-        .catch((err) => {
-            setAlertMsg('Error importing data.');
-            console.log(err.message);
-        });
+    const handleImport = async () => {
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            {
+                title: "Storage Permission",
+                message: "App needs access to your storage to download the file"
+            }
+        );
+
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            // const rootPath = rnfs.DocumentDirectoryPath;
+            const downloadPath = `/storage/emulated/0/Download/`;
+            const path = `${downloadPath}cyclepay.json`;
+            rnfs.readFile(path, 'utf8')
+            .then((data) => {
+                setAlertMsg('Imported successfully');
+                dispatch(importSub(JSON.parse(data)));
+                console.log(data);
+            })
+            .catch((err) => {
+                setAlertMsg('Error importing data. Make sure you have a file named cyclepay.json in your download folder');
+                console.log(err.message);
+            });
+        } else {
+            setAlertMsg("Permission Denied");
+        }
+
     }
 
     return (
