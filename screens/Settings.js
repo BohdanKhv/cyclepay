@@ -103,7 +103,7 @@ const Settings = ({ navigation }) => {
                 console.log(data);
             })
             .catch((err) => {
-                setAlertMsg('Error importing data. Make sure you have a file named cyclepay.json in your download folder');
+                setAlertMsg('Error importing data.');
                 console.log(err.message);
             });
         } else {
@@ -148,11 +148,11 @@ const Settings = ({ navigation }) => {
                     />
                     <SettingsItemLabel
                         onPress={handleExport}
-                        label="Export as JSON"
+                        label="Save backup"
                     />
                     <SettingsItemLabel
                         onPress={handleImport}
-                        label="Import from JSON"
+                        label="Import from backup"
                     />
                     <SettingsItemLabel
                         onPress={handleClearSub}

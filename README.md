@@ -38,8 +38,8 @@ And then run
 
 ## ----------------------------
 ## ??? 😬🤯
-`./gradlew clean`
-`./gradlew assembleRelease -x bundleReleaseJsAndAssets`
+`cd android && ./gradlew clean && cd ..`
+`cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..`
 
 [screen1]: screenshots/1.jpg
 [screen2]: screenshots/2.jpg
