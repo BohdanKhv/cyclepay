@@ -40,6 +40,7 @@ And then run
 ## ??? 😬🤯
 `cd android && ./gradlew clean && cd ..`
 `cd android && ./gradlew assembleRelease -x bundleReleaseJsAndAssets && cd ..`
+`cd android && ./gradlew bundleRelease -x bundleReleaseJsAndAssets && cd ..`
 
 [screen1]: screenshots/1.jpg
 [screen2]: screenshots/2.jpg
