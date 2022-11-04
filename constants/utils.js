@@ -20,17 +20,25 @@ function monthDiff(to, from) {
     return months;
 }
 
-const countAmountOfCycles = (cycle, firstBill, currDate) => {
+const countAmountOfCycles = (cycle, firstBill, cycleBy, currDate) => {
     // firstBill (yyyy-mm-dd)
     if(cycle && firstBill){
         const date = new Date();
         const today = currDate ? new Date(currDate) : new Date(date.getFullYear(), date.getMonth(), date.getDate());
         const startDate = new Date(firstBill);
-        // Count amount of cycles between today and first bill.
-        // First date counts as a cycle.
-        const months = monthDiff(today, startDate);
-        const cycles = Math.floor(months / cycle);
-        return cycles + 1;
+        if(cycleBy === 'm'){
+            // Count amount of cycles between today and first bill.
+            // First date counts as a cycle.
+            const months = monthDiff(today, startDate);
+            const cycles = Math.floor(months / cycle);
+            return cycles + 1;
+        } else {
+            // Count amount of cycles between today and first bill.
+            // First date counts as a cycle.
+            const days = amountOfDaysBetweenTwoDates(today, startDate);
+            const cycles = Math.floor(days / cycle);
+            return cycles + 1;
+        }
     }
 }
 

@@ -163,7 +163,7 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
                                 $ {item.price}
                             </Text>
                             <Text style={style.textSecondary}>
-                                {item.cycle} Month{item.cycle > 1 ? 's' : ''}
+                                {item.cycle} {item.cycleBy === 'm' ? 'Month' : 'Day'}{item.cycle == 1 ? '' : 's'}
                             </Text>
                             <Text style={style.textTertiary}>
                                 {infoNextBill === 'date' ? (
