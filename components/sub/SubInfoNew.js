@@ -18,6 +18,7 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [cycle, setCycle] = useState("");
+    const [cycleBy, setCycleBy] = useState("m");
     const [firstBill, setFirstBill] = useState(utils.dateFormat(new Date()));
     const [reminder, setReminder] = useState(false);
 
@@ -32,6 +33,7 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
             item.description && setDescription(item.description);
             item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
+            item.cycleBy && setCycleBy(item.cycleBy);
             setFirstBill(utils.dateFormat(new Date()));
         }
     }, [item])
@@ -87,6 +89,7 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
             description,
             price: parseFloat(price),
             cycle: parseInt(cycle),
+            cycleBy,
             firstBill,
             nextBill: utils.calcNewBill(firstBill, parseInt(cycle)),
             reminder,
@@ -152,6 +155,7 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
         setDescription("");
         setPrice("");
         setCycle("");
+        setCycleBy("m");
         setFirstBill("");
         setReminder(false);
     }
@@ -237,7 +241,9 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
                     />
                     <SubInfoItem
                         label='Cycle'
-                        stateLabel={cycle ? `${cycle} month${cycle == 1 ? '' : 's'}` : 'Enter cycle'}
+                        stateLabel={cycle ? `${cycle} ${cycleBy === 'm' ? 'month' : 'day' }${cycle == 1 ? '' : 's'}` : "Enter a cycle"}
+                        cycleBy={cycleBy}
+                        setCycleBy={setCycleBy}
                         maxLength={2}
                         state={cycle}
                         keyboardType='numeric'

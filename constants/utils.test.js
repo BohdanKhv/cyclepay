@@ -10,11 +10,11 @@ test('Count amount of cycles', () => {
 });
 
 test('Get next bill date', () => {
-    expect(utils.calcNewBill('2022-09-11', 1, '2022-10-13')).toEqual('2022-11-11');
-    expect(utils.calcNewBill('2018-09-11', 1, '2022-10-13')).toEqual('2022-11-11');
-    expect(utils.calcNewBill('2002-01-01', 1, '2022-01-02')).toEqual('2022-02-01');
-    expect(utils.calcNewBill('1994-01-01', 1, '2022-01-02')).toEqual('2022-02-01');
-    expect(utils.calcNewBill('2022-09-11', 2, '2022-10-13')).toEqual('2022-11-11');
-    expect(utils.calcNewBill('2022-09-11', 3, '2022-10-13')).toEqual('2022-12-11');
-    expect(utils.calcNewBill('2022-09-11', 6, '2022-10-13')).toEqual('2023-03-11');
+    expect(utils.calcNewBill('2022-09-11', 1, 'm', '2022-10-13')).toEqual('2022-11-11');
+    expect(utils.calcNewBill('2018-09-11', 1, 'm', '2022-10-13')).toEqual('2022-11-11');
+    expect(utils.calcNewBill('2002-01-01', 1, 'm', '2022-01-02')).toEqual('2022-02-01');
+    expect(utils.calcNewBill('1994-01-01', 1, 'm', '2022-01-02')).toEqual('2022-02-01');
+    expect(utils.calcNewBill('2022-09-11', 2, 'm', '2022-10-13')).toEqual('2022-11-11');
+    expect(utils.calcNewBill('2022-09-11', 3, 'm', '2022-10-13')).toEqual('2022-12-11');
+    expect(utils.calcNewBill('2022-09-11', 6, 'm', '2022-10-13')).toEqual('2023-03-11');
 });

@@ -17,6 +17,7 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [cycle, setCycle] = useState("");
+    const [cycleBy, setCycleBy] = useState("");
     const [firstBill, setFirstBill] = useState("");
     const [reminder, setReminder] = useState(false);
 
@@ -29,6 +30,7 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
             item.description && setDescription(item.description);
             item.price && setPrice(item.price.toString());
             item.cycle && setCycle(item.cycle.toString());
+            item.cycleBy && setCycleBy(item.cycleBy);
             item.firstBill && setFirstBill(item.firstBill);
             if(item.reminder === false || item.reminder === true) {
             setReminder(item.reminder);
@@ -78,12 +80,13 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
 
 
     const handleUpdate = () => {
-        const newDate = utils.calcNewBill(firstBill, parseInt(cycle));
+        const newDate = utils.calcNewBill(firstBill, parseInt(cycle), cycleBy);
         const newItem = {
             ...item,
             description,
             price: parseFloat(price),
             cycle: parseInt(cycle),
+            cycleBy,
             firstBill,
             nextBill: newDate,
             reminder,
@@ -135,6 +138,7 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
         setDescription("");
         setPrice("");
         setCycle("");
+        setCycleBy("");
         setFirstBill("");
         setReminder(false);
     }
@@ -229,7 +233,9 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
                 />
                 <SubInfoItem
                     label='Cycle'
-                    stateLabel={cycle ? `${cycle} months` : "Enter a cycle"}
+                    stateLabel={cycle ? `${cycle} ${cycleBy === 'm' ? 'month' : 'day' }${cycle == 1 ? '' : 's'}` : "Enter a cycle"}
+                    cycleBy={cycleBy}
+                    setCycleBy={setCycleBy}
                     maxLength={2}
                     state={cycle}
                     keyboardType='numeric'

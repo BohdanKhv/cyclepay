@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { View, Text, StyleSheet, TouchableNativeFeedback, TextInput, TouchableOpacity, TouchableWithoutFeedback, Modal, Switch, StatusBar } from "react-native"
 import { FONTS, SIZES } from '../../constants/theme';
-import { IconButton } from '../'
+import { IconButton, LineButton } from '../'
 import DatePicker from 'react-native-date-picker'
 import icons from "../../constants/icons";
 import utils from "../../constants/utils";
@@ -17,6 +17,8 @@ const SubInfoItem = ({
     date,
     maxLength,
     reminder,
+    cycleBy,
+    setCycleBy,
     isError
 }) => {
     const { theme } = useSelector(state => state.local);
@@ -213,27 +215,62 @@ const SubInfoItem = ({
                                     />
                                 </View>
                             ) : 
-                                <TextInput
-                                    ref={inputRef}
-                                    keyboardType={keyboardType || 'default'}
-                                    value={state}
-                                    placeholder={stateLabel}
-                                    maxLength={maxLength || 100}
-                                    placeholderTextColor={theme.gray50}
-                                    onChangeText={onChange}
-                                    style={style.input}
-                                    onSubmitEditing={() => {
-                                        setDisplayInput(false);
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        alignItems: 'center',
+                                        justifyContent: 'space-between',
                                     }}
-                                    onFocus={(e) => {
-                                        setIsInputFocused(true);
-                                        e.target.setSelection(0, state ? state.length : 0);
-                                    }}
-                                    onBlur={() => {
-                                        setIsInputFocused(false);
-                                        setDisplayInput(false);
-                                    }}
-                                />
+                                >
+                                    <View
+                                        style={{
+                                            flexGrow: 3,
+                                        }}
+                                    >
+                                        <TextInput
+                                            ref={inputRef}
+                                            keyboardType={keyboardType || 'default'}
+                                            value={state}
+                                            placeholder={stateLabel}
+                                            maxLength={maxLength || 100}
+                                            placeholderTextColor={theme.gray50}
+                                            onChangeText={onChange}
+                                            style={style.input}
+                                            onSubmitEditing={() => {
+                                                setDisplayInput(false);
+                                            }}
+                                            onFocus={(e) => {
+                                                setIsInputFocused(true);
+                                                e.target.setSelection(0, state ? state.length : 0);
+                                            }}
+                                            onBlur={() => {
+                                                setIsInputFocused(false);
+                                                setDisplayInput(false);
+                                            }}
+                                        />
+                                    </View>
+                                    {setCycleBy && (
+                                        <View
+                                            style={{
+                                                flexGrow: 0,
+                                                marginLeft: SIZES.padding,
+                                            }}
+                                        >
+                                        <View
+                                            style={{
+                                                alignSelf: 'flex-end',
+                                            }}
+                                        >
+                                            <LineButton
+                                                label={cycleBy === 'm' ? 'months' : 'days'}
+                                                onPress={() => {
+                                                    setCycleBy(cycleBy === 'm' ? 'd' : 'm');
+                                                }}
+                                            />
+                                        </View>
+                                    </View>
+                                    )}
+                                </View>
                             }
                         </View>
                     </TouchableWithoutFeedback>

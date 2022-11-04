@@ -34,26 +34,38 @@ const countAmountOfCycles = (cycle, firstBill, currDate) => {
     }
 }
 
-const calcNewBill = (firstBill, cycle, currDate) => {
+const calcNewBill = (firstBill, cycle, cycleBy, currDate) => {
     // firstBill (yyyy-mm-dd)
     if(cycle && firstBill){
         const date = new Date();
         const today = currDate ? new Date(currDate) : new Date(date.getFullYear(), date.getMonth(), date.getDate());
         const startDate = new Date(firstBill);
-        // Count amount of cycles between today and first bill.
-        // First date counts as a cycle.
-        const months = monthDiff(today, startDate);
-        const cycles = Math.floor(months / cycle);
+        if(cycleBy === 'm'){
+            // Count amount of cycles between today and first bill.
+            // First date counts as a cycle.
+            const months = monthDiff(today, startDate);
+            const cycles = Math.floor(months / cycle);
 
-        // Get date n months from first bill date.
-        const newBill = new Date(firstBill);
-        newBill.setMonth(newBill.getMonth() + cycles * cycle + cycle);
+            // Get date n months from first bill date.
+            const newBill = new Date(firstBill);
+            newBill.setMonth(newBill.getMonth() + cycles * cycle + cycle);
+            // Set the same day as the first bill.
+            // Regardless of the hours, minutes, seconds, milliseconds.
+            newBill.setDate(startDate.getDate());
 
-        // Set the same day as the first bill.
-        // Regardless of the hours, minutes, seconds, milliseconds.
-        newBill.setDate(startDate.getDate());
+            return dateFormat(newBill);
+        } else {
+            // Count amount of cycles between today and first bill.
+            // First date counts as a cycle.
+            const days = amountOfDaysBetweenTwoDates(today, startDate);
+            const cycles = Math.floor(days / cycle);
 
-        return dateFormat(newBill);
+            // Get date n days from first bill date.
+            const newBill = new Date(firstBill);
+            newBill.setDate(newBill.getDate() + cycles * cycle + cycle);
+
+            return dateFormat(newBill);
+        }
     }
 }
 
