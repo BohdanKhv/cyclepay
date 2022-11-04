@@ -72,9 +72,9 @@ const Settings = ({ navigation }) => {
     }
 
     const handleExport = async () => {
-        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
+        // const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
 
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             const path = `${rnfs.DocumentDirectoryPath}/cyclepay.json`;
             console.log(path)
 
@@ -85,15 +85,15 @@ const Settings = ({ navigation }) => {
             .catch((err) => {
                 console.log(err.message);
             });
-        } else {
-            setAlertMsg("Permission Denied");
-        }
+        // } else {
+        //     setAlertMsg("Permission Denied");
+        // }
     }
 
     const handleImport = async () => {
-        const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
+        // const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE);
 
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
             const path = `${rnfs.DocumentDirectoryPath}/cyclepay.json`;
 
             rnfs.readFile(path, 'utf8')
@@ -106,9 +106,9 @@ const Settings = ({ navigation }) => {
                 setAlertMsg('Error importing data.');
                 console.log(err.message);
             });
-        } else {
-            setAlertMsg("Permission Denied");
-        }
+        // } else {
+        //     setAlertMsg("Permission Denied");
+        // }
 
     }
 

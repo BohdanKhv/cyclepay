@@ -41,7 +41,11 @@ const Info = () => {
     const calcPerMonth = (items) => {
         if(!items || items.length === 0) return 0;
         const tpm = items.reduce((acc, item) => {
-            return (+acc + item.price / item.cycle).toFixed(2)
+            if(item.cycleBy === 'm') {
+                return (+acc + item.price / item.cycle).toFixed(2)
+            } else {
+                return (+acc + item.price * (30 / item.cycle)).toFixed(2)
+            }
         }, 0)
         return tpm;
     }
