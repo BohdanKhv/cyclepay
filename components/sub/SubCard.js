@@ -42,7 +42,7 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
     }
 
     const updateItem = async () => {
-        const newDate = utils.calcNewBill(item.nextBill, item.cycle);
+        const newDate = utils.calcNewBill(item.nextBill, item.cycle, item.cycleBy);
         if(item.reminder) {
             createNotification(newDate);
         }

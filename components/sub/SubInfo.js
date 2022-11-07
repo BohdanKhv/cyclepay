@@ -190,7 +190,7 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
                     <SubInfoItemTotal
                         label={`$${item && 
                             utils.addComaToNumber(
-                                utils.countTotalPaid(item.cycle, item.firstBill, item.price)
+                                utils.countTotalPaid(item.cycle, item.firstBill, item.cycleBy, item.price)
                                 )
                             }`}
                         secondaryLabel='Paid'

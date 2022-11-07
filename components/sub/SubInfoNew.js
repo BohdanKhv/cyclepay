@@ -81,7 +81,7 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
     }
 
     const handleAdd = () => {
-        const newDate = utils.calcNewBill(firstBill, parseInt(cycle));
+        const newDate = utils.calcNewBill(firstBill, parseInt(cycle), cycleBy);
         const newItem = {
             ...item,
             id: utils.generateId(),
@@ -91,7 +91,7 @@ const SubInfoNew = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) =
             cycle: parseInt(cycle),
             cycleBy,
             firstBill,
-            nextBill: utils.calcNewBill(firstBill, parseInt(cycle)),
+            nextBill: utils.calcNewBill(firstBill, parseInt(cycle), cycleBy),
             reminder,
         }
 

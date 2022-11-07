@@ -37,7 +37,7 @@ const countAmountOfCycles = (cycle, firstBill, cycleBy, currDate) => {
             // First date counts as a cycle.
             const days = amountOfDaysBetweenTwoDates(today, startDate);
             const cycles = Math.floor(days / cycle);
-            return cycles + 1;
+            return cycles;
         }
     }
 }
@@ -77,14 +77,23 @@ const calcNewBill = (firstBill, cycle, cycleBy, currDate) => {
     }
 }
 
-const countTotalPaid = (cycle, firstBill, price) => {
+const countTotalPaid = (cycle, firstBill, cycleBy, price) => {
     if(cycle && firstBill){
-        const today = new Date();
-        const startDate = new Date(firstBill);
-        const months = monthDiff(today, startDate);
-        const cycles = Math.floor(months / cycle);
-        const totalPaid = (cycles + 1) * price; // +1 because we want to include the current cycle
-        return totalPaid.toFixed(2) || 0;
+        if(cycleBy === 'm'){
+            const today = new Date();
+            const startDate = new Date(firstBill);
+            const months = monthDiff(today, startDate);
+            const cycles = Math.floor(months / cycle);
+            const totalPaid = (cycles + 1) * price; // +1 because we want to include the current cycle
+            return totalPaid.toFixed(2) || 0;
+        } else {
+            const today = new Date();
+            const startDate = new Date(firstBill);
+            const days = amountOfDaysBetweenTwoDates(today, startDate);
+            const cycles = Math.floor(days / cycle);
+            const totalPaid = cycles * price; // +1 because we want to include the current cycle
+            return totalPaid.toFixed(2) || 0;
+        }
     }
 }
 
