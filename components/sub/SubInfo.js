@@ -202,7 +202,7 @@ const SubInfo = ({ item, isOpen, setIsOpen, setAlertMsg, setSelectedItem }) => {
                         icon={icons.date}
                     />
                     <SubInfoItemTotal
-                        label={`${item && utils.countAmountOfCycles(item.cycle, item.firstBill)}`}
+                        label={`${item && utils.countAmountOfCycles(item.cycle, item.firstBill, item.cycleBy)}`}
                         secondaryLabel='Cycles'
                         icon={icons.cycle}
                     />
