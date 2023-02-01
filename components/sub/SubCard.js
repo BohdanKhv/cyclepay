@@ -139,6 +139,7 @@ const SubCard = ({item, setSelectedItem, setModalOpen}) => {
                         <View
                             style={{
                                 flexDirection: 'row',
+                                alignItems: 'center',
                             }}
                         >
                             <View style={style.thumbnailWrapper}>
